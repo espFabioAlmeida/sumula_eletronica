@@ -3,14 +3,22 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { ArbitroComponent } from './arbitro/arbitro.component';
+import { AppRoutingModule } from './app-routing.module';
+import { AtletaComponent } from './atleta/atleta.component';
+import { ClubeComponent } from './clube/clube.component';
+import { SumulaComponent } from './sumula/sumula.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ArbitroComponent
+    ArbitroComponent,
+    AtletaComponent,
+    ClubeComponent,
+    SumulaComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

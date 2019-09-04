@@ -8,10 +8,10 @@
       <nav class="navbar navbar-expand-lg navbar-dark bg-success"> 
           <div class="header_nav">              
               <div class="navbar-nav">                       
-                <a class="nav-item nav-link active" href="#">Cadastro Árbitros</a>
-                <a class="nav-item nav-link" href="#">Cadastro Clubes</a>
-                <a class="nav-item nav-link" href="#">Cadastro Atletas</a>
-                <a class="nav-item nav-link" href="#">Cadastro Súmula Eletrônica</a>
+                <a class="nav-item nav-link" routerLink="/arbitro">Cadastro Árbitros</a>
+                <a class="nav-item nav-link" routerLink="/clube">Cadastro Clubes</a>
+                <a class="nav-item nav-link" routerLink="/atleta">Cadastro Atletas</a>
+                <a class="nav-item nav-link" routerLink="/sumula">Cadastro Súmula Eletrônica</a>
                 <a class="nav-item nav-link" href="#">
                     <p class="texto_botao_sair">
                         Sair 
@@ -23,7 +23,7 @@
 </header>
 
 <div class="container">
-    <app-arbitro></app-arbitro>
+    <router-outlet></router-outlet>
 </div>
 
 
