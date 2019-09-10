@@ -9,4 +9,5 @@ export class Arbitro
     senha: String;
     categoria: String;
     assistente: boolean;
+    sexoMasculino: boolean;
 }

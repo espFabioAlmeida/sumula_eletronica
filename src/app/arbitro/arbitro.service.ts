@@ -18,6 +18,11 @@ export class ArbitroService
     console.log(this.arbitros);
   }
 
+  getArbitros()
+  {
+    return this.arbitros;
+  }
+
   getArbitroById(id: String)
   {
     return this.arbitros.find(arbitro => arbitro.id == id);

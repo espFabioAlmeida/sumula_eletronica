@@ -7,54 +7,20 @@
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">#</th>
                 <th scope="col">Nome</th>
-                <th scope="col">Função</th>
+                <th scope="col">Assistente</th>
                 <th scope="col">Categoria</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
+            <tr *ngFor="let arbitro of arbitros">
                 <td>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="radioTabelaArbitros" id="radioTabelaArbitrosOp1" 
-                        value="option1" checked>
-                        <label class="form-check-label" for="radioTabelaArbitrosOp1">
-                                Fábio Almeida
-                        </label>
-                    </div>
+                    <a routerLink="/arbitro-cadastro/{{arbitro.id}}">
+                        {{arbitro.nome}}
+                    </a>
                 </td>
-                <td>Assistente</td>
-                <td>FCF</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="radioTabelaArbitros" id="radioTabelaArbitrosOp2" 
-                        value="option2">
-                        <label class="form-check-label" for="radioTabelaArbitrosOp2">
-                            Jakson Pereira
-                        </label>
-                    </div>
-                    </td>
-                <td>Árbitro</td>
-                <td>FCF</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="radioTabelaArbitros" id="radioTabelaArbitrosOp3" 
-                        value="option3">
-                        <label class="form-check-label" for="radioTabelaArbitrosOp3">
-                            Adriano Felício
-                        </label>
-                    </div>
-                </td>
-                <td>Assistente</td>
-                <td>Liga</td>
+                <td>{{arbitro.assistente}}</td>
+                <td>{{arbitro.categoria}}</td>
             </tr>
         </tbody>
     </table>
