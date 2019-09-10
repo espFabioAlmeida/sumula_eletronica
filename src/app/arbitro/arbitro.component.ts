@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Arbitro } from './arbitro';
 
 @Component({
   selector: 'app-arbitro',

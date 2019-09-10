@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AtletaComponent } from './atleta/atleta.component';
 import { ClubeComponent } from './clube/clube.component';
 import { SumulaComponent } from './sumula/sumula.component';
+import { ArbitroCadastroComponent } from './arbitro-cadastro/arbitro-cadastro.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { SumulaComponent } from './sumula/sumula.component';
     ArbitroComponent,
     AtletaComponent,
     ClubeComponent,
-    SumulaComponent
+    SumulaComponent,
+    ArbitroCadastroComponent
   ],
   imports: [
     BrowserModule,
