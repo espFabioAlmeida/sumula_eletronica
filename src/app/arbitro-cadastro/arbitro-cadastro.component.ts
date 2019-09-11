@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NgForm } from '@angular/forms';
 import { ArbitroService } from '../arbitro/arbitro.service';
 import { Arbitro } from '../arbitro/arbitro';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-arbitro-cadastro',
@@ -18,6 +20,22 @@ export class ArbitroCadastroComponent implements OnInit {
     this.getArbitro();
   }
 
+  onSubmit(formulario: NgForm)
+  {
+    if(formulario.valid)
+    {
+      console.log("recebido no Submit");
+      console.log(this.arbitro);
+      this.arbitro.id = Math.random().toString(36).substring(2,15) +
+      Math.random().toString(36).substring(2,15);
+      this.arbitroService.cadastraArbitro(this.arbitro);
+      this.arbitro = new Arbitro();
+      this.arbitro.categoria="LVND";
+      this.arbitro.sexo="Masculino";
+      this.arbitro.funcao="Arbitro";
+    }
+  }
+
   getArbitro()
   {
     const id = this.route.snapshot.paramMap.get('id');
@@ -28,8 +46,15 @@ export class ArbitroCadastroComponent implements OnInit {
       console.log("Nao eh nulo");
       this.arbitro = this.arbitroService.getArbitroById(id);
     }
-    else console.log("Eh nulo");
-    
+    else 
+    {
+      console.log("Eh nulo");
+      this.arbitro.categoria="LVND";
+      this.arbitro.sexo="Masculino";
+      this.arbitro.funcao="Arbitro";
+    }  
   }
+
+
 
 }

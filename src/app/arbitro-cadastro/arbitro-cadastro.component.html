@@ -1,71 +1,109 @@
 <section class="campo_cadastro">
-        <form>
-            <p class="texto_titulo_cadastro">
-                Cadastro de Árbitro
-            </p>
-            <div class="form-group">
-                Código: #1                
-            </div>
-            
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="arbitroCpf">CPF:</label>
-                    <input type="number" class="form-control" id="arbitroCpf" placeholder="CPF" required>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="arbitroSenha">Senha:</label>
-                    <input type="password" class="form-control" id="arbitroSenha" placeholder="Senha" required>
-                </div>
+    <form #formulario="ngForm" (ngSubmit) = "onSubmit(formulario)" >
+        <p class="texto_titulo_cadastro">
+            Cadastro de Árbitro
+        </p>    
+        
+        <div class="form-group">
+            <div class="form-group col-md-12">
+                <label for="nome" class="control-label">Nome</label>
             </div>
     
-            <div class="form-group">
-                <label for="arbitroNome">Nome:</label>
-                <input type="text" class="form-control" id="arbitroNome" placeholder="Nome Completo" required>
+            <div class="form-group col-md-12">
+                <input type="text" class="form-control" name="nome" id="nome" placeholder="Nome" 
+                required #nome="ngModel" [(ngModel)]="arbitro.nome">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-group col-md-12">
+                <label for="senha" class="control-label">Senha</label>
             </div>
     
-            <div class="form-row">
-                <div class="form-group col-md-4">
-                    <label for="arbitroDataNasc">Data Nascimento:</label>
-                    <input type="date" class="form-control" id="arbitroDataNasc" placeholder="Data Nascimento" required>
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="arbitroAltura">Altura(cm):</label>
-                    <input type="number" class="form-control" id="arbitroAltura" placeholder="Altura" required>
-                </div>
-    
-                <div class="form-group col-md-4">
-                    <label for="arbitroPeso">Peso:</label>
-                    <input type="number" step="0.1" class="form-control" id="arbitroPeso" placeholder="Peso" required>
-                </div>
+            <div class="form-group col-md-12">
+                <input type="password" password class="form-control" name="senha" id="senha"
+                placeholder="Senha" 
+                required #senha="ngModel" [(ngModel)]="arbitro.senha">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-group col-md-6">
+                <label for="cpf" class="control-label">CPF</label>
             </div>
     
-            <div class="form-row">
-                <div class="form-group col-md-4">
-                    <label for="arbitroSexo">Sexo:</label>
-                    <select id="arbitroSexo" class="form-control">
-                        <option selected>Masculino</option>
-                        <option>Feminino</option>
-                    </select>
-                </div>
-    
-                <div class="form-group col-md-4">
-                    <label for="arbitroSexo">Categoria:</label>
-                    <select id="arbitroSexo" class="form-control">
-                        <option selected>LIGA</option>
-                        <option>FCF</option>
-                        <option>CBF</option>
-                        <option>FIFA</option>
-                    </select>
-                </div>
-    
-                <div class="form-group col-md-4">
-                    <label for="arbitroSexo">Função:</label>
-                    <select id="arbitroSexo" class="form-control">
-                        <option selected>Árbitro</option>
-                        <option>Assistente</option>
-                    </select>
-                </div>
+            <div class="form-group col-md-6">
+                <input type="text" class="form-control" name="cpf" id="cpf" placeholder="CPF" 
+                required #cpf="ngModel" [(ngModel)]="arbitro.cpf">
             </div>
-            <button class="btn btn-success" type="submit">Salvar</button>              
-        </form>           
-    </section>
+
+            <div class="form-group col-md-6">
+                <label for="dataNascimento" class="control-label">Data de Nascimento</label>
+            </div>
+    
+            <div class="form-group col-md-6">
+                <input type="date" date class="form-control" name="dataNascimento" 
+                id="dataNascimento" required #dataNascimento="ngModel" [(ngModel)]="arbitro.dataNascimento">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-group col-md-6">
+                <label for="altura" class="control-label">Altura</label>
+            </div>
+    
+            <div class="form-group col-md-6">
+                <input type="number" number class="form-control" name="altura" id="altura" 
+                placeholder="altura" 
+                required #altura="ngModel" [(ngModel)]="arbitro.altura">
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="peso" class="control-label">Peso</label>
+            </div>
+    
+            <div class="form-group col-md-6">
+                <input type="number" number class="form-control" name="peso" 
+                placeholder="peso" 
+                id="peso" required #peso="ngModel" [(ngModel)]="arbitro.peso">
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            <div class="form-group col-md-6">
+                <label for="sexo">Sexo</label>
+                <select id="sexo" class="form-control" id="sexo" name="sexo"
+                #sexo="ngModel" [(ngModel)]="arbitro.sexo">
+                    <option value="Masculino">Masculino</option>
+                    <option value="Feminino">Feminino</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            <div class="form-group col-md-6">
+                <label for="categoria">Categoria</label>
+                <select id="categoria" class="form-control" id="categoria" name="categoria"
+                #categoria="ngModel" [(ngModel)]="arbitro.categoria">
+                    <option value="LVND">LVND</option>
+                    <option value="FCF">FCF</option>
+                    <option value="CBF">CBF</option>
+                    <option value="FIFA">FIFA</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            <div class="form-group col-md-6">
+                <label for="funcao">Função</label>
+                <select id="funcao" class="form-control" id="funcao" name="funcao"
+                #funcao="ngModel" [(ngModel)]="arbitro.funcao">
+                    <option value="Arbitro">Árbitro</option>
+                    <option value="Assistente">Assistente</option>
+                </select>
+            </div>
+        </div>
+      
+        <button class="btn btn-success" [disabled]="!formulario.valid" type="submit">Salvar</button>  
+    </form>           
+</section>

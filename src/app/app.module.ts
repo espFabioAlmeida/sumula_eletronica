@@ -8,6 +8,7 @@ import { AtletaComponent } from './atleta/atleta.component';
 import { ClubeComponent } from './clube/clube.component';
 import { SumulaComponent } from './sumula/sumula.component';
 import { ArbitroCadastroComponent } from './arbitro-cadastro/arbitro-cadastro.component';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,9 @@ import { ArbitroCadastroComponent } from './arbitro-cadastro/arbitro-cadastro.co
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
