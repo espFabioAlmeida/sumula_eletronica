@@ -7,16 +7,29 @@ import { Arbitro } from './arbitro';
 export class ArbitroService 
 {
   arbitros: Arbitro[] = [];
+  index: any;
 
   constructor() { }
 
   cadastraArbitro(arbitro: Arbitro)
   {
-    console.log("Recebido no Arbitro Service: ");
-    console.log(arbitro);
-    this.arbitros.push(arbitro);
-    console.log(this.arbitros);
+    
+    if(arbitro.id == null)
+    {
+      arbitro.id = Math.random().toString(36).substring(2,15) +
+      Math.random().toString(36).substring(2,15);
+      console.log("Recebido no Arbitro Service: ");
+      console.log(arbitro);
+      this.arbitros.push(arbitro);
+      console.log(this.arbitros);
+      return;
+    }
+
+    this.index = this.arbitros.indexOf(arbitro);
+    this.arbitros[this.index] = arbitro;
+    
   }
+
 
   getArbitros()
   {

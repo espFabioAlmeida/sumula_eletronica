@@ -26,8 +26,6 @@ export class ArbitroCadastroComponent implements OnInit {
     {
       console.log("recebido no Submit");
       console.log(this.arbitro);
-      this.arbitro.id = Math.random().toString(36).substring(2,15) +
-      Math.random().toString(36).substring(2,15);
       this.arbitroService.cadastraArbitro(this.arbitro);
       this.arbitro = new Arbitro();
       this.arbitro.categoria="LVND";
