@@ -103,7 +103,13 @@
                 </select>
             </div>
         </div>
-      
-        <button class="btn btn-success" [disabled]="!formulario.valid" type="submit">Salvar</button>  
+        
+        <p>
+            <button class="btn btn-success" [disabled]="!formulario.valid" type="submit">Salvar</button> 
+        </p>
+        <p>
+            <a class="btn btn-danger" routerLink="/arbitro">Cancelar</a>
+        </p>
+        
     </form>           
 </section>

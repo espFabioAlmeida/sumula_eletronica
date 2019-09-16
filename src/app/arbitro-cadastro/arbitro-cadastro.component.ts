@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { ArbitroService } from '../arbitro/arbitro.service';
 import { Arbitro } from '../arbitro/arbitro';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-arbitro-cadastro',
@@ -13,7 +12,8 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 export class ArbitroCadastroComponent implements OnInit {
   arbitro: Arbitro = new Arbitro();
 
-  constructor(private route: ActivatedRoute, private arbitroService: ArbitroService) { }
+  constructor(private route: ActivatedRoute, private arbitroService: ArbitroService,
+    private router: Router) { }
 
   ngOnInit() 
   {
@@ -31,6 +31,8 @@ export class ArbitroCadastroComponent implements OnInit {
       this.arbitro.categoria="LVND";
       this.arbitro.sexo="Masculino";
       this.arbitro.funcao="Arbitro";
+
+      this.router.navigate(['/arbitro']);
     }
   }
 
