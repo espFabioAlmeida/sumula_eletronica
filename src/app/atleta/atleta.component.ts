@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Atleta } from './atleta';
+import { AtletaService } from './atleta.service';
 
 @Component({
   selector: 'app-atleta',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AtletaComponent implements OnInit {
 
-  constructor() { }
+  atletas: Atleta[] = [];
+  constructor(private atletaService: AtletaService) { }
 
-  ngOnInit() {
+  ngOnInit() 
+  {
+    this.getAtletas();
+  }
+
+  getAtletas()
+  {
+    this.atletas = this.atletaService.getAtletas();
   }
 
 }

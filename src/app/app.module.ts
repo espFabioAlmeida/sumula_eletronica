@@ -12,6 +12,7 @@ import { ClubeCadastroComponent } from './clube-cadastro/clube-cadastro.componen
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HttpClient, HttpHandler } from '@angular/common/http';
 import { CepService } from './clube/cep.service';
+import { AtletaCadastroComponent } from './atleta-cadastro/atleta-cadastro.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { CepService } from './clube/cep.service';
     ClubeComponent,
     SumulaComponent,
     ArbitroCadastroComponent,
-    ClubeCadastroComponent
+    ClubeCadastroComponent,
+    AtletaCadastroComponent
   ],
   imports: [
     BrowserModule,

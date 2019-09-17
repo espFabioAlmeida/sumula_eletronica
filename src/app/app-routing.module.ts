@@ -6,6 +6,7 @@ import { ClubeComponent } from './clube/clube.component';
 import { SumulaComponent } from './sumula/sumula.component';
 import { ArbitroCadastroComponent } from './arbitro-cadastro/arbitro-cadastro.component';
 import { ClubeCadastroComponent } from './clube-cadastro/clube-cadastro.component';
+import { AtletaCadastroComponent } from './atleta-cadastro/atleta-cadastro.component';
 
 const routes: Routes = [ 
 { path: 'arbitro', component: ArbitroComponent},
@@ -15,7 +16,9 @@ const routes: Routes = [
 { path: 'arbitro-cadastro/:id', component: ArbitroCadastroComponent},
 { path: 'arbitro-cadastro', component: ArbitroCadastroComponent},
 { path: 'clube-cadastro/:id', component: ClubeCadastroComponent},
-{ path: 'clube-cadastro', component: ClubeCadastroComponent}
+{ path: 'clube-cadastro', component: ClubeCadastroComponent},
+{ path: 'atleta-cadastro/:id', component: AtletaCadastroComponent},
+{ path: 'atleta-cadastro', component: AtletaCadastroComponent}
 ];
 
 @NgModule({
