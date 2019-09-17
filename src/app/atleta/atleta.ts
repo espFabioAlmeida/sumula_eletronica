@@ -5,4 +5,5 @@ export class Atleta
     cpf: String;
     dataNascimento: Date;
     bid: String;
+    clube: String;
 }

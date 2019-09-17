@@ -43,6 +43,17 @@
                 id="bid" #bid="ngModel" [(ngModel)]="atleta.bid">
             </div>
         </div>
+
+        <div class="form-group col-md-6">
+            <div class="form-group col-md-6">
+                <label for="clube">Clube</label>
+                <select id="clube" class="form-control" id="clube" name="clube"
+                #clube="ngModel" [(ngModel)]="atleta.clube">
+                    <option value="Sem Clube">Sem Clube</option>
+                    <option *ngFor="let clube of clubes" [value]="clube.nome">{{clube.nome}}</option>
+                </select>
+            </div>
+        </div>
         
         <p>
             <button class="btn btn-success" [disabled]="!formulario.valid" type="submit">Salvar</button> 

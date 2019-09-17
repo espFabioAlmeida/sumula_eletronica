@@ -3,6 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { AtletaService } from '../atleta/atleta.service';
 import { Atleta } from '../atleta/atleta';
+import { ClubeService } from '../clube/clube.service';
+import { Clube } from '../clube/clube';
 
 @Component({
   selector: 'app-atleta-cadastro',
@@ -11,13 +13,15 @@ import { Atleta } from '../atleta/atleta';
 })
 export class AtletaCadastroComponent implements OnInit {
   atleta: Atleta = new Atleta();
+  clubes: Clube[] = [];
   
   constructor(private route: ActivatedRoute, private atletaService: AtletaService,
-    private router: Router) { }
+    private clubeService: ClubeService, private router: Router) { }
 
   ngOnInit() 
   {
     this.getAtleta();
+    this.getClubes();
   }
 
   onSubmit(formulario: NgForm)
@@ -28,6 +32,7 @@ export class AtletaCadastroComponent implements OnInit {
       console.log(this.atleta);
       this.atletaService.cadastraAtleta(this.atleta);
       this.atleta = new Atleta();
+      this.atleta.clube = "Sem Clube";
 
       this.router.navigate(['/atleta']);
     }
@@ -48,6 +53,12 @@ export class AtletaCadastroComponent implements OnInit {
     }
 
     console.log("Eh nulo");
+    this.atleta.clube = "Sem Clube";
+  }
+
+  getClubes()
+  {
+    this.clubes = this.clubeService.getClubes();
   }
 
 }
