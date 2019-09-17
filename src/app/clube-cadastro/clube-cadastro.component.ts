@@ -29,7 +29,6 @@ export class ClubeCadastroComponent implements OnInit
       console.log(this.clube);
       this.clubeService.cadastraClube(this.clube);
       this.clube = new Clube();
-      this.clube.estado = "SC";
 
       this.router.navigate(['/clube']);
     }
@@ -48,7 +47,6 @@ export class ClubeCadastroComponent implements OnInit
       return;
     }
     console.log("Eh nulo");
-    this.clube.estado = "SC";
   }
 
 }

@@ -1,4 +1,3 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
@@ -10,6 +9,10 @@ import { SumulaComponent } from './sumula/sumula.component';
 import { ArbitroCadastroComponent } from './arbitro-cadastro/arbitro-cadastro.component';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ClubeCadastroComponent } from './clube-cadastro/clube-cadastro.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule, HttpClient, HttpHandler } from '@angular/common/http';
+import { CepService } from './clube/cep.service';
+
 
 @NgModule({
   declarations: [
@@ -23,11 +26,12 @@ import { ClubeCadastroComponent } from './clube-cadastro/clube-cadastro.componen
   ],
   imports: [
     BrowserModule,
+    // import HttpClientModule after BrowserModule.
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [HttpClientModule, HttpClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

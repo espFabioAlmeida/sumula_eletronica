@@ -4,6 +4,6 @@ export class Clube
     nome: String;
     dataFundacao: Date;
     estadio: String;
+    cep: String;
     cidade: String;
-    estado: String;
 }
