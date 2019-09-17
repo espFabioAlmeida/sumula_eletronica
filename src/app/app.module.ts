@@ -9,6 +9,7 @@ import { ClubeComponent } from './clube/clube.component';
 import { SumulaComponent } from './sumula/sumula.component';
 import { ArbitroCadastroComponent } from './arbitro-cadastro/arbitro-cadastro.component';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { ClubeCadastroComponent } from './clube-cadastro/clube-cadastro.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
     AtletaComponent,
     ClubeComponent,
     SumulaComponent,
-    ArbitroCadastroComponent
+    ArbitroCadastroComponent,
+    ClubeCadastroComponent
   ],
   imports: [
     BrowserModule,

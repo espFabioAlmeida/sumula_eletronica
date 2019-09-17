@@ -30,7 +30,6 @@ export class ArbitroService
     
   }
 
-
   getArbitros()
   {
     return this.arbitros;

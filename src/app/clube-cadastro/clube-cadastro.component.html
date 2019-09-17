@@ -1,0 +1,95 @@
+<section class="campo_cadastro">
+    <form #formulario="ngForm" (ngSubmit) = "onSubmit(formulario)" >
+        <p class="texto_titulo_cadastro">
+            Cadastro de Clube
+        </p>    
+        
+        <div class="form-group">
+            <div class="form-group col-md-12">
+                <label for="nome" class="control-label">Nome</label>
+            </div>
+    
+            <div class="form-group col-md-12">
+                <input type="text" class="form-control" name="nome" id="nome" placeholder="Nome" 
+                required #nome="ngModel" [(ngModel)]="clube.nome">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-group col-md-6">
+                <label for="dataFundacao" class="control-label">Data de Fundacao</label>
+            </div>
+    
+            <div class="form-group col-md-6">
+                <input type="date" date class="form-control" name="dataFundacao" 
+                id="dataFundacao" required #dataFundacao="ngModel" [(ngModel)]="clube.dataFundacao">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-group col-md-6">
+                <label for="estadio" class="control-label">Estádio</label>
+            </div>
+    
+            <div class="form-group col-md-6">
+                <input type="text" class="form-control" name="estadio" id="estadio" 
+                placeholder="Estádio" 
+                required #estadio="ngModel" [(ngModel)]="clube.estadio">
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="cidade" class="control-label">Cidade</label>
+            </div>
+    
+            <div class="form-group col-md-6">
+                <input type="text" class="form-control" name="cidade" id="cidade" 
+                placeholder="Cidade" 
+                required #cidade="ngModel" [(ngModel)]="clube.cidade">
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            <div class="form-group col-md-6">
+                <label for="estado">Estado</label>
+                <select id="estado" class="form-control" id="estado" name="estado"
+                #estado="ngModel" [(ngModel)]="clube.estado">
+                    <option value="AC">AC</option>
+                    <option value="AP">AP</option>
+                    <option value="AM">AM</option>
+                    <option value="BA">BA</option>
+                    <option value="CE">CE</option>
+                    <option value="DF">DF</option>
+                    <option value="ES">ES</option>
+                    <option value="GO">GO</option>
+                    <option value="MA">MA</option>
+                    <option value="MT">MT</option>
+                    <option value="MS">MS</option>
+                    <option value="MG">MG</option>
+                    <option value="PA">PA</option>
+                    <option value="PB">PB</option>
+                    <option value="PR">PR</option>
+                    <option value="PE">PE</option>
+                    <option value="PI">PI</option>
+                    <option value="RJ">RJ</option>
+                    <option value="RN">RN</option>
+                    <option value="RS">RS</option>
+                    <option value="RO">RO</option>
+                    <option value="RR">RR</option>
+                    <option value="SC">SC</option>
+                    <option value="SP">SP</option>
+                    <option value="SE">SE</option>
+                    <option value="TO">TO</option>
+                </select>
+            </div>
+        </div>
+        
+        <p>
+            <button class="btn btn-success" [disabled]="!formulario.valid" type="submit">Salvar</button> 
+        </p>
+        <p>
+            <a class="btn btn-danger" routerLink="/clube">Cancelar</a>
+        </p>
+        
+    </form>           
+</section>
+    

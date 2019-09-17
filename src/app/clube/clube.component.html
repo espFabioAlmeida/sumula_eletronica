@@ -1,186 +1,30 @@
-<section class="campo_procura">
-    <div class="form-group row">
-        <label for="SearchNomeClube" class="col-sm-2 col-form-label">Nome:</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" id="SearchNomeClube" placeholder="Nome">
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label for="SearchCidadeClube" class="col-sm-2 col-form-label">Cidade:</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" id="SearchCidadeClube" placeholder="Cidade">
-        </div>
-    </div>
-            
-    <div>
-        <br>
-        <button type="button" class="btn btn-primary">Buscar</button>
-        <button type="button" class="btn btn-success">Novo Clube</button>
-    </div>
-                    
-</section>
-
 <section class="campo_tabela">
+    <p>
+        <a class="btn btn-success" routerLink="/clube-cadastro">Novo Clube</a>
+    </p>
     <p class="texto_titulo_tabela">
-        Clubes encontrados:
+        Clubes cadastrados:
     </p>
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">#</th>
                 <th scope="col">Nome</th>
-                <th scope="col">Cidade</th>
                 <th scope="col">Estádio</th>
+                <th scope="col">Cidade</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
+            <tr *ngFor="let clube of clubes">
                 <td>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="radioTabelaClubes" id="radioTabelaClubesOp1" 
-                        value="option1" checked>
-                        <label class="form-check-label" for="radioTabelaClubesOp2">
-                            Juventus Futebol Clube
-                        </label>
-                    </div>
+                    <a routerLink="/clube-cadastro/{{clube.id}}">
+                        {{clube.nome}}
+                    </a>
                 </td>
-                <td>Ibirama</td>
-                <td>da Baixada</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="radioTabelaClubes" id="radioTabelaClubesOp2" 
-                        value="option2">
-                        <label class="form-check-label" for="radioTabelaClubesOp2">
-                            Guarani Futebol Clube
-                        </label>
-                    </div>
-                </td>
-                <td>Ibirama</td>
-                <td>Arno Grahl</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="radioTabelaClubes" id="radioTabelaClubesOp3" 
-                        value="option3">
-                        <label class="form-check-label" for="radioTabelaClubesOp3">
-                            Catarinense Esporte Clube
-                        </label>
-                    </div>
-                </td>
-                <td>Vitor Meireles</td>
-                <td>João Moretti</td>
-            </tr>
-
-            <tr>
-                <th scope="row">4</th>
-                <td>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="radioTabelaClubes" id="radioTabelaClubesOp4" 
-                        value="option4">
-                        <label class="form-check-label" for="radioTabelaClubesOp4">
-                            Duque de Caxias
-                        </label>
-                    </div>
-                </td>
-                <td>Dona Emma</td>
-                <td>Alfredo Dahm</td>
-            </tr>
-
-            <tr>
-                <th scope="row">5</th>
-                <td>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="radioTabelaClubes" id="radioTabelaClubesOp5" 
-                        value="option5">
-                        <label class="form-check-label" for="radioTabelaClubesOp5">
-                            Atlético Dona Emma
-                        </label>
-                    </div>
-                </td>
-                <td>Dona Emma</td>
-                <td>Alfredo Dahm</td>
+                <td>{{clube.estadio}}</td>
+                <td>{{clube.cidade}}/{{clube.estado}}</td>
             </tr>
         </tbody>
     </table>
-    <div>
-        <br>
-        <button type="button" class="btn btn-primary">Abrir Registro</button>
-    </div>
 </section>
-
-<section class="campo_cadastro">
-    <form>
-        <p class="texto_titulo_cadastro">
-            Cadastro de Clube
-        </p>
-        <div class="form-group">
-            Código: #5                
-        </div>
     
-        <div class="form-group">
-            <label for="clubeNome">Nome:</label>
-            <input type="text" class="form-control" id="clubeNome" placeholder="Nome" required>
-        </div>
-
-        <div class="form-row">
-            <div class="form-group col-md-4">
-                <label for="clubeDataFundacao">Data Nascimento:</label>
-                <input type="date" class="form-control" id="clubeDataFundacao" placeholder="Data Fundação" required>
-            </div>
-
-            <div class="form-group col-md-8">
-                <label for="clubeEstadio">Estádio:</label>
-                <input type="text" class="form-control" id="clubeEstadio" placeholder="Estádio" required>
-            </div>
-        </div>
-
-        <div class="form-row">
-            <div class="form-group col-md-8">
-                <label for="clubeCidade">Cidade:</label>
-                <input type="text" class="form-control" id="clubeCidade" placeholder="Cidade" required>
-            </div>
-
-            <div class="form-group col-md-4">
-                <label for="clubeEstado">Estado:</label>
-                <select id="clubeEstado" class="form-control">
-                    <option>AC</option>
-                    <option>AL</option>
-                    <option>AP</option>
-                    <option>AM</option>
-                    <option>BA</option>
-                    <option>CE</option>
-                    <option>DF</option>
-                    <option>ES</option>
-                    <option>GO</option>
-                    <option>MA</option>
-                    <option>MT</option>
-                    <option>MS</option>
-                    <option>MG</option>
-                    <option>PA</option>
-                    <option>PB</option>
-                    <option>PR</option>
-                    <option>PE</option>
-                    <option>PI</option>
-                    <option>RJ</option>
-                    <option>RN</option>
-                    <option>RS</option>
-                    <option>RO</option>
-                    <option>RR</option>
-                    <option selected>SC</option>
-                    <option>SP</option>
-                    <option>SE</option>
-                    <option>TO</option>
-                </select>
-            </div>
-        </div>
-
-        <button class="btn btn-success" type="submit">Salvar</button>              
-    </form>           
-</section>
+    
