@@ -37,6 +37,6 @@ export class ClubeService
 
   getClubeById(id: String)
   {
-    return this.clubes.find(clube => clube.id = id);
+    return this.clubes.find(clube => clube.id == id);
   }
 }

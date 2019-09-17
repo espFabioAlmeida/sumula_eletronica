@@ -31,7 +31,7 @@ export class ClubeCadastroComponent implements OnInit
       this.clube = new Clube();
       this.clube.estado = "SC";
 
-      //this.router.navigate(['/clube']);
+      this.router.navigate(['/clube']);
     }
   }
 
