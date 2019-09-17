@@ -1,0 +1,187 @@
+<section class="campo_cadastro">
+    <form #formulario="ngForm" (ngSubmit) = "onSubmit(formulario)" >
+        <p class="texto_titulo_cadastro">
+            Dados da Partida
+        </p>    
+        
+        <div class="form-group">
+            <div class="form-group col-md-12">
+                <label class="control-label">Resultado Final</label>
+                <p>{{sumula.placarMandante}} x {{sumula.placarVisitante}}</p>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="mandante">Clube Mandante</label>
+                <select id="mandante" class="form-control" id="mandante" name="mandante"
+                #mandante="ngModel" [(ngModel)]="sumula.mandante"
+                (change)="onItemChange(mandante)">
+                    <option value="Sem Clube">Selecionar</option>
+                    <option *ngFor="let clube of clubes" [value]="clube.nome">{{clube.nome}}</option>
+                </select>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="visitante">Clube Visitante</label>
+                <select id="visitante" class="form-control" id="visitante" name="visitante"
+                #visitante="ngModel" [(ngModel)]="sumula.visitante">
+                    <option value="Sem Clube">Selecionar</option>
+                    <option *ngFor="let clube of clubes" [value]="clube.nome">{{clube.nome}}</option>
+                </select>
+            </div>
+
+            <div class="form-group col-md-12">
+                <label class="control-label">Local</label>
+                <p>{{sumula.estadio}} - {{sumula.cidade}}</p>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="data" class="control-label">Data e Hora da Partida</label>
+            </div>
+    
+            <div class="form-group col-md-6">
+                <input type="date" date class="form-control" name="data" 
+                id="data" required #data="ngModel" [(ngModel)]="sumula.data">
+            </div>
+        </div>
+
+        <p class="texto_titulo_cadastro">
+            Cronologia
+        </p>
+
+        <div class="form-group">
+            <div class="form-group col-md-6">
+                <label for="entradaMandante" class="control-label">Entrada Mandante</label>
+            </div>
+    
+            <div class="form-group col-md-6">
+                <input type="date" date class="form-control" name="entradaMandante" 
+                id="entradaMandante" required #entradaMandante="ngModel" [(ngModel)]="sumula.entradaMandante">
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="entradaVisitante" class="control-label">Entrada Visitante</label>
+            </div>
+    
+            <div class="form-group col-md-6">
+                <input type="date" date class="form-control" name="entradaVisitante" 
+                id="entradaVisitante" required #entradaVisitante="ngModel" [(ngModel)]="sumula.entradaVisitante">
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="inicioPrimeiroTempo" class="control-label">Início do Jogo</label>
+            </div>
+    
+            <div class="form-group col-md-6">
+                <input type="date" date class="form-control" name="inicioPrimeiroTempo" 
+                id="inicioPrimeiroTempo" required #inicioPrimeiroTempo="ngModel" [(ngModel)]="sumula.inicioPrimeiroTempo">
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="fimPrimeiroTempo" class="control-label">Fim do Primeiro Tempo</label>
+            </div>
+    
+            <div class="form-group col-md-6">
+                <input type="date" date class="form-control" name="fimPrimeiroTempo" 
+                id="fimPrimeiroTempo" required #fimPrimeiroTempo="ngModel" [(ngModel)]="sumula.fimPrimeiroTempo">
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="retornoMandante" class="control-label">Retorno Mandante</label>
+            </div>
+    
+            <div class="form-group col-md-6">
+                <input type="date" date class="form-control" name="retornoMandante" 
+                id="retornoMandante" required #retornoMandante="ngModel" [(ngModel)]="sumula.retornoMandante">
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="retornoVisitante" class="control-label">Retorno Visitante</label>
+            </div>
+    
+            <div class="form-group col-md-6">
+                <input type="date" date class="form-control" name="retornoVisitante" 
+                id="retornoVisitante" required #retornoVisitante="ngModel" [(ngModel)]="sumula.retornoVisitante">
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="inicioSegundoTempo" class="control-label">Início do Segundo Tempo</label>
+            </div>
+            <div class="form-group col-md-6">
+                <input type="date" date class="form-control" name="inicioSegundoTempo" 
+                id="inicioSegundoTempo" required #inicioSegundoTempo="ngModel" [(ngModel)]="sumula.inicioSegundoTempo">
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="fimSegundoTempo" class="control-label">Fim do Jogo</label>
+            </div>
+    
+            <div class="form-group col-md-6">
+                <input type="date" date class="form-control" name="fimSegundoTempo" 
+                id="fimSegundoTempo" required #fimSegundoTempo="ngModel" [(ngModel)]="sumula.fimSegundoTempo">
+            </div>
+        </div>
+
+        <p class="texto_titulo_cadastro">
+            Arbitragem
+        </p>    
+        
+        <div class="form-group">
+            <div class="form-group col-md-12">
+                <label class="control-label">Árbitro</label>
+                <p>Aqui deve trazer o arbitro logado</p>
+            </div>
+
+            <div class="form-group col-md-12">
+                <label for="assistente1" class="control-label">Assistente 1</label>
+            </div>
+    
+            <div class="form-group col-md-12">
+                <input type="text" class="form-control" name="assistente1" id="assistente1" placeholder="assistente1" 
+                required #assistente1="ngModel" [(ngModel)]="sumula.assistente1">
+            </div>
+
+            <div class="form-group col-md-12">
+                <label for="assistente2" class="control-label">Assistente 2</label>
+            </div>
+    
+            <div class="form-group col-md-12">
+                <input type="text" class="form-control" name="assistente2" id="assistente2" placeholder="assistente2" 
+                required #assistente2="ngModel" [(ngModel)]="sumula.assistente2">
+            </div>
+        </div>
+
+
+        <p class="texto_titulo_cadastro">
+            Relatórios
+        </p>    
+        
+        <div class="form-group">
+
+            <div class="form-group col-md-12">
+                <label for="relatorioExpulsoes" class="control-label">Relatório Expulsões</label>
+            </div>
+    
+            <div class="form-group col-md-12">
+                <input type="text" class="form-control" name="relatorioExpulsoes" id="relatorioExpulsoes" placeholder="relatorioExpulsoes" 
+                required #relatorioExpulsoes="ngModel" [(ngModel)]="sumula.relatorioExpulsoes">
+            </div>
+
+            <div class="form-group col-md-12">
+                <label for="relatorioObservacoes" class="control-label">Relatório Observações</label>
+            </div>
+    
+            <div class="form-group col-md-12">
+                <input type="text" class="form-control" name="relatorioObservacoes" id="relatorioObservacoes" placeholder="relatorioExpulsoes" 
+                required #relatorioObservacoes="ngModel" [(ngModel)]="sumula.relatorioObservacoes">
+            </div>
+        </div>
+        
+        <p>
+            <button class="btn btn-success" [disabled]="!formulario.valid" type="submit">Salvar</button> 
+        </p>
+        <p>
+            <a class="btn btn-danger" routerLink="/atleta">Cancelar</a>
+        </p>
+        
+    </form>           
+</section>

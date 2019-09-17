@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SumulaService } from './sumula.service';
+import { Sumula } from './sumula'
 
 @Component({
   selector: 'app-sumula',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SumulaComponent implements OnInit {
 
-  constructor() { }
+  sumulas: Sumula[] = [];
+
+  constructor(private sumulaService: SumulaService) { }
 
   ngOnInit() {
+  }
+
+  getSumulas()
+  {
+    this.sumulas = this.sumulaService.getSumulas();
   }
 
 }

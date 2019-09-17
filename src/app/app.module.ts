@@ -13,6 +13,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HttpClient, HttpHandler } from '@angular/common/http';
 import { CepService } from './clube/cep.service';
 import { AtletaCadastroComponent } from './atleta-cadastro/atleta-cadastro.component';
+import { SumulaCadastroComponent } from './sumula-cadastro/sumula-cadastro.component';
+import { SumulaVisualizacaoComponent } from './sumula-visualizacao/sumula-visualizacao.component';
 
 
 @NgModule({
@@ -24,7 +26,9 @@ import { AtletaCadastroComponent } from './atleta-cadastro/atleta-cadastro.compo
     SumulaComponent,
     ArbitroCadastroComponent,
     ClubeCadastroComponent,
-    AtletaCadastroComponent
+    AtletaCadastroComponent,
+    SumulaCadastroComponent,
+    SumulaVisualizacaoComponent
   ],
   imports: [
     BrowserModule,

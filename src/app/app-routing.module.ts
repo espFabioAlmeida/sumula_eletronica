@@ -7,6 +7,8 @@ import { SumulaComponent } from './sumula/sumula.component';
 import { ArbitroCadastroComponent } from './arbitro-cadastro/arbitro-cadastro.component';
 import { ClubeCadastroComponent } from './clube-cadastro/clube-cadastro.component';
 import { AtletaCadastroComponent } from './atleta-cadastro/atleta-cadastro.component';
+import { SumulaCadastroComponent } from './sumula-cadastro/sumula-cadastro.component';
+import { SumulaVisualizacaoComponent } from './sumula-visualizacao/sumula-visualizacao.component';
 
 const routes: Routes = [ 
 { path: 'arbitro', component: ArbitroComponent},
@@ -18,7 +20,9 @@ const routes: Routes = [
 { path: 'clube-cadastro/:id', component: ClubeCadastroComponent},
 { path: 'clube-cadastro', component: ClubeCadastroComponent},
 { path: 'atleta-cadastro/:id', component: AtletaCadastroComponent},
-{ path: 'atleta-cadastro', component: AtletaCadastroComponent}
+{ path: 'atleta-cadastro', component: AtletaCadastroComponent},
+{ path: 'sumula-cadastro', component: SumulaCadastroComponent},
+{ path: 'sumula-visualizacao/:id', component: SumulaVisualizacaoComponent}
 ];
 
 @NgModule({
