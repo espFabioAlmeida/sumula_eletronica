@@ -58,7 +58,7 @@ export class SumulaCadastroComponent implements OnInit {
     }
   }
 
-  onItemChange(mandante: NgModel)
+  changeClubeMandante(mandante: NgModel)
   {
     console.log("Trocando Local da Partida");
     console.log(mandante.value);
@@ -68,14 +68,18 @@ export class SumulaCadastroComponent implements OnInit {
   onClickInserirRelacaoMandante()
   {
     const obj: Relacao = this.relacoesMandante.find
-    (relacao => relacao.numero == this.inserirRelacaoMandante.numero );
+    (relacao => relacao.numero == this.inserirRelacaoMandante.numero);
 
-    if(this.inserirRelacaoMandante.nome != "Selecionar" 
+    if(this.inserirRelacaoMandante.idAtleta != null
     && this.inserirRelacaoMandante.numero > 0
     && this.inserirRelacaoMandante.gols >= 0
     && !obj)
     {
-      console.log("Atleta Válido");
+      this.inserirRelacaoMandante.nome = this.atletasMandante.find(
+        atleta => atleta.id == this.inserirRelacaoMandante.idAtleta).nome;
+      
+      console.log("Nome encontrado");
+      console.log(this.inserirRelacaoMandante.nome);
       this.relacoesMandante.push(this.inserirRelacaoMandante);
       this.inserirCartoesMandante(); 
       this.atualizaPlacarFinal();
@@ -106,12 +110,14 @@ export class SumulaCadastroComponent implements OnInit {
     const obj: Relacao = this.relacoesVisitante.find
     (relacao => relacao.numero == this.inserirRelacaoVisitante.numero );
 
-    if(this.inserirRelacaoVisitante.nome != "Selecionar" 
+    if(this.inserirRelacaoVisitante.idAtleta != null
     && this.inserirRelacaoVisitante.numero > 0
     && this.inserirRelacaoVisitante.gols >= 0
     && !obj)
     {
       console.log("Atleta Válido");
+      this.inserirRelacaoVisitante.nome = this.atletasVisitante.find(
+        atleta => atleta.id == this.inserirRelacaoVisitante.idAtleta).nome;
       this.relacoesVisitante.push(this.inserirRelacaoVisitante);
       this.inserirCartoesVisitante(); 
       this.atualizaPlacarFinal();

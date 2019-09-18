@@ -17,7 +17,7 @@
                     <label for="mandante">Clube Mandante</label>
                     <select id="mandante" class="form-control" id="mandante" name="mandante"
                     #mandante="ngModel" [(ngModel)]="sumula.mandante"
-                    (change)="onItemChange(mandante)">
+                    (change)="changeClubeMandante(mandante)">
                         <option value="Sem Clube">Selecionar</option>
                         <option *ngFor="let clube of clubes" [value]="clube.nome">{{clube.nome}}</option>
                     </select>
@@ -186,11 +186,11 @@
                 id="numero" #numero="ngModel" [(ngModel)]="inserirRelacaoMandante.numero">
             </div>  
             <div class="col-sm-4">  
-                <label for="nome">Atleta</label>             
-                <select id="nome" class="form-control" id="nome" name="nome"
-                #nome="ngModel" [(ngModel)]="inserirRelacaoMandante.nome">
-                    <option value="Selecionar">Selecionar</option>
-                    <option *ngFor="let atleta of atletasMandante" [value]="atleta.nome">{{atleta.nome}}</option>
+                <label for="idAtleta">Atleta</label>             
+                <select id="idAtleta" class="form-control" id="idAtleta" name="idAtleta"
+                #idAtleta="ngModel" [(ngModel)]="inserirRelacaoMandante.idAtleta">
+                    <option value=null>Selecionar</option>
+                    <option *ngFor="let atleta of atletasMandante" [value]="atleta.id">{{atleta.nome}}</option>
                 </select> 
             </div>
             <div class="col-sm-2">   
@@ -277,11 +277,11 @@
                 id="numero" #numero="ngModel" [(ngModel)]="inserirRelacaoVisitante.numero">
             </div>  
             <div class="col-sm-4">  
-                <label for="nome">Atleta</label>             
-                <select id="nome" class="form-control" id="nome" name="nome"
-                #nome="ngModel" [(ngModel)]="inserirRelacaoVisitante.nome">
+                <label for="idAtleta">Atleta</label>             
+                <select id="idAtleta" class="form-control" name="idAtleta"
+                #idAtleta="ngModel" [(ngModel)]="inserirRelacaoVisitante.idAtleta">
                     <option value="Selecionar">Selecionar</option>
-                    <option *ngFor="let atleta of atletasVisitante" [value]="atleta.nome">{{atleta.nome}}</option>
+                    <option *ngFor="let atleta of atletasVisitante" [value]="atleta.id">{{atleta.nome}}</option>
                 </select> 
             </div>
             <div class="col-sm-2">   
