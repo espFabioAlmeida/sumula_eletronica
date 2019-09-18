@@ -22,7 +22,8 @@ export class SumulaCadastroComponent implements OnInit {
   sumula: Sumula = new Sumula();
   clubes: Clube[] = [];
   arbitros: Arbitro[] = [];
-  atletas: Atleta[] = [];
+  atletasMandante: Atleta[] = [];
+  atletasVisitante: Atleta[] = [];
 
   escalacaoMandante: Escalacao = new Escalacao();
   escalacaoVisitante: Escalacao = new Escalacao();
@@ -205,7 +206,8 @@ export class SumulaCadastroComponent implements OnInit {
 
   getAtletasByClubes()
   {
-    this.atletas = this.atletaService.getAtletas();
+    this.atletasMandante = this.atletaService.getAtletas();
+    this.atletasVisitante = this.atletaService.getAtletas();
   }
 
   inserirCartoesMandante()

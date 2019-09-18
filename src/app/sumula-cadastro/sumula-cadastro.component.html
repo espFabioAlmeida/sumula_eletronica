@@ -190,7 +190,7 @@
                 <select id="nome" class="form-control" id="nome" name="nome"
                 #nome="ngModel" [(ngModel)]="inserirRelacaoMandante.nome">
                     <option value="Selecionar">Selecionar</option>
-                    <option *ngFor="let atleta of atletas" [value]="atleta.nome">{{atleta.nome}}</option>
+                    <option *ngFor="let atleta of atletasMandante" [value]="atleta.nome">{{atleta.nome}}</option>
                 </select> 
             </div>
             <div class="col-sm-2">   
@@ -281,7 +281,7 @@
                 <select id="nome" class="form-control" id="nome" name="nome"
                 #nome="ngModel" [(ngModel)]="inserirRelacaoVisitante.nome">
                     <option value="Selecionar">Selecionar</option>
-                    <option *ngFor="let atleta of atletas" [value]="atleta.nome">{{atleta.nome}}</option>
+                    <option *ngFor="let atleta of atletasVisitante" [value]="atleta.nome">{{atleta.nome}}</option>
                 </select> 
             </div>
             <div class="col-sm-2">   
