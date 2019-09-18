@@ -76,6 +76,18 @@ export class SumulaCadastroComponent implements OnInit {
     console.log("Nenhum Selecionado")
   }
 
+  onClickExcluirRelacaoMandante(apagar: any)
+  {
+    console.log("Registro para remoção recebido");
+    console.log(apagar);
+    const obj: Relacao = this.relacoesMandante.find(relacao => relacao.numero == apagar);
+    const index: number = this.relacoesMandante.indexOf(obj);
+
+    if (index !== -1) 
+    {
+      this.relacoesMandante.splice(index, 1);
+    } 
+  }
 
   inicializaSumula()
   {

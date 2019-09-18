@@ -164,8 +164,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let relacao of relacoesMandante">
-                        <td><button class="btn btn-danger">X</button></td>
+                    <tr *ngFor="let relacao of relacoesMandante">                           
+                        <td>
+                            <button class="btn btn-danger" 
+                            (click)="onClickExcluirRelacaoMandante(relacao.numero)">X</button>
+                        </td>
                         <td>{{relacao.numero}}</td>
                         <td>{{relacao.nome}}</td>
                         <td>{{relacao.titular}}</td>
