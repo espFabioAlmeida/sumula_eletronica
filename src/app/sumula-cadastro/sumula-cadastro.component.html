@@ -1,372 +1,370 @@
-<section class="campo_cadastro">
-    <form #formulario="ngForm" (ngSubmit) = "onSubmit(formulario)" >
-        <div class="subcampo_cadastro">
-            <p class="texto_titulo_cadastro">
-                Dados da Partida
-            </p>    
-            
-            <div class="form-group">
-                <div class="form-group col-md-12">
-                    <h3>
-                        <label class="control-label">Resultado Final</label>
-                        {{sumula.placarMandante}} x {{sumula.placarVisitante}}
-                    </h3>
-                </div>
-
-                <div class="form-group row">
-                    <div class="col-sm-5">
-                        <label for="mandante">Clube Mandante</label>
-                        <select id="mandante" class="form-control" id="mandante" name="mandante"
-                        #mandante="ngModel" [(ngModel)]="sumula.mandante"
-                        (change)="onItemChange(mandante)">
-                            <option value="Sem Clube">Selecionar</option>
-                            <option *ngFor="let clube of clubes" [value]="clube.nome">{{clube.nome}}</option>
-                        </select>
-                    </div>
-
-                    <div class="col-sm-5">
-                        <label for="visitante">Clube Visitante</label>
-                        <select id="visitante" class="form-control" id="visitante" name="visitante"
-                        #visitante="ngModel" [(ngModel)]="sumula.visitante">
-                            <option value="Sem Clube">Selecionar</option>
-                            <option *ngFor="let clube of clubes" [value]="clube.nome">{{clube.nome}}</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group row">      
-                    <div class="col-sm-3">
-                        <label for="data" class="control-label">Data e Hora da Partida</label>
-                        <input type="datetime-local" datetime-local class="form-control" name="data" 
-                        id="data" required #data="ngModel" [(ngModel)]="sumula.data">
-                    </div>
-
-                    <div class="col-sm-6">
-                        <label class="control-label">Local da Partida</label>
-                        <p>{{sumula.estadio}} - {{sumula.cidade}}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="subcampo_cadastro">
-            <p class="texto_titulo_cadastro">
-                Cronologia
-            </p>
-
-            <div class="form-group">
-                <div class="form-group row">           
-                    <div class="col-sm-3">
-                        <label for="entradaMandante" class="control-label">Entrada Mandante</label>
-                        <input type="time" time class="form-control" name="entradaMandante" 
-                        id="entradaMandante" required #entradaMandante="ngModel" [(ngModel)]="sumula.entradaMandante">
-                    </div>
-            
-                    <div class="col-sm-3">
-                        <label for="entradaVisitante" class="control-label">Entrada Visitante</label>
-                        <input type="time" time class="form-control" name="entradaVisitante" 
-                        id="entradaVisitante" required #entradaVisitante="ngModel" [(ngModel)]="sumula.entradaVisitante">
-                    </div>
-            
-                    <div class="col-sm-3">
-                        <label for="inicioPrimeiroTempo" class="control-label">Início do Jogo</label>
-                        <input type="time" time class="form-control" name="inicioPrimeiroTempo" 
-                        id="inicioPrimeiroTempo" required #inicioPrimeiroTempo="ngModel" [(ngModel)]="sumula.inicioPrimeiroTempo">
-                    </div>
-
-                    <div class="col-sm-3">
-                        <label for="fimPrimeiroTempo" class="control-label">Fim do Primeiro Tempo</label>
-                        <input type="time" time class="form-control" name="fimPrimeiroTempo" 
-                        id="fimPrimeiroTempo" required #fimPrimeiroTempo="ngModel" [(ngModel)]="sumula.fimPrimeiroTempo">
-                    </div>
-
-                </div>
+<form #formulario="ngForm" (ngSubmit) = "onSubmit(formulario)" >
+    <div class="campo_cadastro">
+        <p class="texto_titulo_cadastro">
+            Dados da Partida
+        </p>    
         
-                
-                <div class="form-group row">        
-                    <div class="col-sm-3">
-                        <label for="retornoMandante" class="control-label">Retorno Mandante</label>
-                        <input type="time" time class="form-control" name="retornoMandante" 
-                        id="retornoMandante" required #retornoMandante="ngModel" [(ngModel)]="sumula.retornoMandante">
-                    </div>
-            
-                    <div class="col-sm-3">
-                        <label for="retornoVisitante" class="control-label">Retorno Visitante</label>
-                        <input type="time" time class="form-control" name="retornoVisitante" 
-                        id="retornoVisitante" required #retornoVisitante="ngModel" [(ngModel)]="sumula.retornoVisitante">
-                    </div>
-
-                    <div class="col-sm-3">
-                        <label for="inicioSegundoTempo" class="control-label">Início do Segundo Tempo</label>
-                        <input type="time" time class="form-control" name="inicioSegundoTempo" 
-                        id="inicioSegundoTempo" required #inicioSegundoTempo="ngModel" [(ngModel)]="sumula.inicioSegundoTempo">
-                    </div>
-            
-                    <div class="col-sm-3">
-                        <label for="fimSegundoTempo" class="control-label">Fim do Jogo</label>
-                        <input type="time" time class="form-control" name="fimSegundoTempo" 
-                        id="fimSegundoTempo" required #fimSegundoTempo="ngModel" [(ngModel)]="sumula.fimSegundoTempo">
-                    </div>
-                </div>
+        <div class="form-group">
+            <div class="form-group col-md-12">
+                <h3>
+                    <label class="control-label">Resultado Final</label>
+                    {{sumula.placarMandante}} x {{sumula.placarVisitante}}
+                </h3>
             </div>
-        </div>
-        
-        <div class="subcampo_cadastro">
-            <p class="texto_titulo_cadastro">
-                Arbitragem
-            </p>    
-            
-            <div class="form-group">
-                <div class="form-group row">
-                    <div class="col-sm-12">
-                        <label class="control-label">Árbitro</label>
-                        <p>{{sumula.arbitro}}</p>
-                    </div>
-                </div>
-                <div class="form-group row">  
-                    <div class="col-sm-6">
-                        <label for="assistente1">Assistente 1</label>
-                        <select id="assistente1" class="form-control" id="assistente1" name="assistente1"
-                        #assistente1="ngModel" [(ngModel)]="sumula.assistente1">
-                            <option value="Selecionar">Selecionar</option>
-                            <option *ngFor="let arbitro of arbitros" [value]="arbitro.nome">{{arbitro.nome}}</option>
-                        </select>
-                    </div>
 
-                    <div class="col-sm-6">
-                        <label for="assistente2">Assistente 2</label>
-                        <select id="assistente2" class="form-control" id="assistente2" name="assistente2"
-                        #assistente2="ngModel" [(ngModel)]="sumula.assistente2">
-                            <option value="Selecionar">Selecionar</option>
-                            <option *ngFor="let arbitro of arbitros" [value]="arbitro.nome">{{arbitro.nome}}</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="subcampo_cadastro">
-            <p class="texto_titulo_cadastro">
-                Escalação Equipe Mandante
-            </p> 
-
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Número</th>
-                        <th scope="col">Atleta</th>
-                        <th scope="col">T/R</th>
-                        <th scope="col">Gols</th>
-                        <th scope="col">Cartões</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let relacao of relacoesMandante">                           
-                        <td>
-                            <button class="btn btn-danger" 
-                            (click)="onClickExcluirRelacaoMandante(relacao.numero)">X</button>
-                        </td>
-                        <td>{{relacao.numero}}</td>
-                        <td>{{relacao.nome}}</td>
-                        <td>{{relacao.titular}}</td>
-                        <td>{{relacao.gols}}</td>
-                        <td>{{relacao.cartoes}}
-                    </tr>
-                </tbody>
-            </table>
-
-            <p class="texto_titulo_cadastro">
-                Incluir Atleta na Equipe Mandante
-            </p> 
-            
             <div class="form-group row">
-                <div class="col-sm-2">
-                    <label for="numero">Número</label> 
-                    <input type="number" number class="form-control" name="numero" 
-                    id="numero" #numero="ngModel" [(ngModel)]="inserirRelacaoMandante.numero">
-                </div>  
-                <div class="col-sm-4">  
-                    <label for="nome">Atleta</label>             
-                    <select id="nome" class="form-control" id="nome" name="nome"
-                    #nome="ngModel" [(ngModel)]="inserirRelacaoMandante.nome">
-                        <option value="Selecionar">Selecionar</option>
-                        <option *ngFor="let atleta of atletas" [value]="atleta.nome">{{atleta.nome}}</option>
-                    </select> 
-                </div>
-                <div class="col-sm-2">   
-                    <label for="titular">T/R</label>             
-                    <select id="titular" class="form-control" id="titular" name="titular"
-                    #titular="ngModel" [(ngModel)]="inserirRelacaoMandante.titular">
-                        <option value="Titular">Titular</option>
-                        <option value="Reserva">Reserva</option>
-                    </select> 
+                <div class="col-sm-5">
+                    <label for="mandante">Clube Mandante</label>
+                    <select id="mandante" class="form-control" id="mandante" name="mandante"
+                    #mandante="ngModel" [(ngModel)]="sumula.mandante"
+                    (change)="onItemChange(mandante)">
+                        <option value="Sem Clube">Selecionar</option>
+                        <option *ngFor="let clube of clubes" [value]="clube.nome">{{clube.nome}}</option>
+                    </select>
                 </div>
 
-                <div class="col-sm-2">
-                    <label for="gols">Gols</label> 
-                    <input type="number" number class="form-control" name="gols" 
-                    id="gols" #gols="ngModel" [(ngModel)]="inserirRelacaoMandante.gols">
-                </div>            
+                <div class="col-sm-5">
+                    <label for="visitante">Clube Visitante</label>
+                    <select id="visitante" class="form-control" id="visitante" name="visitante"
+                    #visitante="ngModel" [(ngModel)]="sumula.visitante">
+                        <option value="Sem Clube">Selecionar</option>
+                        <option *ngFor="let clube of clubes" [value]="clube.nome">{{clube.nome}}</option>
+                    </select>
+                </div>
             </div>
 
-            <div class="form-group form-check">
-                <input type="checkbox" checkbox class="form-check-input" 
-                id="ca" name="ca" value=true
-                #ca [(ngModel)]="inserirRelacaoMandante.ca">
-                <label class="form-check-label" for="ca">CA</label>
+            <div class="form-group row">      
+                <div class="col-sm-3">
+                    <label for="data" class="control-label">Data e Hora da Partida</label>
+                    <input type="datetime-local" datetime-local class="form-control" name="data" 
+                    id="data" required #data="ngModel" [(ngModel)]="sumula.data">
+                </div>
+
+                <div class="col-sm-6">
+                    <label class="control-label">Local da Partida</label>
+                    <p>{{sumula.estadio}} - {{sumula.cidade}}</p>
+                </div>
             </div>
-
-            <div class="form-group form-check">
-                <input type="checkbox" checkbox class="form-check-input" 
-                id="doisCa" name="doisCa" value=true
-                #doisCa [(ngModel)]="inserirRelacaoMandante.doisCa">
-                <label class="form-check-label" for="doisCa">2CA</label>
-            </div>
-
-            <div class="form-group form-check">
-                <input type="checkbox" checkbox class="form-check-input" 
-                id="cvd" name="cvd" value=true
-                #cvd [(ngModel)]="inserirRelacaoMandante.cvd">
-                <label class="form-check-label" for="cvd">CVD</label>
-            </div>
-
-
-            <button class="btn btn-success" (click)="onClickInserirRelacaoMandante()">Incluir</button>
         </div>
+    </div>
 
+    <div class="campo_cadastro">
+        <p class="texto_titulo_cadastro">
+            Cronologia
+        </p>
 
-        <div class="subcampo_cadastro">
-            <p class="texto_titulo_cadastro">
-                Escalação Equipe Visitante
-            </p> 
+        <div class="form-group">
+            <div class="form-group row">           
+                <div class="col-sm-3">
+                    <label for="entradaMandante" class="control-label">Entrada Mandante</label>
+                    <input type="time" time class="form-control" name="entradaMandante" 
+                    id="entradaMandante" required #entradaMandante="ngModel" [(ngModel)]="sumula.entradaMandante">
+                </div>
+        
+                <div class="col-sm-3">
+                    <label for="entradaVisitante" class="control-label">Entrada Visitante</label>
+                    <input type="time" time class="form-control" name="entradaVisitante" 
+                    id="entradaVisitante" required #entradaVisitante="ngModel" [(ngModel)]="sumula.entradaVisitante">
+                </div>
+        
+                <div class="col-sm-3">
+                    <label for="inicioPrimeiroTempo" class="control-label">Início do Jogo</label>
+                    <input type="time" time class="form-control" name="inicioPrimeiroTempo" 
+                    id="inicioPrimeiroTempo" required #inicioPrimeiroTempo="ngModel" [(ngModel)]="sumula.inicioPrimeiroTempo">
+                </div>
 
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Número</th>
-                        <th scope="col">Atleta</th>
-                        <th scope="col">T/R</th>
-                        <th scope="col">Gols</th>
-                        <th scope="col">Cartões</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let relacao of relacoesVisitante">                           
-                        <td>
-                            <button class="btn btn-danger" 
-                            (click)="onClickExcluirRelacaoVisitante(relacao.numero)">X</button>
-                        </td>
-                        <td>{{relacao.numero}}</td>
-                        <td>{{relacao.nome}}</td>
-                        <td>{{relacao.titular}}</td>
-                        <td>{{relacao.gols}}</td>
-                        <td>{{relacao.cartoes}}
-                    </tr>
-                </tbody>
-            </table>
+                <div class="col-sm-3">
+                    <label for="fimPrimeiroTempo" class="control-label">Fim do Primeiro Tempo</label>
+                    <input type="time" time class="form-control" name="fimPrimeiroTempo" 
+                    id="fimPrimeiroTempo" required #fimPrimeiroTempo="ngModel" [(ngModel)]="sumula.fimPrimeiroTempo">
+                </div>
 
-            <p class="texto_titulo_cadastro">
-                Incluir Atleta na Equipe Visitante
-            </p> 
+            </div>
+    
             
+            <div class="form-group row">        
+                <div class="col-sm-3">
+                    <label for="retornoMandante" class="control-label">Retorno Mandante</label>
+                    <input type="time" time class="form-control" name="retornoMandante" 
+                    id="retornoMandante" required #retornoMandante="ngModel" [(ngModel)]="sumula.retornoMandante">
+                </div>
+        
+                <div class="col-sm-3">
+                    <label for="retornoVisitante" class="control-label">Retorno Visitante</label>
+                    <input type="time" time class="form-control" name="retornoVisitante" 
+                    id="retornoVisitante" required #retornoVisitante="ngModel" [(ngModel)]="sumula.retornoVisitante">
+                </div>
+
+                <div class="col-sm-3">
+                    <label for="inicioSegundoTempo" class="control-label">Início do Segundo Tempo</label>
+                    <input type="time" time class="form-control" name="inicioSegundoTempo" 
+                    id="inicioSegundoTempo" required #inicioSegundoTempo="ngModel" [(ngModel)]="sumula.inicioSegundoTempo">
+                </div>
+        
+                <div class="col-sm-3">
+                    <label for="fimSegundoTempo" class="control-label">Fim do Jogo</label>
+                    <input type="time" time class="form-control" name="fimSegundoTempo" 
+                    id="fimSegundoTempo" required #fimSegundoTempo="ngModel" [(ngModel)]="sumula.fimSegundoTempo">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="campo_cadastro">
+        <p class="texto_titulo_cadastro">
+            Arbitragem
+        </p>    
+        
+        <div class="form-group">
             <div class="form-group row">
-                <div class="col-sm-2">
-                    <label for="numero">Número</label> 
-                    <input type="number" number class="form-control" name="numero" 
-                    id="numero" #numero="ngModel" [(ngModel)]="inserirRelacaoVisitante.numero">
-                </div>  
-                <div class="col-sm-4">  
-                    <label for="nome">Atleta</label>             
-                    <select id="nome" class="form-control" id="nome" name="nome"
-                    #nome="ngModel" [(ngModel)]="inserirRelacaoVisitante.nome">
+                <div class="col-sm-12">
+                    <label class="control-label">Árbitro</label>
+                    <p>{{sumula.arbitro}}</p>
+                </div>
+            </div>
+            <div class="form-group row">  
+                <div class="col-sm-6">
+                    <label for="assistente1">Assistente 1</label>
+                    <select id="assistente1" class="form-control" id="assistente1" name="assistente1"
+                    #assistente1="ngModel" [(ngModel)]="sumula.assistente1">
                         <option value="Selecionar">Selecionar</option>
-                        <option *ngFor="let atleta of atletas" [value]="atleta.nome">{{atleta.nome}}</option>
-                    </select> 
-                </div>
-                <div class="col-sm-2">   
-                    <label for="titular">T/R</label>             
-                    <select id="titular" class="form-control" id="titular" name="titular"
-                    #titular="ngModel" [(ngModel)]="inserirRelacaoVisitante.titular">
-                        <option value="Titular">Titular</option>
-                        <option value="Reserva">Reserva</option>
-                    </select> 
+                        <option *ngFor="let arbitro of arbitros" [value]="arbitro.nome">{{arbitro.nome}}</option>
+                    </select>
                 </div>
 
-                <div class="col-sm-2">
-                    <label for="gols">Gols</label> 
-                    <input type="number" number class="form-control" name="gols" 
-                    id="gols" #gols="ngModel" [(ngModel)]="inserirRelacaoVisitante.gols">
-                </div>            
-            </div>
-
-            <div class="form-group form-check">
-                <input type="checkbox" checkbox class="form-check-input" 
-                id="ca" name="ca" value=true
-                #ca [(ngModel)]="inserirRelacaoVisitante.ca">
-                <label class="form-check-label" for="ca">CA</label>
-            </div>
-
-            <div class="form-group form-check">
-                <input type="checkbox" checkbox class="form-check-input" 
-                id="doisCa" name="doisCa" value=true
-                #doisCa [(ngModel)]="inserirRelacaoVisitante.doisCa">
-                <label class="form-check-label" for="doisCa">2CA</label>
-            </div>
-
-            <div class="form-group form-check">
-                <input type="checkbox" checkbox class="form-check-input" 
-                id="cvd" name="cvd" value=true
-                #cvd [(ngModel)]="inserirRelacaoVisitante.cvd">
-                <label class="form-check-label" for="cvd">CVD</label>
-            </div>
-
-
-            <button class="btn btn-success" (click)="onClickInserirRelacaoVisitante()">Incluir</button>
-        </div>
-
-
-
-
-
-        <div class="subcampo_cadastro">
-            <p class="texto_titulo_cadastro">
-                Relatórios
-            </p>    
-            
-            <div class="form-group">
-
-                <div class="form-group col-md-12">
-                    <label for="relatorioExpulsoes" class="control-label">Relatório Expulsões</label>
-                </div>
-        
-                <div class="form-group col-md-12">
-                    <textarea name="relatorioExpulsoes" id="relatorioExpulsoes" class="form-control" aria-label="With textarea" 
-                    placeholder="Relatório de Expulsões" required 
-                    #relatorioExpulsoes="ngModel" [(ngModel)]="sumula.relatorioExpulsoes">
-                    </textarea>
-                </div>
-
-                <div class="form-group col-md-12">
-                    <label for="relatorioObservacoes" class="control-label">Relatório Observações</label>
-                </div>
-        
-                <div class="form-group col-md-12">
-                    <textarea name="relatorioObservacoes" id="relatorioObservacoes" class="form-control" aria-label="With textarea" 
-                    placeholder="Relatório de Obervações Gerais" required 
-                    #relatorioObservacoes="ngModel" [(ngModel)]="sumula.relatorioObservacoes">
-                    </textarea>
+                <div class="col-sm-6">
+                    <label for="assistente2">Assistente 2</label>
+                    <select id="assistente2" class="form-control" id="assistente2" name="assistente2"
+                    #assistente2="ngModel" [(ngModel)]="sumula.assistente2">
+                        <option value="Selecionar">Selecionar</option>
+                        <option *ngFor="let arbitro of arbitros" [value]="arbitro.nome">{{arbitro.nome}}</option>
+                    </select>
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="campo_cadastro">
+        <p class="texto_titulo_cadastro">
+            Escalação Equipe Mandante
+        </p> 
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Número</th>
+                    <th scope="col">Atleta</th>
+                    <th scope="col">T/R</th>
+                    <th scope="col">Gols</th>
+                    <th scope="col">Cartões</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let relacao of relacoesMandante">                           
+                    <td>
+                        <button class="btn btn-danger" 
+                        (click)="onClickExcluirRelacaoMandante(relacao.numero)">X</button>
+                    </td>
+                    <td>{{relacao.numero}}</td>
+                    <td>{{relacao.nome}}</td>
+                    <td>{{relacao.titular}}</td>
+                    <td>{{relacao.gols}}</td>
+                    <td>{{relacao.cartoes}}
+                </tr>
+            </tbody>
+        </table>
+
+        <p class="texto_titulo_cadastro">
+            Incluir Atleta na Equipe Mandante
+        </p> 
         
+        <div class="form-group row">
+            <div class="col-sm-2">
+                <label for="numero">Número</label> 
+                <input type="number" number class="form-control" name="numero" 
+                id="numero" #numero="ngModel" [(ngModel)]="inserirRelacaoMandante.numero">
+            </div>  
+            <div class="col-sm-4">  
+                <label for="nome">Atleta</label>             
+                <select id="nome" class="form-control" id="nome" name="nome"
+                #nome="ngModel" [(ngModel)]="inserirRelacaoMandante.nome">
+                    <option value="Selecionar">Selecionar</option>
+                    <option *ngFor="let atleta of atletas" [value]="atleta.nome">{{atleta.nome}}</option>
+                </select> 
+            </div>
+            <div class="col-sm-2">   
+                <label for="titular">T/R</label>             
+                <select id="titular" class="form-control" id="titular" name="titular"
+                #titular="ngModel" [(ngModel)]="inserirRelacaoMandante.titular">
+                    <option value="Titular">Titular</option>
+                    <option value="Reserva">Reserva</option>
+                </select> 
+            </div>
+
+            <div class="col-sm-2">
+                <label for="gols">Gols</label> 
+                <input type="number" number class="form-control" name="gols" 
+                id="gols" #gols="ngModel" [(ngModel)]="inserirRelacaoMandante.gols">
+            </div>            
+        </div>
+
+        <div class="form-group form-check">
+            <input type="checkbox" checkbox class="form-check-input" 
+            id="ca" name="ca" value=true
+            #ca [(ngModel)]="inserirRelacaoMandante.ca">
+            <label class="form-check-label" for="ca">CA</label>
+        </div>
+
+        <div class="form-group form-check">
+            <input type="checkbox" checkbox class="form-check-input" 
+            id="doisCa" name="doisCa" value=true
+            #doisCa [(ngModel)]="inserirRelacaoMandante.doisCa">
+            <label class="form-check-label" for="doisCa">2CA</label>
+        </div>
+
+        <div class="form-group form-check">
+            <input type="checkbox" checkbox class="form-check-input" 
+            id="cvd" name="cvd" value=true
+            #cvd [(ngModel)]="inserirRelacaoMandante.cvd">
+            <label class="form-check-label" for="cvd">CVD</label>
+        </div>
+
+
+        <button class="btn btn-success" (click)="onClickInserirRelacaoMandante()">Incluir</button>
+    </div>
+
+
+    <div class="campo_cadastro">
+        <p class="texto_titulo_cadastro">
+            Escalação Equipe Visitante
+        </p> 
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Número</th>
+                    <th scope="col">Atleta</th>
+                    <th scope="col">T/R</th>
+                    <th scope="col">Gols</th>
+                    <th scope="col">Cartões</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let relacao of relacoesVisitante">                           
+                    <td>
+                        <button class="btn btn-danger" 
+                        (click)="onClickExcluirRelacaoVisitante(relacao.numero)">X</button>
+                    </td>
+                    <td>{{relacao.numero}}</td>
+                    <td>{{relacao.nome}}</td>
+                    <td>{{relacao.titular}}</td>
+                    <td>{{relacao.gols}}</td>
+                    <td>{{relacao.cartoes}}
+                </tr>
+            </tbody>
+        </table>
+
+        <p class="texto_titulo_cadastro">
+            Incluir Atleta na Equipe Visitante
+        </p> 
+        
+        <div class="form-group row">
+            <div class="col-sm-2">
+                <label for="numero">Número</label> 
+                <input type="number" number class="form-control" name="numero" 
+                id="numero" #numero="ngModel" [(ngModel)]="inserirRelacaoVisitante.numero">
+            </div>  
+            <div class="col-sm-4">  
+                <label for="nome">Atleta</label>             
+                <select id="nome" class="form-control" id="nome" name="nome"
+                #nome="ngModel" [(ngModel)]="inserirRelacaoVisitante.nome">
+                    <option value="Selecionar">Selecionar</option>
+                    <option *ngFor="let atleta of atletas" [value]="atleta.nome">{{atleta.nome}}</option>
+                </select> 
+            </div>
+            <div class="col-sm-2">   
+                <label for="titular">T/R</label>             
+                <select id="titular" class="form-control" id="titular" name="titular"
+                #titular="ngModel" [(ngModel)]="inserirRelacaoVisitante.titular">
+                    <option value="Titular">Titular</option>
+                    <option value="Reserva">Reserva</option>
+                </select> 
+            </div>
+
+            <div class="col-sm-2">
+                <label for="gols">Gols</label> 
+                <input type="number" number class="form-control" name="gols" 
+                id="gols" #gols="ngModel" [(ngModel)]="inserirRelacaoVisitante.gols">
+            </div>            
+        </div>
+
+        <div class="form-group form-check">
+            <input type="checkbox" checkbox class="form-check-input" 
+            id="ca" name="ca" value=true
+            #ca [(ngModel)]="inserirRelacaoVisitante.ca">
+            <label class="form-check-label" for="ca">CA</label>
+        </div>
+
+        <div class="form-group form-check">
+            <input type="checkbox" checkbox class="form-check-input" 
+            id="doisCa" name="doisCa" value=true
+            #doisCa [(ngModel)]="inserirRelacaoVisitante.doisCa">
+            <label class="form-check-label" for="doisCa">2CA</label>
+        </div>
+
+        <div class="form-group form-check">
+            <input type="checkbox" checkbox class="form-check-input" 
+            id="cvd" name="cvd" value=true
+            #cvd [(ngModel)]="inserirRelacaoVisitante.cvd">
+            <label class="form-check-label" for="cvd">CVD</label>
+        </div>
+
+
+        <button class="btn btn-success" (click)="onClickInserirRelacaoVisitante()">Incluir</button>
+    </div>
+
+
+
+
+
+    <div class="campo_cadastro">
+        <p class="texto_titulo_cadastro">
+            Relatórios
+        </p>    
+        
+        <div class="form-group">
+
+            <div class="form-group col-md-12">
+                <label for="relatorioExpulsoes" class="control-label">Relatório Expulsões</label>
+            </div>
+    
+            <div class="form-group col-md-12">
+                <textarea name="relatorioExpulsoes" id="relatorioExpulsoes" class="form-control" aria-label="With textarea" 
+                placeholder="Relatório de Expulsões" required 
+                #relatorioExpulsoes="ngModel" [(ngModel)]="sumula.relatorioExpulsoes">
+                </textarea>
+            </div>
+
+            <div class="form-group col-md-12">
+                <label for="relatorioObservacoes" class="control-label">Relatório Observações</label>
+            </div>
+    
+            <div class="form-group col-md-12">
+                <textarea name="relatorioObservacoes" id="relatorioObservacoes" class="form-control" aria-label="With textarea" 
+                placeholder="Relatório de Obervações Gerais" required 
+                #relatorioObservacoes="ngModel" [(ngModel)]="sumula.relatorioObservacoes">
+                </textarea>
+            </div>
+        </div>
+
         <p>
             <button class="btn btn-success" [disabled]="!formulario.valid" type="submit">Salvar</button> 
         </p>
         <p>
             <a class="btn btn-danger" routerLink="/sumula">Cancelar</a>
         </p>
-        
-    </form>           
-</section>
+    </div>
+    
+</form>           
