@@ -66,7 +66,11 @@ export class SumulaCadastroComponent implements OnInit {
 
   onClickInserirRelacaoMandante()
   {
-    if(this.inserirRelacaoMandante.nome != "Selecionar")
+    const obj: Relacao = this.relacoesMandante.find(relacao => relacao.numero == this.inserirRelacaoMandante.numero );
+    if(this.inserirRelacaoMandante.nome != "Selecionar" 
+    && this.inserirRelacaoMandante.numero > 0
+    && this.inserirRelacaoMandante.gols >= 0
+    && !obj)
     {
       console.log("Atleta Válido");
       this.relacoesMandante.push(this.inserirRelacaoMandante);
@@ -74,6 +78,7 @@ export class SumulaCadastroComponent implements OnInit {
       return;
     }
     console.log("Nenhum Selecionado")
+    alert("Verifique os campos de inserção e tente novamente");
   }
 
   onClickExcluirRelacaoMandante(apagar: any)
