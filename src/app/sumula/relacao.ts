@@ -1,10 +1,11 @@
 export class Relacao
 {
     nome: String;
-    numero: Number;
-    gols: Number;
+    numero: number;
+    gols: any;
     titular: String;
     ca: Boolean;
     doisCa: Boolean;
     cvd: Boolean;
+    cartoes: String;
 }

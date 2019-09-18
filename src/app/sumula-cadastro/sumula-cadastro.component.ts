@@ -66,7 +66,9 @@ export class SumulaCadastroComponent implements OnInit {
 
   onClickInserirRelacaoMandante()
   {
-    const obj: Relacao = this.relacoesMandante.find(relacao => relacao.numero == this.inserirRelacaoMandante.numero );
+    const obj: Relacao = this.relacoesMandante.find
+    (relacao => relacao.numero == this.inserirRelacaoMandante.numero );
+
     if(this.inserirRelacaoMandante.nome != "Selecionar" 
     && this.inserirRelacaoMandante.numero > 0
     && this.inserirRelacaoMandante.gols >= 0
@@ -74,6 +76,8 @@ export class SumulaCadastroComponent implements OnInit {
     {
       console.log("Atleta Válido");
       this.relacoesMandante.push(this.inserirRelacaoMandante);
+      this.inserirCartoesMandante(); 
+      this.atualizaPlacarFinal();
       this.inicializaInserirRelacaoMandante();
       return;
     }
@@ -91,7 +95,58 @@ export class SumulaCadastroComponent implements OnInit {
     if (index !== -1) 
     {
       this.relacoesMandante.splice(index, 1);
+      this.atualizaPlacarFinal();
     } 
+  }
+
+
+  onClickInserirRelacaoVisitante()
+  {
+    const obj: Relacao = this.relacoesVisitante.find
+    (relacao => relacao.numero == this.inserirRelacaoVisitante.numero );
+
+    if(this.inserirRelacaoVisitante.nome != "Selecionar" 
+    && this.inserirRelacaoVisitante.numero > 0
+    && this.inserirRelacaoVisitante.gols >= 0
+    && !obj)
+    {
+      console.log("Atleta Válido");
+      this.relacoesVisitante.push(this.inserirRelacaoVisitante);
+      this.inserirCartoesVisitante(); 
+      this.atualizaPlacarFinal();
+      this.inicializaInserirRelacaoVisitante();
+      return;
+    }
+    console.log("Nenhum Selecionado")
+    alert("Verifique os campos de inserção e tente novamente");
+  }
+
+  onClickExcluirRelacaoVisitante(apagar: any)
+  {
+    console.log("Registro para remoção recebido");
+    console.log(apagar);
+    const obj: Relacao = this.relacoesVisitante.find(relacao => relacao.numero == apagar);
+    const index: number = this.relacoesVisitante.indexOf(obj);
+
+    if (index !== -1) 
+    {
+      this.relacoesVisitante.splice(index, 1);
+      this.atualizaPlacarFinal();
+    } 
+  }
+
+  atualizaPlacarFinal()
+  {
+    this.sumula.placarMandante = 0;
+    this.relacoesMandante.forEach(relacao => {
+    this.sumula.placarMandante += relacao.gols;
+    });
+
+    this.sumula.placarVisitante = 0;
+    this.relacoesVisitante.forEach(relacao => {
+      this.sumula.placarVisitante += relacao.gols;
+    })
+     
   }
 
   inicializaSumula()
@@ -107,6 +162,9 @@ export class SumulaCadastroComponent implements OnInit {
 
     this.inicializaInserirRelacaoMandante();
     this.inicializaInserirRelacaoVisitante();
+
+    this.relacoesMandante = [];
+    this.relacoesVisitante = [];
   }
 
   inicializaInserirRelacaoMandante()
@@ -148,6 +206,83 @@ export class SumulaCadastroComponent implements OnInit {
   getAtletasByClubes()
   {
     this.atletas = this.atletaService.getAtletas();
+  }
+
+  inserirCartoesMandante()
+  {
+    if(!this.inserirRelacaoMandante.ca && !this.inserirRelacaoMandante.doisCa && !this.inserirRelacaoMandante.cvd)
+    {
+      this.inserirRelacaoMandante.cartoes = "Sem Cartão";
+      return;
+    }
+
+    if((this.inserirRelacaoMandante.ca && this.inserirRelacaoMandante.doisCa && this.inserirRelacaoMandante.cvd)
+    ||
+    (this.inserirRelacaoMandante.ca && !this.inserirRelacaoMandante.doisCa && this.inserirRelacaoMandante.cvd))
+    {
+      this.inserirRelacaoMandante.cartoes = "CA + CVD";
+      return;
+    }
+
+    if(this.inserirRelacaoMandante.ca && !this.inserirRelacaoMandante.doisCa && !this.inserirRelacaoMandante.cvd)
+    {
+      this.inserirRelacaoMandante.cartoes = "CA";
+      return;
+    }
+
+    if((this.inserirRelacaoMandante.ca && this.inserirRelacaoMandante.doisCa && !this.inserirRelacaoMandante.cvd)
+    ||
+    (!this.inserirRelacaoMandante.ca && this.inserirRelacaoMandante.doisCa && !this.inserirRelacaoMandante.cvd))
+    {
+      this.inserirRelacaoMandante.cartoes = "2CA";
+      return;
+    }
+
+    if((!this.inserirRelacaoMandante.ca && !this.inserirRelacaoMandante.doisCa && this.inserirRelacaoMandante.cvd)    
+    ||
+    (!this.inserirRelacaoMandante.ca && this.inserirRelacaoMandante.doisCa && this.inserirRelacaoMandante.cvd))
+    {
+      this.inserirRelacaoMandante.cartoes = "CVD";
+      return;
+    }
+  }
+
+  inserirCartoesVisitante()
+  {
+    if(!this.inserirRelacaoVisitante.ca && !this.inserirRelacaoVisitante.doisCa && !this.inserirRelacaoVisitante.cvd)
+    {
+      this.inserirRelacaoVisitante.cartoes = "Sem Cartão";
+      return;
+    }
+
+    if((this.inserirRelacaoVisitante.ca && this.inserirRelacaoVisitante.doisCa && this.inserirRelacaoVisitante.cvd)
+    ||
+    (this.inserirRelacaoVisitante.ca && !this.inserirRelacaoVisitante.doisCa && this.inserirRelacaoVisitante.cvd))
+    {
+      this.inserirRelacaoVisitante.cartoes = "CA + CVD";
+      return;
+    }
+
+    if(this.inserirRelacaoVisitante.ca && !this.inserirRelacaoVisitante.doisCa && !this.inserirRelacaoVisitante.cvd)
+    {
+      this.inserirRelacaoVisitante.cartoes = "CA";
+      return;
+    }
+
+    if((this.inserirRelacaoVisitante.ca && this.inserirRelacaoVisitante.doisCa && !this.inserirRelacaoVisitante.cvd)
+    ||
+    (!this.inserirRelacaoVisitante.ca && this.inserirRelacaoVisitante.doisCa && !this.inserirRelacaoVisitante.cvd))
+    {
+      this.inserirRelacaoVisitante.cartoes = "2CA";
+      return;
+    }
+
+    if(!this.inserirRelacaoVisitante.ca && !this.inserirRelacaoVisitante.doisCa && this.inserirRelacaoVisitante.cvd)
+    {  
+      this.inserirRelacaoVisitante.cartoes = "CVD";
+      return;
+    }
+
   }
 
 }

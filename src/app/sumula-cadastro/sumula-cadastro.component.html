@@ -158,9 +158,7 @@
                         <th scope="col">Atleta</th>
                         <th scope="col">T/R</th>
                         <th scope="col">Gols</th>
-                        <th scope="col">CA</th>
-                        <th scope="col">2CA</th>
-                        <th scope="col">CVD</th>
+                        <th scope="col">Cartões</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -173,9 +171,7 @@
                         <td>{{relacao.nome}}</td>
                         <td>{{relacao.titular}}</td>
                         <td>{{relacao.gols}}</td>
-                        <td>{{relacao.ca}}</td>
-                        <td>{{relacao.doisCa}}</td>
-                        <td>{{relacao.cvd}}</td>
+                        <td>{{relacao.cartoes}}
                     </tr>
                 </tbody>
             </table>
@@ -238,6 +234,102 @@
 
             <button class="btn btn-success" (click)="onClickInserirRelacaoMandante()">Incluir</button>
         </div>
+
+
+        <div class="subcampo_cadastro">
+            <p class="texto_titulo_cadastro">
+                Escalação Equipe Visitante
+            </p> 
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Número</th>
+                        <th scope="col">Atleta</th>
+                        <th scope="col">T/R</th>
+                        <th scope="col">Gols</th>
+                        <th scope="col">Cartões</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let relacao of relacoesVisitante">                           
+                        <td>
+                            <button class="btn btn-danger" 
+                            (click)="onClickExcluirRelacaoVisitante(relacao.numero)">X</button>
+                        </td>
+                        <td>{{relacao.numero}}</td>
+                        <td>{{relacao.nome}}</td>
+                        <td>{{relacao.titular}}</td>
+                        <td>{{relacao.gols}}</td>
+                        <td>{{relacao.cartoes}}
+                    </tr>
+                </tbody>
+            </table>
+
+            <p class="texto_titulo_cadastro">
+                Incluir Atleta na Equipe Visitante
+            </p> 
+            
+            <div class="form-group row">
+                <div class="col-sm-2">
+                    <label for="numero">Número</label> 
+                    <input type="number" number class="form-control" name="numero" 
+                    id="numero" #numero="ngModel" [(ngModel)]="inserirRelacaoVisitante.numero">
+                </div>  
+                <div class="col-sm-4">  
+                    <label for="nome">Atleta</label>             
+                    <select id="nome" class="form-control" id="nome" name="nome"
+                    #nome="ngModel" [(ngModel)]="inserirRelacaoVisitante.nome">
+                        <option value="Selecionar">Selecionar</option>
+                        <option *ngFor="let atleta of atletas" [value]="atleta.nome">{{atleta.nome}}</option>
+                    </select> 
+                </div>
+                <div class="col-sm-2">   
+                    <label for="titular">T/R</label>             
+                    <select id="titular" class="form-control" id="titular" name="titular"
+                    #titular="ngModel" [(ngModel)]="inserirRelacaoVisitante.titular">
+                        <option value="Titular">Titular</option>
+                        <option value="Reserva">Reserva</option>
+                    </select> 
+                </div>
+
+                <div class="col-sm-2">
+                    <label for="gols">Gols</label> 
+                    <input type="number" number class="form-control" name="gols" 
+                    id="gols" #gols="ngModel" [(ngModel)]="inserirRelacaoVisitante.gols">
+                </div>            
+            </div>
+
+            <div class="form-group form-check">
+                <input type="checkbox" checkbox class="form-check-input" 
+                id="ca" name="ca" value=true
+                #ca [(ngModel)]="inserirRelacaoVisitante.ca">
+                <label class="form-check-label" for="ca">CA</label>
+            </div>
+
+            <div class="form-group form-check">
+                <input type="checkbox" checkbox class="form-check-input" 
+                id="doisCa" name="doisCa" value=true
+                #doisCa [(ngModel)]="inserirRelacaoVisitante.doisCa">
+                <label class="form-check-label" for="doisCa">2CA</label>
+            </div>
+
+            <div class="form-group form-check">
+                <input type="checkbox" checkbox class="form-check-input" 
+                id="cvd" name="cvd" value=true
+                #cvd [(ngModel)]="inserirRelacaoVisitante.cvd">
+                <label class="form-check-label" for="cvd">CVD</label>
+            </div>
+
+
+            <button class="btn btn-success" (click)="onClickInserirRelacaoVisitante()">Incluir</button>
+        </div>
+
+
+
+
+
         <div class="subcampo_cadastro">
             <p class="texto_titulo_cadastro">
                 Relatórios

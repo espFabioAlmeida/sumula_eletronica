@@ -6,8 +6,8 @@ export class Sumula
     mandante: String;
     visitante: String;
     data: Date;
-    placarMandante: Number;
-    placarVisitante: Number;
+    placarMandante: any;
+    placarVisitante: any;
     estadio: String;
     cidade: String;
 
