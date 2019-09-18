@@ -1,3 +1,5 @@
+import { Escalacao } from './escalacao';
+
 export class Sumula
 {
     id: String;
@@ -25,4 +27,6 @@ export class Sumula
     relatorioExpulsoes: String;
     relatorioObservacoes: String;
 
+    escalacaoMandante: Escalacao;
+    escalacaoVisitante: Escalacao;
 }
