@@ -280,7 +280,7 @@
                 <label for="idAtleta">Atleta</label>             
                 <select id="idAtleta" class="form-control" name="idAtleta"
                 #idAtleta="ngModel" [(ngModel)]="inserirRelacaoVisitante.idAtleta">
-                    <option value="Selecionar">Selecionar</option>
+                    <option value=null>Selecionar</option>
                     <option *ngFor="let atleta of atletasVisitante" [value]="atleta.id">{{atleta.nome}}</option>
                 </select> 
             </div>

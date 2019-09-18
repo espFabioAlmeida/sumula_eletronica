@@ -184,6 +184,7 @@ export class SumulaCadastroComponent implements OnInit {
     this.inserirRelacaoMandante.gols = 0;
     this.inserirRelacaoMandante.numero = 0;
     this.inserirRelacaoMandante.titular = "Titular";
+    this.inserirRelacaoMandante.idAtleta = null;
   }
 
   inicializaInserirRelacaoVisitante()
@@ -196,6 +197,7 @@ export class SumulaCadastroComponent implements OnInit {
     this.inserirRelacaoVisitante.gols = 0;
     this.inserirRelacaoVisitante.numero = 0;
     this.inserirRelacaoVisitante.titular = "Titular";
+    this.inserirRelacaoVisitante.idAtleta = null;
   }
 
   getClubes()
