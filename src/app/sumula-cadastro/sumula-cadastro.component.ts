@@ -50,6 +50,13 @@ export class SumulaCadastroComponent implements OnInit {
     {
       console.log("recebido no Submit");
       console.log(this.sumula);
+
+      this.sumula.assistente1 = this.arbitros.find(
+        arbitro => arbitro.id == this.sumula.idAssistente1).nome;
+
+      this.sumula.assistente2 = this.arbitros.find(
+        arbitro => arbitro.id == this.sumula.idAssistente2).nome;
+
       this.sumulaService.cadastraSumula(this.sumula);
       this.sumula = new Sumula();
       this.inicializaSumula();
@@ -166,6 +173,8 @@ export class SumulaCadastroComponent implements OnInit {
     this.sumula.relatorioObservacoes = "Nada a Relatar";
     this.sumula.assistente1 = "Selecionar";
     this.sumula.assistente2 = "Selecionar";
+    this.sumula.idAssistente1 = null;
+    this.sumula.idAssistente2 = null;
 
     this.inicializaInserirRelacaoMandante();
     this.inicializaInserirRelacaoVisitante();

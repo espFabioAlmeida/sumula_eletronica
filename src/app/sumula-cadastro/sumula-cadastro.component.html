@@ -124,20 +124,20 @@
             </div>
             <div class="form-group row">  
                 <div class="col-sm-6">
-                    <label for="assistente1">Assistente 1</label>
-                    <select id="assistente1" class="form-control" id="assistente1" name="assistente1"
-                    #assistente1="ngModel" [(ngModel)]="sumula.assistente1">
-                        <option value="Selecionar">Selecionar</option>
-                        <option *ngFor="let arbitro of arbitros" [value]="arbitro.nome">{{arbitro.nome}}</option>
+                    <label for="idAssistente1">Assistente 1</label>
+                    <select id="idAssistente1" class="form-control" name="idAssistente1"
+                    #idAssistente1="ngModel" [(ngModel)]="sumula.idAssistente1">
+                        <option value=null>Selecionar</option>
+                        <option *ngFor="let arbitro of arbitros" [value]="arbitro.id">{{arbitro.nome}}</option>
                     </select>
                 </div>
 
                 <div class="col-sm-6">
-                    <label for="assistente2">Assistente 2</label>
-                    <select id="assistente2" class="form-control" id="assistente2" name="assistente2"
-                    #assistente2="ngModel" [(ngModel)]="sumula.assistente2">
-                        <option value="Selecionar">Selecionar</option>
-                        <option *ngFor="let arbitro of arbitros" [value]="arbitro.nome">{{arbitro.nome}}</option>
+                    <label for="idAssistente2">Assistente 2</label>
+                    <select id="idAssistente2" class="form-control" name="idAssistente2"
+                    #idAssistente2="ngModel" [(ngModel)]="sumula.idAssistente2">
+                        <option value=null>Selecionar</option>
+                        <option *ngFor="let arbitro of arbitros" [value]="arbitro.id">{{arbitro.nome}}</option>
                     </select>
                 </div>
             </div>

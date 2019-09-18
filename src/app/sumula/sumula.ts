@@ -23,6 +23,9 @@ export class Sumula
     arbitro: String;
     assistente1: String;
     assistente2: String;
+    idArbitro: String;
+    idAssistente1: String;
+    idAssistente2: String;
 
     relatorioExpulsoes: String;
     relatorioObservacoes: String;
