@@ -19,12 +19,14 @@ import { Sumula } from '../sumula/sumula';
 export class SumulaCadastroComponent implements OnInit {
   sumula: Sumula = new Sumula();
   clubes: Clube[] = [];
+  arbitros: Arbitro[] = [];
   constructor(private router: Router, private clubeService: ClubeService,
     private arbitroService: ArbitroService, private attletaService: AtletaService,
     private sumulaService: SumulaService) { }
 
   ngOnInit() 
   {
+    this.getAssistentes();
     this.getClubes();
     this.inicializaSumula();
   }
@@ -59,11 +61,20 @@ export class SumulaCadastroComponent implements OnInit {
     this.sumula.visitante = "Sem Clube";
     this.sumula.relatorioExpulsoes = "Nada a Relatar";
     this.sumula.relatorioObservacoes = "Nada a Relatar";
+    this.sumula.assistente1 = "Selecionar";
+    this.sumula.assistente2 = "Selecionar";
   }
 
   getClubes()
   {
     this.clubes = this.clubeService.getClubes();
+  }
+
+  getAssistentes()
+  {
+    this.arbitros = this.arbitroService.getArbitrosAssistentes();
+    console.log("Assistentes Recebidos")
+    console.log(this.arbitros);
   }
 
 }

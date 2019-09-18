@@ -7,6 +7,7 @@ import { Arbitro } from './arbitro';
 export class ArbitroService 
 {
   arbitros: Arbitro[] = [];
+  arbitrosAssistentes: Arbitro[] = [];
   index: any;
 
   constructor() { }
@@ -33,6 +34,20 @@ export class ArbitroService
   getArbitros()
   {
     return this.arbitros;
+  }
+
+  getArbitrosAssistentes()
+  {
+    this.arbitrosAssistentes = [];
+
+    this.arbitros.forEach(arbitro => {
+      if(arbitro.funcao == "Assistente")
+      {
+        this.arbitrosAssistentes.push(arbitro);
+      }
+    });
+
+    return this.arbitrosAssistentes;
   }
 
   getArbitroById(id: String)
