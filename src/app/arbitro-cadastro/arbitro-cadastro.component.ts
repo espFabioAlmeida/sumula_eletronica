@@ -26,6 +26,15 @@ export class ArbitroCadastroComponent implements OnInit {
     {
       console.log("recebido no Submit");
       console.log(this.arbitro);
+
+      if(this.arbitro.cpf.length != 9)
+      {
+        console.log("tamanho cpf");
+        console.log(this.arbitro.cpf.length);
+        alert("Há campos com erros.");
+        return;
+      }
+
       this.arbitroService.cadastraArbitro(this.arbitro);
       this.arbitro = new Arbitro();
       this.arbitro.categoria="LVND";
@@ -33,6 +42,8 @@ export class ArbitroCadastroComponent implements OnInit {
       this.arbitro.funcao="Arbitro";
 
       this.router.navigate(['/arbitro']);
+
+      return;
     }
   }
 
