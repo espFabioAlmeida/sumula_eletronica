@@ -27,10 +27,10 @@ export class ArbitroCadastroComponent implements OnInit {
       console.log("recebido no Submit");
       console.log(this.arbitro);
 
-      if(this.arbitro.cpf.length != 9)
+      //Validação de dados
+      if(this.arbitro.cpf.length != 11 || this.arbitro.senha.length < 4
+        || this.arbitro.senha.length > 10)
       {
-        console.log("tamanho cpf");
-        console.log(this.arbitro.cpf.length);
         alert("Há campos com erros.");
         return;
       }
@@ -65,7 +65,5 @@ export class ArbitroCadastroComponent implements OnInit {
       this.arbitro.funcao="Arbitro";
     }  
   }
-
-
 
 }
