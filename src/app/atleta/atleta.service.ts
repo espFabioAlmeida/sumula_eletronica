@@ -35,4 +35,22 @@ export class AtletaService
   {
     return this.atletas.find(atleta => atleta.id == id);
   }
+
+  getAtletasByClube(id: String)
+  {
+    const atletasPorClube: Atleta[] = [];
+
+    if(id) //Busca somente se o id for válido
+    {
+      this.atletas.forEach(atleta => 
+      {
+        if(atleta.idClube == id)
+        {
+          atletasPorClube.push(atleta);
+        }
+      });
+    }
+
+    return atletasPorClube;
+  }
 }

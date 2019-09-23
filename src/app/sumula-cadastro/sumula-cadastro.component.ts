@@ -43,7 +43,7 @@ NG ON INIT
   {
     this.getAssistentes(); //Busca opções de assistentes
     this.getClubes(); //Busca opções de clubes
-    this.getAtletasByClubes(); //Busca atletas por clubes (depois deverá ser removido)
+    //this.getAtletasByClubes(); //Busca atletas por clubes (depois deverá ser removido)
     this.inicializaSumula(); //Inicializa variáveis da súmula
   }
 /*==============================================================================
@@ -80,13 +80,29 @@ OM SUBIMIT
 /*==============================================================================
 TROCA O CLUBE MANDANTE
 ==============================================================================*/
-  changeClubeMandante(mandante: NgModel)
+  changeClubeMandante(idMandante: NgModel)
   {
     console.log("Trocando Local da Partida");
-    console.log(mandante.value);
+    console.log(idMandante.value);
     //Busca nome do estádio
-    this.sumula.estadio = this.clubes.find(clube => clube.nome == mandante.value).estadio; 
+    this.sumula.estadio = this.clubes.find(clube => clube.id == idMandante.value).estadio; 
     //Falta Buscar cidade (após a implementação do CEP service)
+
+    this.getAtletasByClubes(); //Busca os atletas da equipe mandante
+    this.inicializaInserirRelacaoMandante(); //Reinicia todos os atletas mandantes
+    this.relacoesMandante = []; //Apaga Lista de Atletas
+  }
+/*==============================================================================
+TROCA O CLUBE VISITANTE
+==============================================================================*/
+  changeClubeVisitante(idVisitante: NgModel)
+  {
+    console.log("Trocando Local da Partida");
+    console.log(idVisitante.value);
+
+    this.getAtletasByClubes(); //Busca os atletas da equipe visitante
+    this.inicializaInserirRelacaoVisitante(); //Reinicia todos os atletas visitantes
+    this.relacoesVisitante = []; //Apaga Lista de Atletas
   }
 /*==============================================================================
 ON CLICK - INSERIR ATLETA CLUBE MANDANTE
@@ -225,6 +241,8 @@ INICIA SÚMULA
 
     this.sumula.mandante = "Sem Clube"; //Equipes
     this.sumula.visitante = "Sem Clube";
+    this.sumula.idMandante = null;
+    this.sumula.idVisitante = null;
 
     this.sumula.relatorioExpulsoes = "Nada a Relatar"; //Relatórios
     this.sumula.relatorioObservacoes = "Nada a Relatar";
@@ -291,10 +309,13 @@ BUSCA OS ATLETAS PELO CLUBE (FALTA IMPLEMENTAR)
 ==============================================================================*/
   getAtletasByClubes()
   {
-    this.atletasMandante = this.atletaService.getAtletas(); //Busca todos os atletas
-    this.atletasVisitante = this.atletaService.getAtletas();
-
+    //this.atletasMandante = this.atletaService.getAtletas(); //Busca todos os atletas
+    //this.atletasVisitante = this.atletaService.getAtletas();
     //Futuramente deverá filtrar por clube escolhido
+
+    //Busca os atletas filtrando por equipe
+    this.atletasMandante = this.atletaService.getAtletasByClube(this.sumula.idMandante);
+    this.atletasVisitante = this.atletaService.getAtletasByClube(this.sumula.idVisitante);  
   }
 /*==============================================================================
 INSERE CARTÕES NA EQUIPE MANDANTE

@@ -5,6 +5,8 @@ export class Sumula
     id: String;
     mandante: String;
     visitante: String;
+    idMandante: String;
+    idVisitante: String;
     data: Date;
     placarMandante: any;
     placarVisitante: any;

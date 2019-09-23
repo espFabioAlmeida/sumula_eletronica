@@ -14,21 +14,22 @@
 
             <div class="form-group row">
                 <div class="col-sm-5">
-                    <label for="mandante">Clube Mandante</label>
-                    <select id="mandante" class="form-control" id="mandante" name="mandante"
-                    #mandante="ngModel" [(ngModel)]="sumula.mandante"
-                    (change)="changeClubeMandante(mandante)">
-                        <option value="Sem Clube">Selecionar</option>
-                        <option *ngFor="let clube of clubes" [value]="clube.nome">{{clube.nome}}</option>
+                    <label for="idMandante">Clube Mandante</label>
+                    <select id="idMandante" class="form-control" id="idMandante" name="idMandante"
+                    #idMandante="ngModel" [(ngModel)]="sumula.idMandante"
+                    (change)="changeClubeMandante(idMandante)">
+                        <option value = null>Selecionar</option>
+                        <option *ngFor="let clube of clubes" [value]="clube.id">{{clube.nome}}</option>
                     </select>
                 </div>
 
                 <div class="col-sm-5">
-                    <label for="visitante">Clube Visitante</label>
-                    <select id="visitante" class="form-control" id="visitante" name="visitante"
-                    #visitante="ngModel" [(ngModel)]="sumula.visitante">
-                        <option value="Sem Clube">Selecionar</option>
-                        <option *ngFor="let clube of clubes" [value]="clube.nome">{{clube.nome}}</option>
+                    <label for="idVisitante">Clube Visitante</label>
+                    <select id="idVisitante" class="form-control" id="idVisitante" name="idVisitante"
+                    #idVisitante="ngModel" [(ngModel)]="sumula.idVisitante"
+                    (change)="changeClubeVisitante(idVisitante)">
+                        <option value = null>Selecionar</option>
+                        <option *ngFor="let clube of clubes" [value]="clube.id">{{clube.nome}}</option>
                     </select>
                 </div>
             </div>
