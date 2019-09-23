@@ -17,6 +17,7 @@ export class SumulaService
       Math.random().toString(36).substring(2,15);
       console.log("Recebido no Sumula Service: ");
       console.log(sumula);
+      
       this.sumulas.push(sumula);
       console.log(this.sumulas);
       return;

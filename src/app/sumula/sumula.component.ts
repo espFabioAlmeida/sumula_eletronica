@@ -13,7 +13,9 @@ export class SumulaComponent implements OnInit {
 
   constructor(private sumulaService: SumulaService) { }
 
-  ngOnInit() {
+  ngOnInit() 
+  {
+    this.getSumulas();
   }
 
   getSumulas()

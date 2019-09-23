@@ -58,11 +58,21 @@ ON SUBIMIT
         alert("Há campos com erros");
         return;
       }
-      this.sumula.assistente1 = this.arbitros.find(
-        arbitro => arbitro.id == this.sumula.idAssistente1).nome; //Guarda nome do assistente1 por id
+      //Guarda nome do clube mandante
+      this.sumula.mandante = this.clubes.find(
+        clube => clube.id == this.sumula.idMandante).nome;    
 
+      //Guarda nome do clube visitante
+      this.sumula.visitante = this.clubes.find(
+        clube => clube.id == this.sumula.idVisitante).nome;  
+      
+      //Guarda nome do assistente1 por id
+      this.sumula.assistente1 = this.arbitros.find(
+        arbitro => arbitro.id == this.sumula.idAssistente1).nome; 
+      
+      //Guarda nome do assistente2 por id
       this.sumula.assistente2 = this.arbitros.find(
-        arbitro => arbitro.id == this.sumula.idAssistente2).nome; //Guarda nome do assistente2 por id
+        arbitro => arbitro.id == this.sumula.idAssistente2).nome; 
       
       //Monta a escalação completa com todas as relações
       this.escalacaoMandante.relacoes = this.relacoesMandante; 
