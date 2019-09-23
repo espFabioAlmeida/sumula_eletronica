@@ -6,4 +6,5 @@ export class Atleta
     dataNascimento: Date;
     bid: String;
     clube: String;
+    idClube: String;
 }

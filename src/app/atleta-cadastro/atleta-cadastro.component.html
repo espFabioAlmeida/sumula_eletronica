@@ -46,11 +46,11 @@
 
         <div class="form-group col-md-6">
             <div class="form-group col-md-6">
-                <label for="clube">Clube</label>
-                <select id="clube" class="form-control" id="clube" name="clube"
-                #clube="ngModel" [(ngModel)]="atleta.clube">
-                    <option value="Sem Clube">Sem Clube</option>
-                    <option *ngFor="let clube of clubes" [value]="clube.nome">{{clube.nome}}</option>
+                <label for="idClube">Clube</label>
+                <select id="idClube" class="form-control" id="idClube" name="idClube"
+                #idClube="ngModel" [(ngModel)]="atleta.idClube">
+                    <option value=null>Sem Clube</option>
+                    <option *ngFor="let clube of clubes" [value]="clube.id">{{clube.nome}}</option>
                 </select>
             </div>
         </div>

@@ -30,9 +30,16 @@ export class AtletaCadastroComponent implements OnInit {
     {
       console.log("recebido no Submit");
       console.log(this.atleta);
+
+      if(this.atleta.idClube)
+      {
+        this.atleta.clube = this.clubes.find(clube => clube.id == this.atleta.idClube).nome;
+      }  
+
       this.atletaService.cadastraAtleta(this.atleta);
       this.atleta = new Atleta();
       this.atleta.clube = "Sem Clube";
+      this.atleta.idClube = null;
 
       this.router.navigate(['/atleta']);
     }
@@ -54,6 +61,7 @@ export class AtletaCadastroComponent implements OnInit {
 
     console.log("Eh nulo");
     this.atleta.clube = "Sem Clube";
+    this.atleta.idClube = null;
   }
 
   getClubes()
