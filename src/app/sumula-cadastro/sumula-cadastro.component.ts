@@ -36,14 +36,19 @@ export class SumulaCadastroComponent implements OnInit {
     private arbitroService: ArbitroService, private atletaService: AtletaService,
     private sumulaService: SumulaService) { }
 
+/*==============================================================================
+NG ON INIT
+==============================================================================*/
   ngOnInit() 
   {
-    this.getAssistentes();
-    this.getClubes();
-    this.getAtletasByClubes();
-    this.inicializaSumula();
+    this.getAssistentes(); //Busca opções de assistentes
+    this.getClubes(); //Busca opções de clubes
+    this.getAtletasByClubes(); //Busca atletas por clubes (depois deverá ser removido)
+    this.inicializaSumula(); //Inicializa variáveis da súmula
   }
-
+/*==============================================================================
+OM SUBIMIT
+==============================================================================*/
   onSubmit(formulario: NgForm)
   {
     if(formulario.valid)
@@ -52,141 +57,188 @@ export class SumulaCadastroComponent implements OnInit {
       console.log(this.sumula);
 
       this.sumula.assistente1 = this.arbitros.find(
-        arbitro => arbitro.id == this.sumula.idAssistente1).nome;
+        arbitro => arbitro.id == this.sumula.idAssistente1).nome; //Guarda nome do assistente1 por id
 
       this.sumula.assistente2 = this.arbitros.find(
-        arbitro => arbitro.id == this.sumula.idAssistente2).nome;
+        arbitro => arbitro.id == this.sumula.idAssistente2).nome; //Guarda nome do assistente2 por id
 
-      this.sumulaService.cadastraSumula(this.sumula);
-      this.sumula = new Sumula();
-      this.inicializaSumula();
+      this.sumulaService.cadastraSumula(this.sumula); //Salva a súmula
+      this.sumula = new Sumula(); //Reinicializa 
+      this.inicializaSumula(); //Inicia a sumula
 
-      this.router.navigate(['/sumula']);
+      this.router.navigate(['/sumula']); //Volta para a página inicial de súmulas
     }
   }
-
+/*==============================================================================
+TROCA O CLUBE MANDANTE
+==============================================================================*/
   changeClubeMandante(mandante: NgModel)
   {
     console.log("Trocando Local da Partida");
     console.log(mandante.value);
-    this.sumula.estadio = this.clubes.find(clube => clube.nome == mandante.value).estadio;
+    //Busca nome do estádio
+    this.sumula.estadio = this.clubes.find(clube => clube.nome == mandante.value).estadio; 
+    //Falta Buscar cidade (após a implementação do CEP service)
   }
-
+/*==============================================================================
+ON CLICK - INSERIR ATLETA CLUBE MANDANTE
+==============================================================================*/
   onClickInserirRelacaoMandante()
   {
+    //Cria um objeto Relação para verificar se já existe um atleta com esse número
     const obj: Relacao = this.relacoesMandante.find
     (relacao => relacao.numero == this.inserirRelacaoMandante.numero);
 
+    //Prossegue com a inserção se: 
+    //O Atleta for válido
+    //O Número da camisa dele for maior que 0
+    //Se a quantidade de gols que ele fez por maior ou igual a 0
+    //E se nenhuma tleta com o mesmo número dele está inserido nessa lista
     if(this.inserirRelacaoMandante.idAtleta != null
     && this.inserirRelacaoMandante.numero > 0
     && this.inserirRelacaoMandante.gols >= 0
     && !obj)
     {
+      //Busca o nome pelo seu id
       this.inserirRelacaoMandante.nome = this.atletasMandante.find(
         atleta => atleta.id == this.inserirRelacaoMandante.idAtleta).nome;
       
       console.log("Nome encontrado");
       console.log(this.inserirRelacaoMandante.nome);
-      this.relacoesMandante.push(this.inserirRelacaoMandante);
-      this.inserirCartoesMandante(); 
-      this.atualizaPlacarFinal();
-      this.inicializaInserirRelacaoMandante();
+   
+      this.relacoesMandante.push(this.inserirRelacaoMandante); //Coloca na relação
+      this.inserirCartoesMandante(); //Insere os cartões
+      this.atualizaPlacarFinal(); //Atualiza o placar
+      this.inicializaInserirRelacaoMandante(); //Reinicia os valores para inserção de atleta
       return;
     }
     console.log("Nenhum Selecionado")
-    alert("Verifique os campos de inserção e tente novamente");
+    alert("Verifique os campos de inserção e tente novamente"); //Informa o erro
   }
-
+/*==============================================================================
+ON CLICK - EXCLUIR ATLETA DA EQUIPE MANDANTE
+==============================================================================*/
   onClickExcluirRelacaoMandante(apagar: any)
   {
     console.log("Registro para remoção recebido");
     console.log(apagar);
+
+    //Busca o atleta que será apagado da relação com base no número da camisa
     const obj: Relacao = this.relacoesMandante.find(relacao => relacao.numero == apagar);
+    //Busca a posição na array
     const index: number = this.relacoesMandante.indexOf(obj);
 
+    //Foi encontrado
     if (index !== -1) 
     {
-      this.relacoesMandante.splice(index, 1);
-      this.atualizaPlacarFinal();
+      this.relacoesMandante.splice(index, 1); //Apaga
+      this.atualizaPlacarFinal(); //Atualiza o placar final
     } 
   }
-
-
+/*==============================================================================
+ON CLICK - INSERIR ATLETA EQUIPE VISITANTE
+==============================================================================*/
   onClickInserirRelacaoVisitante()
   {
+    //Cria um objeto Relação para verificar se já existe um atleta com esse número
     const obj: Relacao = this.relacoesVisitante.find
     (relacao => relacao.numero == this.inserirRelacaoVisitante.numero );
 
+    //Prossegue com a inserção se: 
+    //O Atleta for válido
+    //O Número da camisa dele for maior que 0
+    //Se a quantidade de gols que ele fez por maior ou igual a 0
+    //E se nenhuma tleta com o mesmo número dele está inserido nessa lista
     if(this.inserirRelacaoVisitante.idAtleta != null
     && this.inserirRelacaoVisitante.numero > 0
     && this.inserirRelacaoVisitante.gols >= 0
     && !obj)
     {
       console.log("Atleta Válido");
+
+      //Busca o nome pelo seu id
       this.inserirRelacaoVisitante.nome = this.atletasVisitante.find(
         atleta => atleta.id == this.inserirRelacaoVisitante.idAtleta).nome;
-      this.relacoesVisitante.push(this.inserirRelacaoVisitante);
-      this.inserirCartoesVisitante(); 
-      this.atualizaPlacarFinal();
-      this.inicializaInserirRelacaoVisitante();
+
+      this.relacoesVisitante.push(this.inserirRelacaoVisitante); //Remove da lista
+      this.inserirCartoesVisitante();  //Insere os cartões
+      this.atualizaPlacarFinal(); //Atualiza placar final
+      this.inicializaInserirRelacaoVisitante(); //Reinicia as variáveis de inserção
       return;
     }
     console.log("Nenhum Selecionado")
     alert("Verifique os campos de inserção e tente novamente");
   }
-
+/*==============================================================================
+ON CLICK - EXCLUIR ATLETA EQUIPE VISITANTE
+==============================================================================*/
   onClickExcluirRelacaoVisitante(apagar: any)
   {
     console.log("Registro para remoção recebido");
     console.log(apagar);
+
+    //Busca o atleta pelo número da camisa
     const obj: Relacao = this.relacoesVisitante.find(relacao => relacao.numero == apagar);
+    //Busca a sua posição na array
     const index: number = this.relacoesVisitante.indexOf(obj);
 
+    //Posição válida
     if (index !== -1) 
     {
-      this.relacoesVisitante.splice(index, 1);
-      this.atualizaPlacarFinal();
+      this.relacoesVisitante.splice(index, 1); //Remove
+      this.atualizaPlacarFinal(); //Atualiza placar final
     } 
   }
-
+/*==============================================================================
+ATUALIZA PLACAR FINAL
+==============================================================================*/
   atualizaPlacarFinal()
   {
-    this.sumula.placarMandante = 0;
-    this.relacoesMandante.forEach(relacao => {
+    this.sumula.placarMandante = 0; //Zera
+    //Para cada atleta na relação incrementa a variável final
+    this.relacoesMandante.forEach(relacao => { 
     this.sumula.placarMandante += relacao.gols;
     });
 
-    this.sumula.placarVisitante = 0;
+    this.sumula.placarVisitante = 0; //Zera
+    //Para cada atleta na relação incrementa a variável final
     this.relacoesVisitante.forEach(relacao => {
       this.sumula.placarVisitante += relacao.gols;
     })
      
   }
-
+/*==============================================================================
+INICIA SÚMULA
+==============================================================================*/
   inicializaSumula()
   {
-    this.sumula.placarMandante = 0;
+    this.sumula.placarMandante = 0; //Placar
     this.sumula.placarVisitante = 0;
-    this.sumula.mandante = "Sem Clube";
+
+    this.sumula.mandante = "Sem Clube"; //Equipes
     this.sumula.visitante = "Sem Clube";
-    this.sumula.relatorioExpulsoes = "Nada a Relatar";
+
+    this.sumula.relatorioExpulsoes = "Nada a Relatar"; //Relatórios
     this.sumula.relatorioObservacoes = "Nada a Relatar";
-    this.sumula.assistente1 = "Selecionar";
-    this.sumula.assistente2 = "Selecionar";
+
+    this.sumula.assistente1 = "Selecionar"; //Assistentes
+    this.sumula.assistente2 = "Selecionar";   
     this.sumula.idAssistente1 = null;
     this.sumula.idAssistente2 = null;
 
-    this.inicializaInserirRelacaoMandante();
+    this.inicializaInserirRelacaoMandante(); //Inserção de atletas
     this.inicializaInserirRelacaoVisitante();
 
-    this.relacoesMandante = [];
+    this.relacoesMandante = []; //Listas de atletas
     this.relacoesVisitante = [];
   }
-
+/*==============================================================================
+INICIALIZA NOVO ATLETA MANDANTE
+==============================================================================*/
   inicializaInserirRelacaoMandante()
   {
-    this.inserirRelacaoMandante = new Relacao();
-    this.inserirRelacaoMandante.nome = "Selecionar";
+    this.inserirRelacaoMandante = new Relacao(); //Inicializa classe
+    this.inserirRelacaoMandante.nome = "Selecionar"; //Inicializa variáveis de inserção
     this.inserirRelacaoMandante.ca = false;
     this.inserirRelacaoMandante.cvd = false;
     this.inserirRelacaoMandante.doisCa = false;
@@ -195,11 +247,13 @@ export class SumulaCadastroComponent implements OnInit {
     this.inserirRelacaoMandante.titular = "Titular";
     this.inserirRelacaoMandante.idAtleta = null;
   }
-
+/*==============================================================================
+INICIALIZA NOVO ATLETA VISITANTE
+==============================================================================*/
   inicializaInserirRelacaoVisitante()
   {
-    this.inserirRelacaoVisitante = new Relacao();
-    this.inserirRelacaoVisitante.nome = "Selecionar";
+    this.inserirRelacaoVisitante = new Relacao(); //Inicializa Classe
+    this.inserirRelacaoVisitante.nome = "Selecionar"; //Inicializa variáveis de inserção
     this.inserirRelacaoVisitante.ca = false;
     this.inserirRelacaoVisitante.cvd = false;
     this.inserirRelacaoVisitante.doisCa = false;
@@ -208,27 +262,38 @@ export class SumulaCadastroComponent implements OnInit {
     this.inserirRelacaoVisitante.titular = "Titular";
     this.inserirRelacaoVisitante.idAtleta = null;
   }
-
+/*==============================================================================
+BUSCA OS CLUBES
+==============================================================================*/
   getClubes()
   {
-    this.clubes = this.clubeService.getClubes();
+    this.clubes = this.clubeService.getClubes(); //Busca todos os clubes
   }
-
+/*==============================================================================
+BUSCA OS ASSISTENTES
+==============================================================================*/
   getAssistentes()
   {
-    this.arbitros = this.arbitroService.getArbitrosAssistentes();
+    this.arbitros = this.arbitroService.getArbitrosAssistentes(); //Busca somentes os assistentes
     console.log("Assistentes Recebidos")
     console.log(this.arbitros);
   }
-
+/*==============================================================================
+BUSCA OS ATLETAS PELO CLUBE (FALTA IMPLEMENTAR)
+==============================================================================*/
   getAtletasByClubes()
   {
-    this.atletasMandante = this.atletaService.getAtletas();
+    this.atletasMandante = this.atletaService.getAtletas(); //Busca todos os atletas
     this.atletasVisitante = this.atletaService.getAtletas();
-  }
 
+    //Futuramente deverá filtrar por clube escolhido
+  }
+/*==============================================================================
+INSERE CARTÕES NA EQUIPE MANDANTE
+==============================================================================*/
   inserirCartoesMandante()
   {
+    //Insere um texto com base nos boleanos de cartões, considera todas as possibilidades
     if(!this.inserirRelacaoMandante.ca && !this.inserirRelacaoMandante.doisCa && !this.inserirRelacaoMandante.cvd)
     {
       this.inserirRelacaoMandante.cartoes = "Sem Cartão";
@@ -265,9 +330,12 @@ export class SumulaCadastroComponent implements OnInit {
       return;
     }
   }
-
+/*==============================================================================
+INSERE CARTÕES NA EQUIPE VISITANTE
+==============================================================================*/
   inserirCartoesVisitante()
   {
+    //Insere um texto com base nos boleanos de cartões, considera todas as possibilidades
     if(!this.inserirRelacaoVisitante.ca && !this.inserirRelacaoVisitante.doisCa && !this.inserirRelacaoVisitante.cvd)
     {
       this.inserirRelacaoVisitante.cartoes = "Sem Cartão";
