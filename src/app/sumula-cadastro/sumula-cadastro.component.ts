@@ -53,14 +53,22 @@ OM SUBIMIT
   {
     if(formulario.valid)
     {
-      console.log("recebido no Submit");
-      console.log(this.sumula);
-
       this.sumula.assistente1 = this.arbitros.find(
         arbitro => arbitro.id == this.sumula.idAssistente1).nome; //Guarda nome do assistente1 por id
 
       this.sumula.assistente2 = this.arbitros.find(
         arbitro => arbitro.id == this.sumula.idAssistente2).nome; //Guarda nome do assistente2 por id
+      
+      //Monta a escalação completa com todas as relações
+      this.escalacaoMandante.relacoes = this.relacoesMandante; 
+      this.escalacaoVisitante.relacoes = this.relacoesVisitante;
+      
+      //Guarda tudo na classe final
+      this.sumula.escalacaoMandante = this.escalacaoMandante; 
+      this.sumula.escalacaoVisitante = this.escalacaoVisitante;
+
+      console.log("recebido no Submit");
+      console.log(this.sumula);
 
       this.sumulaService.cadastraSumula(this.sumula); //Salva a súmula
       this.sumula = new Sumula(); //Reinicializa 
