@@ -47,12 +47,17 @@ NG ON INIT
     this.inicializaSumula(); //Inicializa variáveis da súmula
   }
 /*==============================================================================
-OM SUBIMIT
+ON SUBIMIT
 ==============================================================================*/
   onSubmit(formulario: NgForm)
   {
     if(formulario.valid)
     {
+      if(!this.validaSumula())
+      {
+        alert("Há campos com erros");
+        return;
+      }
       this.sumula.assistente1 = this.arbitros.find(
         arbitro => arbitro.id == this.sumula.idAssistente1).nome; //Guarda nome do assistente1 por id
 
@@ -410,5 +415,16 @@ INSERE CARTÕES NA EQUIPE VISITANTE
     }
 
   }
+/*==============================================================================
+VALIDA SÚMULA
+==============================================================================*/
+  validaSumula()
+  {
+    if(this.sumula.idMandante == "null") return false;
+    if(this.sumula.idVisitante == "null") return false;
+    if(this.sumula.idAssistente1 == "null") return false;
+    if(this.sumula.idAssistente2 == "null") return false;
 
+    return true;
+  }
 }
