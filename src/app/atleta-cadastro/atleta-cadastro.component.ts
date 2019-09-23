@@ -36,6 +36,12 @@ export class AtletaCadastroComponent implements OnInit {
         this.atleta.clube = this.clubes.find(clube => clube.id == this.atleta.idClube).nome;
       }  
 
+      if(this.atleta.cpf.length != 11)
+      {
+        alert("Há campos com erros.");
+        return;
+      }
+
       this.atletaService.cadastraAtleta(this.atleta);
       this.atleta = new Atleta();
       this.atleta.clube = "Sem Clube";
