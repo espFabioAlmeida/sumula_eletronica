@@ -49,7 +49,7 @@
                 <label for="idClube">Clube</label>
                 <select id="idClube" class="form-control" id="idClube" name="idClube"
                 #idClube="ngModel" [(ngModel)]="atleta.idClube">
-                    <option value=null>Sem Clube</option>
+                    <option [value]=null>Sem Clube</option>
                     <option *ngFor="let clube of clubes" [value]="clube.id">{{clube.nome}}</option>
                 </select>
             </div>

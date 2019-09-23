@@ -85,7 +85,14 @@ TROCA O CLUBE MANDANTE
     console.log("Trocando Local da Partida");
     console.log(idMandante.value);
     //Busca nome do estádio
-    this.sumula.estadio = this.clubes.find(clube => clube.id == idMandante.value).estadio; 
+    if(this.sumula.idMandante != "null")
+    {
+      this.sumula.estadio = this.clubes.find(clube => clube.id == idMandante.value).estadio; 
+    }
+    else 
+    {
+      this.sumula.estadio = "";
+    }
     //Falta Buscar cidade (após a implementação do CEP service)
 
     this.getAtletasByClubes(); //Busca os atletas da equipe mandante
@@ -113,12 +120,15 @@ ON CLICK - INSERIR ATLETA CLUBE MANDANTE
     const obj: Relacao = this.relacoesMandante.find
     (relacao => relacao.numero == this.inserirRelacaoMandante.numero);
 
+    console.log("Id do atleta");
+    console.log(this.inserirRelacaoMandante.idAtleta);
+
     //Prossegue com a inserção se: 
     //O Atleta for válido
     //O Número da camisa dele for maior que 0
     //Se a quantidade de gols que ele fez por maior ou igual a 0
     //E se nenhuma tleta com o mesmo número dele está inserido nessa lista
-    if(this.inserirRelacaoMandante.idAtleta != null
+    if(this.inserirRelacaoMandante.idAtleta != "null"
     && this.inserirRelacaoMandante.numero > 0
     && this.inserirRelacaoMandante.gols >= 0
     && !obj)
@@ -173,7 +183,7 @@ ON CLICK - INSERIR ATLETA EQUIPE VISITANTE
     //O Número da camisa dele for maior que 0
     //Se a quantidade de gols que ele fez por maior ou igual a 0
     //E se nenhuma tleta com o mesmo número dele está inserido nessa lista
-    if(this.inserirRelacaoVisitante.idAtleta != null
+    if(this.inserirRelacaoVisitante.idAtleta != "null"
     && this.inserirRelacaoVisitante.numero > 0
     && this.inserirRelacaoVisitante.gols >= 0
     && !obj)
@@ -241,16 +251,16 @@ INICIA SÚMULA
 
     this.sumula.mandante = "Sem Clube"; //Equipes
     this.sumula.visitante = "Sem Clube";
-    this.sumula.idMandante = null;
-    this.sumula.idVisitante = null;
+    this.sumula.idMandante = "null";
+    this.sumula.idVisitante = "null";
 
     this.sumula.relatorioExpulsoes = "Nada a Relatar"; //Relatórios
     this.sumula.relatorioObservacoes = "Nada a Relatar";
 
     this.sumula.assistente1 = "Selecionar"; //Assistentes
     this.sumula.assistente2 = "Selecionar";   
-    this.sumula.idAssistente1 = null;
-    this.sumula.idAssistente2 = null;
+    this.sumula.idAssistente1 = "null";
+    this.sumula.idAssistente2 = "null";
 
     this.inicializaInserirRelacaoMandante(); //Inserção de atletas
     this.inicializaInserirRelacaoVisitante();
@@ -271,7 +281,7 @@ INICIALIZA NOVO ATLETA MANDANTE
     this.inserirRelacaoMandante.gols = 0;
     this.inserirRelacaoMandante.numero = 0;
     this.inserirRelacaoMandante.titular = "Titular";
-    this.inserirRelacaoMandante.idAtleta = null;
+    this.inserirRelacaoMandante.idAtleta = "null";
   }
 /*==============================================================================
 INICIALIZA NOVO ATLETA VISITANTE
@@ -286,7 +296,7 @@ INICIALIZA NOVO ATLETA VISITANTE
     this.inserirRelacaoVisitante.gols = 0;
     this.inserirRelacaoVisitante.numero = 0;
     this.inserirRelacaoVisitante.titular = "Titular";
-    this.inserirRelacaoVisitante.idAtleta = null;
+    this.inserirRelacaoVisitante.idAtleta = "null";
   }
 /*==============================================================================
 BUSCA OS CLUBES

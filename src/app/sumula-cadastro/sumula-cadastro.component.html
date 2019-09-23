@@ -18,7 +18,7 @@
                     <select id="idMandante" class="form-control" id="idMandante" name="idMandante"
                     #idMandante="ngModel" [(ngModel)]="sumula.idMandante"
                     (change)="changeClubeMandante(idMandante)">
-                        <option value = null>Selecionar</option>
+                        <option [value]=null>Selecionar</option>
                         <option *ngFor="let clube of clubes" [value]="clube.id">{{clube.nome}}</option>
                     </select>
                 </div>
@@ -28,7 +28,7 @@
                     <select id="idVisitante" class="form-control" id="idVisitante" name="idVisitante"
                     #idVisitante="ngModel" [(ngModel)]="sumula.idVisitante"
                     (change)="changeClubeVisitante(idVisitante)">
-                        <option value = null>Selecionar</option>
+                        <option [value]=null>Selecionar</option>
                         <option *ngFor="let clube of clubes" [value]="clube.id">{{clube.nome}}</option>
                     </select>
                 </div>
@@ -190,7 +190,7 @@
                 <label for="idAtleta">Atleta</label>             
                 <select id="idAtleta" class="form-control" id="idAtleta" name="idAtleta"
                 #idAtleta="ngModel" [(ngModel)]="inserirRelacaoMandante.idAtleta">
-                    <option value=null>Selecionar</option>
+                    <option [value]=null>Selecionar</option>
                     <option *ngFor="let atleta of atletasMandante" [value]="atleta.id">{{atleta.nome}}</option>
                 </select> 
             </div>
@@ -281,7 +281,7 @@
                 <label for="idAtleta">Atleta</label>             
                 <select id="idAtleta" class="form-control" name="idAtleta"
                 #idAtleta="ngModel" [(ngModel)]="inserirRelacaoVisitante.idAtleta">
-                    <option value=null>Selecionar</option>
+                    <option [value]=null>Selecionar</option>
                     <option *ngFor="let atleta of atletasVisitante" [value]="atleta.id">{{atleta.nome}}</option>
                 </select> 
             </div>
