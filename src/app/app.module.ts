@@ -15,7 +15,6 @@ import { CepService } from './clube/cep.service';
 import { AtletaCadastroComponent } from './atleta-cadastro/atleta-cadastro.component';
 import { SumulaCadastroComponent } from './sumula-cadastro/sumula-cadastro.component';
 import { SumulaVisualizacaoComponent } from './sumula-visualizacao/sumula-visualizacao.component';
-import { ArbitroCadastroDirective } from './arbitro-cadastro/arbitro-cadastro.directive';
 
 
 @NgModule({
@@ -29,8 +28,7 @@ import { ArbitroCadastroDirective } from './arbitro-cadastro/arbitro-cadastro.di
     ClubeCadastroComponent,
     AtletaCadastroComponent,
     SumulaCadastroComponent,
-    SumulaVisualizacaoComponent,
-    ArbitroCadastroDirective
+    SumulaVisualizacaoComponent
   ],
   imports: [
     BrowserModule,
