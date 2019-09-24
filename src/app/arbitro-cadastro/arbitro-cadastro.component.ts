@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ArbitroService } from '../arbitro/arbitro.service';
 import { Arbitro } from '../arbitro/arbitro';
+import { ArbitroCategoria } from '../arbitro/arbitroCategoria';
 
 @Component({
   selector: 'app-arbitro-cadastro',
@@ -11,6 +12,7 @@ import { Arbitro } from '../arbitro/arbitro';
 })
 export class ArbitroCadastroComponent implements OnInit {
   arbitro: Arbitro = new Arbitro();
+  categorias: ArbitroCategoria[] = [];
   formulario: FormGroup;
 
   constructor(private route: ActivatedRoute, private arbitroService: ArbitroService,
@@ -65,15 +67,19 @@ export class ArbitroCadastroComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     console.log("Id recebido: ");
     console.log(id);
+
+    this.categorias = this.arbitroService.getCategorias();
+
     if(id != null)
     {
       console.log("Nao eh nulo");
       this.arbitro = this.arbitroService.getArbitroById(id);
     }
+
     else 
     {
       console.log("Eh nulo");
-      this.arbitro.categoria="LVND";
+      this.arbitro.idCategoria="1";
       this.arbitro.sexo="Masculino";
       this.arbitro.funcao="Arbitro";
     }  

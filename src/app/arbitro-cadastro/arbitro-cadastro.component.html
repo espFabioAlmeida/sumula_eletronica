@@ -83,13 +83,10 @@
 
         <div class="form-group col-md-6">
             <div class="form-group col-md-6">
-                <label for="categoria">Categoria</label>
-                <select id="categoria" class="form-control" id="categoria" name="categoria"
-                #categoria="ngModel" [(ngModel)]="arbitro.categoria">
-                    <option value="LVND">LVND</option>
-                    <option value="FCF">FCF</option>
-                    <option value="CBF">CBF</option>
-                    <option value="FIFA">FIFA</option>
+                <label for="idCategoria">Categoria</label>
+                <select id="idCategoria" class="form-control" name="idCategoria"
+                #idCategoria="ngModel" [(ngModel)]="arbitro.idCategoria">
+                    <option *ngFor="let categoria of categorias" [value]="categoria.id">{{categoria.nome}}</option>
                 </select>
             </div>
         </div>

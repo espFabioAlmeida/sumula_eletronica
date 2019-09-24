@@ -8,6 +8,7 @@ export class Arbitro
     peso: DoubleRange;
     senha: String;
     categoria: String;
+    idCategoria: String;
     funcao: String;
     sexo: String;
 }
