@@ -1,5 +1,5 @@
 <section class="campo_cadastro">
-    <form #formulario="ngForm" (ngSubmit) = "onSubmit(formulario)" >
+    <form #formulario="ngForm" (ngSubmit) = "onSubmit(this.formulario)" >
         <p class="texto_titulo_cadastro">
             Cadastro de Árbitro
         </p>    
@@ -34,7 +34,7 @@
     
             <div class="form-group col-md-6">
                 <input type="text" class="form-control" name="cpf" id="cpf" placeholder="CPF" 
-                required #cpf="ngModel" [(ngModel)]="arbitro.cpf"
+                required #cpf="ngModel" [(ngModel)]="arbitro.cpf" 
                 onkeypress="return event.charCode >= 48 && event.charCode <= 57">               
             </div>
 

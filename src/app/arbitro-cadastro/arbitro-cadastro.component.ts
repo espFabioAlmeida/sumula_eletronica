@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { NgForm, FormGroup, Validators } from '@angular/forms';
+import { NgForm, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ArbitroService } from '../arbitro/arbitro.service';
 import { Arbitro } from '../arbitro/arbitro';
 
@@ -11,6 +11,7 @@ import { Arbitro } from '../arbitro/arbitro';
 })
 export class ArbitroCadastroComponent implements OnInit {
   arbitro: Arbitro = new Arbitro();
+  formulario: FormGroup;
 
   constructor(private route: ActivatedRoute, private arbitroService: ArbitroService,
     private router: Router) { }
@@ -18,7 +19,18 @@ export class ArbitroCadastroComponent implements OnInit {
   ngOnInit() 
   {
     this.getArbitro();
+
+    //Controle de form 
+    this.formulario = new FormGroup({
+      'cpf': new FormControl(this.arbitro.cpf, [
+        Validators.required,
+        Validators.minLength(11),
+        Validators.maxLength(11)
+      ])
+    });
+  
   }
+  
 
   onSubmit(formulario: NgForm)
   {
