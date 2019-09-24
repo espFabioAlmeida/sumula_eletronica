@@ -4,7 +4,7 @@ import { NgForm } from '@angular/forms';
 import { ArbitroService } from '../arbitro/arbitro.service';
 import { Arbitro } from '../arbitro/arbitro';
 import { Login } from './login';
-import { LoginService } from './login.service';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit
 
 
   constructor(private router: Router, private arbitroService: ArbitroService, 
-    private loginService: LoginService) 
+    private header: HeaderComponent) 
   { 
   }
 
@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit
 
       if(this.validaUsuario())
       {       
-        this.loginService.logarArbitro(this.arbitroLogado);
+        this.header.setArbitroLogado(this.arbitroLogado);
         this.login = new Login();
         this.arbitroLogado = new Arbitro();
         this.router.navigate(['/sumula']);
