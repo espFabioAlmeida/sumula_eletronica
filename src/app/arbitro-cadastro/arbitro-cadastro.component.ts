@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormGroup, Validators } from '@angular/forms';
 import { ArbitroService } from '../arbitro/arbitro.service';
 import { Arbitro } from '../arbitro/arbitro';
 
@@ -32,6 +32,7 @@ export class ArbitroCadastroComponent implements OnInit {
         || this.arbitro.senha.length > 10)
       {
         alert("Há campos com erros.");
+        
         return;
       }
 
