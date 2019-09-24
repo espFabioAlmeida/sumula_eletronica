@@ -11,7 +11,7 @@ export class ArbitroComponent implements OnInit {
 
   arbitros: Arbitro[] = [];
 
-  constructor(private arbitroService: ArbitroService) { }
+  constructor(private arbitroService: ArbitroService) {}
 
   ngOnInit() 
   {

@@ -82,5 +82,7 @@ export class LoginComponent implements OnInit
   getAritros()
   {
     this.arbitros = this.arbitroService.getArbitrosLinha();
+    console.log("Arbitros recebidos do service")
+    console.log(this.arbitros);
   }
 }

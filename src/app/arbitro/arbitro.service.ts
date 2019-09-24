@@ -34,6 +34,17 @@ export class ArbitroService
     this.categorias.push(fcf);
     this.categorias.push(cbf);
     this.categorias.push(fifa);
+
+    //Cria arbitro admin -  (remover depois que tiver o serviço)
+    const arbitroAdmin: Arbitro = new Arbitro();
+    arbitroAdmin.nome = "ADMIN";
+    arbitroAdmin.cpf = "ADMIN";
+    arbitroAdmin.id = "ADMIN";
+    arbitroAdmin.senha = "1234";
+    arbitroAdmin.funcao = "Arbitro";
+
+    this.arbitros.push(arbitroAdmin);
+    
   }
 
   cadastraArbitro(arbitro: Arbitro)

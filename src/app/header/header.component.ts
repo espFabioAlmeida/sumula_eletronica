@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   arbitroLogado: Arbitro = new Arbitro();
+  mostrarBarra: Boolean = false;
 
   constructor(private router: Router) { }
 
@@ -17,12 +18,14 @@ export class HeaderComponent implements OnInit {
   setArbitroLogado(arbitro: Arbitro)
   {
     this.arbitroLogado = arbitro;
+    this.mostrarBarra = true;
   }
 
   onClickSair()
   {
     this.arbitroLogado = new Arbitro();
     this.router.navigate(['']);
+    this.mostrarBarra = false;
   }
 
 }
