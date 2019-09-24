@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit
   arbitros: Arbitro[] = [];
   login: Login = new Login();
   admin: Login = new Login();
+  usuarioEncontrado: Boolean = false;
 
 
   constructor(private router: Router, private arbitroService: ArbitroService) 
@@ -52,6 +53,7 @@ export class LoginComponent implements OnInit
 
   validaUsuario()
   {
+    this.usuarioEncontrado = false;    
     this.arbitros.forEach(arbitro => {
       if(arbitro.cpf == this.login.usuario)
       {
@@ -59,10 +61,12 @@ export class LoginComponent implements OnInit
         {
           console.log("Arbitro Logado: ");
           console.log(arbitro.nome);
-          return true;
+          this.usuarioEncontrado = true;
         }
       }
     });
+
+    if(this.usuarioEncontrado) return true;
 
     if(this.login.usuario == this.admin.usuario)
     {
@@ -78,6 +82,6 @@ export class LoginComponent implements OnInit
 
   getAritros()
   {
-    this.arbitros = this.arbitroService.getArbitros();
+    this.arbitros = this.arbitroService.getArbitrosLinha();
   }
 }

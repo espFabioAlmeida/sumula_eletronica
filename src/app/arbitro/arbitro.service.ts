@@ -9,6 +9,7 @@ export class ArbitroService
 {
   arbitros: Arbitro[] = [];
   arbitrosAssistentes: Arbitro[] = [];
+  arbitrosLinha: Arbitro[] = [];
   categorias: ArbitroCategoria[] = [];
   index: any;
 
@@ -68,6 +69,20 @@ export class ArbitroService
   getCategorias()
   {
     return this.categorias;
+  }
+
+  getArbitrosLinha()
+  {
+    this.arbitrosLinha = [];
+
+    this.arbitros.forEach(arbitro => {
+      if(arbitro.funcao == "Arbitro")
+      {
+        this.arbitrosLinha.push(arbitro);
+      }
+    });
+
+    return this.arbitrosLinha;
   }
 
   getArbitrosAssistentes()
