@@ -9,6 +9,7 @@ import { ClubeCadastroComponent } from './clube-cadastro/clube-cadastro.componen
 import { AtletaCadastroComponent } from './atleta-cadastro/atleta-cadastro.component';
 import { SumulaCadastroComponent } from './sumula-cadastro/sumula-cadastro.component';
 import { SumulaVisualizacaoComponent } from './sumula-visualizacao/sumula-visualizacao.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [ 
 { path: 'arbitro', component: ArbitroComponent},
@@ -22,7 +23,9 @@ const routes: Routes = [
 { path: 'atleta-cadastro/:id', component: AtletaCadastroComponent},
 { path: 'atleta-cadastro', component: AtletaCadastroComponent},
 { path: 'sumula-cadastro', component: SumulaCadastroComponent},
-{ path: 'sumula-visualizacao/:id', component: SumulaVisualizacaoComponent}
+{ path: 'sumula-visualizacao/:id', component: SumulaVisualizacaoComponent},
+{ path: 'login', component : LoginComponent },
+{ path: '', redirectTo: '/login', pathMatch: 'full'}
 ];
 
 @NgModule({
