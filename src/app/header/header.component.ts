@@ -21,6 +21,11 @@ export class HeaderComponent implements OnInit {
     this.mostrarBarra = true;
   }
 
+  getArbitroLogado()
+  {
+    return this.arbitroLogado;
+  }
+
   onClickSair()
   {
     this.arbitroLogado = new Arbitro();
