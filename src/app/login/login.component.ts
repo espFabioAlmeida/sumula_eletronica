@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { ArbitroService } from '../arbitro/arbitro.service';
 import { Arbitro } from '../arbitro/arbitro';
 import { Login } from './login';
+import { LoginService } from './login.service';
 
 @Component({
   selector: 'app-login',
@@ -12,17 +13,15 @@ import { Login } from './login';
 })
 export class LoginComponent implements OnInit 
 {
+  arbitroLogado: Arbitro = new Arbitro();
   arbitros: Arbitro[] = [];
   login: Login = new Login();
-  admin: Login = new Login();
   usuarioEncontrado: Boolean = false;
 
 
-  constructor(private router: Router, private arbitroService: ArbitroService) 
+  constructor(private router: Router, private arbitroService: ArbitroService, 
+    private loginService: LoginService) 
   { 
-    //Cria usuário Admin
-    this.admin.usuario = "ADMIN";
-    this.admin.senha = "ADMIN";
   }
 
   ngOnInit() 
@@ -40,15 +39,23 @@ export class LoginComponent implements OnInit
       console.log(this.login.senha);
 
       if(this.validaUsuario())
-      {
+      {       
+        this.loginService.logarArbitro(this.arbitroLogado);
         this.login = new Login();
+        this.arbitroLogado = new Arbitro();
         this.router.navigate(['/sumula']);
         return;
       }
 
       alert("Dados incorretos");
       this.login = new Login();
+      this.arbitroLogado = new Arbitro();
     }
+  }
+
+  onClickLimpar()
+  {
+    this.login = new Login();
   }
 
   validaUsuario()
@@ -61,21 +68,13 @@ export class LoginComponent implements OnInit
         {
           console.log("Arbitro Logado: ");
           console.log(arbitro.nome);
+          this.arbitroLogado = arbitro;
           this.usuarioEncontrado = true;
         }
       }
     });
 
     if(this.usuarioEncontrado) return true;
-
-    if(this.login.usuario == this.admin.usuario)
-    {
-      if(this.login.senha == this.admin.senha)
-      {
-        console.log("Login Logado");
-        return true;
-      }
-    }
 
     return false;
   }
