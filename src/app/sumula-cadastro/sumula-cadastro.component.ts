@@ -12,6 +12,7 @@ import { Sumula } from '../sumula/sumula';
 import { Escalacao } from '../sumula/escalacao';
 import { Relacao } from '../sumula/relacao';
 import { HeaderComponent } from '../header/header.component';
+import { LoginService } from '../login/login.service';
 
 
 @Component({
@@ -35,7 +36,8 @@ export class SumulaCadastroComponent implements OnInit {
 
   constructor(private router: Router, private clubeService: ClubeService,
     private arbitroService: ArbitroService, private atletaService: AtletaService,
-    private sumulaService: SumulaService, private header: HeaderComponent) { }
+    private sumulaService: SumulaService, private header: HeaderComponent,
+    private loginService: LoginService) { }
 
 /*==============================================================================
 NG ON INIT
@@ -262,7 +264,8 @@ INICIA SÚMULA
 ==============================================================================*/
   inicializaSumula()
   {
-    const arbitroLogado: Arbitro = this.header.getArbitroLogado();
+    //const arbitroLogado: Arbitro = this.header.getArbitroLogado();
+    const arbitroLogado: Arbitro = this.loginService.getArbitroLogado();
 
     this.sumula.placarMandante = 0; //Placar
     this.sumula.placarVisitante = 0;

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Arbitro } from '../arbitro/arbitro';
 import { Router } from '@angular/router';
+import { LoginService } from '../login/login.service';
 
 @Component({
   selector: 'app-header',
@@ -9,28 +10,23 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   arbitroLogado: Arbitro = new Arbitro();
-  mostrarBarra: Boolean = false;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private loginService: LoginService) {
+   }
 
-  ngOnInit() { }
-
-  setArbitroLogado(arbitro: Arbitro)
-  {
-    this.arbitroLogado = arbitro;
-    this.mostrarBarra = true;
+  ngOnInit() 
+  { 
+    this.loginService.mostrarMenuEmitter.subscribe(
+      mostrar => this.arbitroLogado = mostrar
+    );
   }
 
-  getArbitroLogado()
-  {
-    return this.arbitroLogado;
-  }
 
   onClickSair()
   {
     this.arbitroLogado = new Arbitro();
     this.router.navigate(['']);
-    this.mostrarBarra = false;
+    this.loginService.deslogarArbitro();
   }
 
 }

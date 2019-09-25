@@ -5,6 +5,7 @@ import { ArbitroService } from '../arbitro/arbitro.service';
 import { Arbitro } from '../arbitro/arbitro';
 import { Login } from './login';
 import { HeaderComponent } from '../header/header.component';
+import { LoginService } from './login.service';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,7 @@ export class LoginComponent implements OnInit
 
 
   constructor(private router: Router, private arbitroService: ArbitroService, 
-    private header: HeaderComponent) 
+    private loginService: LoginService) 
   { 
   }
 
@@ -40,7 +41,7 @@ export class LoginComponent implements OnInit
 
       if(this.validaUsuario())
       {       
-        this.header.setArbitroLogado(this.arbitroLogado);
+        this.loginService.logarArbitro(this.arbitroLogado);
         this.login = new Login();
         this.arbitroLogado = new Arbitro();
         this.router.navigate(['/sumula']);
