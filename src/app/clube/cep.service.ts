@@ -11,11 +11,14 @@ export class CepService
 
   cunsultaCep(cep: String)
   {
-    cep = cep.replace(/\D/g, ''); //Remove qualquer caracter que não seja dígito
-
-    if(cep.length == 8) //Verifica se possui exatamente 8 dígitos
+    if(cep != null)
     {
-      return this.http.get<Cep>(`https://viacep.com.br/ws/${cep}/json/`);
+      cep = cep.replace(/\D/g, ''); //Remove qualquer caracter que não seja dígito
+
+      if(cep.length == 8) //Verifica se possui exatamente 8 dígitos
+      {
+        return this.http.get<Cep>(`https://viacep.com.br/ws/${cep}/json/`);
+      }
     }
   }
 

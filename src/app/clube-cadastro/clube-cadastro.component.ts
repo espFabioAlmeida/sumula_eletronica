@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { ClubeService } from '../clube/clube.service';
 import { Clube } from '../clube/clube';
 import { CepService } from '../clube/cep.service';
+import { Cep } from '../clube/cep';
 
 @Component({
   selector: 'app-clube-cadastro',
@@ -13,6 +14,7 @@ import { CepService } from '../clube/cep.service';
 export class ClubeCadastroComponent implements OnInit 
 {
   clube: Clube = new Clube();
+  endereco: Cep = new Cep();
 
   constructor(private route: ActivatedRoute, private clubeService: ClubeService, 
     private router: Router, private cepService: CepService ) { }
@@ -20,7 +22,9 @@ export class ClubeCadastroComponent implements OnInit
   ngOnInit() 
   {
     this.getClube();
-    this.cepService.cunsultaCep("89053-145").subscribe(dados => console.log(dados));
+    this.verificaCep();
+    //Teste de cep service
+    //this.cepService.cunsultaCep("89053-145").subscribe(dados => console.log(dados));   
   }
 
   onSubmit(formulario: NgForm)
@@ -49,6 +53,21 @@ export class ClubeCadastroComponent implements OnInit
       return;
     }
     console.log("Eh nulo");
+  }
+
+  verificaCep()
+  {
+    this.endereco = new Cep();
+    if(this.clube.cep != null) //Verifica se tem algo escrito
+    {
+      this.clube.cep = this.clube.cep.replace(/\D/g, ''); //Remove qualquer caracter que não seja dígito
+      if(this.clube.cep.length == 8) //Verifica se tem 8 letras
+      {
+        this.cepService.cunsultaCep(this.clube.cep).subscribe(dados => this.endereco = dados); 
+        console.log(this.endereco);
+        return;
+      }
+    }
   }
 
 }

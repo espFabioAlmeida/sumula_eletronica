@@ -42,24 +42,17 @@
             </div>
     
             <div class="form-group col-md-6">
-                <input type="number" number class="form-control" name="cep" id="cep" 
-                placeholder="CEP" 
+                <input type="text" class="form-control" name="cep" id="cep" 
+                placeholder="CEP" (blur)="verificaCep()" onkeypress="return event.charCode >= 48 && event.charCode <= 57"
                 required #cep="ngModel" [(ngModel)]="clube.cep">
             </div>
         </div>
 
         <div class="form-group">
             <div class="form-group col-md-6">
-                <label class="control-label">Rua: </label>
-            </div>
-
-            <div class="form-group col-md-6">
-                <label class="control-label">Cidade: {{clube.cidade}}</label>
+                <label class="control-label">Cidade: {{endereco.localidade}}/{{endereco.uf}}</label>
             </div>
         </div>
-
-        
-        
         
         <p>
             <button class="btn btn-success" [disabled]="!formulario.valid" type="submit">Salvar</button> 
