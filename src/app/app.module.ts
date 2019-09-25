@@ -11,7 +11,6 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ClubeCadastroComponent } from './clube-cadastro/clube-cadastro.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HttpClient, HttpHandler } from '@angular/common/http';
-import { CepService } from './clube/cep.service';
 import { AtletaCadastroComponent } from './atleta-cadastro/atleta-cadastro.component';
 import { SumulaCadastroComponent } from './sumula-cadastro/sumula-cadastro.component';
 import { SumulaVisualizacaoComponent } from './sumula-visualizacao/sumula-visualizacao.component';
