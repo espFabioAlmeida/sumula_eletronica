@@ -36,12 +36,12 @@ import { HeaderComponent } from './header/header.component';
   ],
   imports: [
     BrowserModule,
-    // import HttpClientModule after BrowserModule.
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [HttpClientModule, HttpClient],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

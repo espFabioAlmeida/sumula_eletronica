@@ -14,8 +14,6 @@ export class ClubeComponent implements OnInit
   clubes: Clube[] = [];
   cep: Cep = new Cep();
 
-  //constructor(private clubeService: ClubeService, private cepService: CepService ) { }
-
   constructor(private clubeService: ClubeService) { }
 
   ngOnInit() 

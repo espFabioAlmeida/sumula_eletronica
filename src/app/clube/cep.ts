@@ -4,6 +4,6 @@ export class Cep
     logradouro: String;
     complemento: String;
     bairro: String;
-    cidade: String;
-    estado: String;
+    localidade: String;
+    uf: String;
 }

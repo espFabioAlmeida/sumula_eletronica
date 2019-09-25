@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { ClubeService } from '../clube/clube.service';
 import { Clube } from '../clube/clube';
+import { CepService } from '../clube/cep.service';
 
 @Component({
   selector: 'app-clube-cadastro',
@@ -14,11 +15,12 @@ export class ClubeCadastroComponent implements OnInit
   clube: Clube = new Clube();
 
   constructor(private route: ActivatedRoute, private clubeService: ClubeService, 
-    private router: Router) { }
+    private router: Router, private cepService: CepService ) { }
 
   ngOnInit() 
   {
     this.getClube();
+    this.cepService.cunsultaCep("89053-145").subscribe(dados => console.log(dados));
   }
 
   onSubmit(formulario: NgForm)
