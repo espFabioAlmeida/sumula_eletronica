@@ -13,6 +13,7 @@ import { Escalacao } from '../sumula/escalacao';
 import { Relacao } from '../sumula/relacao';
 import { HeaderComponent } from '../header/header.component';
 import { LoginService } from '../login/login.service';
+import { Substituicao } from '../sumula/substituicao';
 
 
 @Component({
@@ -33,6 +34,9 @@ export class SumulaCadastroComponent implements OnInit {
   relacoesVisitante: Relacao[] = [];
   inserirRelacaoMandante: Relacao = new Relacao();
   inserirRelacaoVisitante: Relacao = new Relacao();
+
+  inserirSubstituicaoMandante: Substituicao = new Substituicao();
+  inserirSubstituicaoVisitante: Substituicao = new Substituicao();
 
   constructor(private router: Router, private clubeService: ClubeService,
     private arbitroService: ArbitroService, private atletaService: AtletaService,
@@ -242,6 +246,44 @@ ON CLICK - EXCLUIR ATLETA EQUIPE VISITANTE
     } 
   }
 /*==============================================================================
+ON CLICK - INSERIR SUBSTITUIÇÃO MANDANTE
+==============================================================================*/
+  onClickInserirSubstituicaoMandante()
+  {
+    console.log("Substituicao recebida");
+    console.log(this.inserirSubstituicaoMandante);
+    if(this.inserirSubstituicaoMandante.entra >= 1 &&
+      this.inserirSubstituicaoMandante.sai >= 1 &&
+      this.inserirSubstituicaoMandante.tempo >= 1 &&
+      this.inserirSubstituicaoMandante.periodo != null)
+    {
+      this.inserirSubstituicaoMandante.equipeMandante = true;
+      this.sumula.substituicoesMandante.push(this.inserirSubstituicaoMandante);
+      
+      console.log("Subs Mandante Atualizado");
+      console.log(this.sumula.substituicoesMandante);
+
+      this.inicializaInserirSubstituicaoMandante();
+      return;
+    }
+    console.log("Erro nas substituição")
+    alert("Verifique os campos de inserção e tente novamente"); //Informa o erro
+  }
+/*==============================================================================
+ON CLICK - EXCLUIR ATLETA DA EQUIPE MANDANTE
+==============================================================================*/
+  onClickExcluirSubstituicaoMandante(numero: any)
+  {
+    const excluirSubstituicao: Substituicao = 
+      this.sumula.substituicoesMandante.find(subs => subs.entra == numero);
+    const index: number = this.sumula.substituicoesMandante.indexOf(excluirSubstituicao);
+
+    if(index >= 0)
+    {
+      this.sumula.substituicoesMandante.splice(index, 1);
+    }
+  }
+/*==============================================================================
 ATUALIZA PLACAR FINAL
 ==============================================================================*/
   atualizaPlacarFinal()
@@ -290,6 +332,11 @@ INICIA SÚMULA
 
     this.relacoesMandante = []; //Listas de atletas
     this.relacoesVisitante = [];
+
+    this.inicializaInserirSubstituicaoMandante();
+
+    this.sumula.substituicoesMandante = [];
+    this.sumula.substituicoesVisitante = [];
   }
 /*==============================================================================
 INICIALIZA NOVO ATLETA MANDANTE
@@ -320,6 +367,18 @@ INICIALIZA NOVO ATLETA VISITANTE
     this.inserirRelacaoVisitante.numero = 0;
     this.inserirRelacaoVisitante.titular = "Titular";
     this.inserirRelacaoVisitante.idAtleta = "null";
+  }
+/*==============================================================================
+INICIALIZA NOVA SUBSTITUIÇÃO MANDANTE
+==============================================================================*/
+  inicializaInserirSubstituicaoMandante()
+  {
+    this.inserirSubstituicaoMandante = new Substituicao(); //Inicializa classe
+    this.inserirSubstituicaoMandante.entra = 0; //Inicializa variáveis de inserção
+    this.inserirSubstituicaoMandante.equipeMandante = false;
+    this.inserirSubstituicaoMandante.periodo = "1T";
+    this.inserirSubstituicaoMandante.sai = 0;
+    this.inserirSubstituicaoMandante.tempo = 0;
   }
 /*==============================================================================
 BUSCA OS CLUBES
