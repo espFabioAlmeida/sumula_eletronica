@@ -250,12 +250,20 @@ ON CLICK - INSERIR SUBSTITUIÇÃO MANDANTE
 ==============================================================================*/
   onClickInserirSubstituicaoMandante()
   {
+    const verificaEntrou: Substituicao = this.sumula.substituicoesMandante.find
+    (sub => sub.entra == this.inserirSubstituicaoMandante.entra);
+    const verificaSaiu: Substituicao = this.sumula.substituicoesMandante.find
+    (sub => sub.sai == this.inserirSubstituicaoMandante.sai);
+
     console.log("Substituicao recebida");
     console.log(this.inserirSubstituicaoMandante);
+
     if(this.inserirSubstituicaoMandante.entra >= 1 &&
       this.inserirSubstituicaoMandante.sai >= 1 &&
       this.inserirSubstituicaoMandante.tempo >= 1 &&
-      this.inserirSubstituicaoMandante.periodo != null)
+      this.inserirSubstituicaoMandante.periodo != null &&
+      this.inserirSubstituicaoMandante.entra != this.inserirSubstituicaoMandante.sai &&
+      !verificaEntrou && !verificaSaiu)
     {
       this.inserirSubstituicaoMandante.equipeMandante = true;
       this.sumula.substituicoesMandante.push(this.inserirSubstituicaoMandante);
@@ -283,6 +291,52 @@ ON CLICK - EXCLUIR ATLETA DA EQUIPE MANDANTE
       this.sumula.substituicoesMandante.splice(index, 1);
     }
   }
+/*==============================================================================
+ON CLICK - INSERIR SUBSTITUIÇÃO VISITANTE
+==============================================================================*/
+  onClickInserirSubstituicaoVisitante()
+  {
+    const verificaEntrou: Substituicao = this.sumula.substituicoesVisitante.find
+    (sub => sub.entra == this.inserirSubstituicaoVisitante.entra);
+    const verificaSaiu: Substituicao = this.sumula.substituicoesVisitante.find
+    (sub => sub.sai == this.inserirSubstituicaoVisitante.sai);
+
+    console.log("Substituicao recebida");
+    console.log(this.inserirSubstituicaoVisitante);
+
+    if(this.inserirSubstituicaoVisitante.entra >= 1 &&
+      this.inserirSubstituicaoVisitante.sai >= 1 &&
+      this.inserirSubstituicaoVisitante.tempo >= 1 &&
+      this.inserirSubstituicaoVisitante.periodo != null &&
+      this.inserirSubstituicaoVisitante.entra != this.inserirSubstituicaoVisitante.sai &&
+      !verificaEntrou && !verificaSaiu)
+    {
+      this.inserirSubstituicaoVisitante.equipeMandante = false;
+      this.sumula.substituicoesVisitante.push(this.inserirSubstituicaoVisitante);
+      
+      console.log("Subs Visitante Atualizado");
+      console.log(this.sumula.substituicoesVisitante);
+
+      this.inicializaInserirSubstituicaoVisitante();
+      return;
+    }
+    console.log("Erro nas substituição")
+    alert("Verifique os campos de inserção e tente novamente"); //Informa o erro
+  }
+/*==============================================================================
+ON CLICK - EXCLUIR ATLETA DA EQUIPE VISITANTE
+==============================================================================*/
+  onClickExcluirSubstituicaoVisitante(numero: any)
+  {
+    const excluirSubstituicao: Substituicao = 
+      this.sumula.substituicoesVisitante.find(subs => subs.entra == numero);
+    const index: number = this.sumula.substituicoesVisitante.indexOf(excluirSubstituicao);
+
+    if(index >= 0)
+    {
+      this.sumula.substituicoesVisitante.splice(index, 1);
+    }
+  } 
 /*==============================================================================
 ATUALIZA PLACAR FINAL
 ==============================================================================*/
@@ -334,6 +388,7 @@ INICIA SÚMULA
     this.relacoesVisitante = [];
 
     this.inicializaInserirSubstituicaoMandante();
+    this.inicializaInserirSubstituicaoVisitante();
 
     this.sumula.substituicoesMandante = [];
     this.sumula.substituicoesVisitante = [];
@@ -379,6 +434,18 @@ INICIALIZA NOVA SUBSTITUIÇÃO MANDANTE
     this.inserirSubstituicaoMandante.periodo = "1T";
     this.inserirSubstituicaoMandante.sai = 0;
     this.inserirSubstituicaoMandante.tempo = 0;
+  }
+/*==============================================================================
+INICIALIZA NOVA SUBSTITUIÇÃO VISITANTE
+==============================================================================*/
+  inicializaInserirSubstituicaoVisitante()
+  {
+    this.inserirSubstituicaoVisitante = new Substituicao(); //Inicializa classe
+    this.inserirSubstituicaoVisitante.entra = 0; //Inicializa variáveis de inserção
+    this.inserirSubstituicaoVisitante.equipeMandante = false;
+    this.inserirSubstituicaoVisitante.periodo = "1T";
+    this.inserirSubstituicaoVisitante.sai = 0;
+    this.inserirSubstituicaoVisitante.tempo = 0;
   }
 /*==============================================================================
 BUSCA OS CLUBES

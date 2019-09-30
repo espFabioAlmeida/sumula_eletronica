@@ -325,8 +325,6 @@
 
         <button class="btn btn-success"  type="button" (click)="onClickInserirRelacaoVisitante()">Incluir</button>
     </div>
-
-
     <div class="campo_cadastro">
         <p class="texto_titulo_cadastro">
             Substituições da Equipe Mandante
@@ -391,6 +389,72 @@
         </div>
 
         <button class="btn btn-success"  type="button" (click)="onClickInserirSubstituicaoMandante()">Incluir</button>
+    </div>
+
+    <div class="campo_cadastro">
+        <p class="texto_titulo_cadastro">
+            Substituições da Equipe Visitante
+        </p> 
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Período</th>
+                    <th scope="col">Tempo</th>
+                    <th scope="col">Entrou</th>
+                    <th scope="col">Saiu</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let substituicao of sumula.substituicoesVisitante">                           
+                    <td>
+                        <button class="btn btn-danger" 
+                        (click)="onClickExcluirSubstituicaoVisitante(substituicao.entra)">X</button>
+                    </td>
+                    <td>{{substituicao.periodo}}</td>
+                    <td>{{substituicao.tempo}}</td>
+                    <td>{{substituicao.entra}}</td>
+                    <td>{{substituicao.sai}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p class="texto_titulo_cadastro">
+            Incluir Substituição na Equipe Visitante
+        </p> 
+        
+        <div class="form-group row">
+            <div class="form-group col-md-4">
+                <label for="periodo">Período</label>
+                <select id="periodo" class="form-control" id="periodo" name="periodo"
+                #periodo="ngModel" [(ngModel)]="inserirSubstituicaoVisitante.periodo">
+                    <option value="1T">1T: Primeiro Tempo</option>
+                    <option value="INT">Intervalo</option>
+                    <option value="2T">2T: Segundo Tempo</option>
+                </select>
+            </div> 
+
+            <div class="col-sm-2">  
+                <label for="tempo">Tempo</label>             
+                <input type="number" number class="form-control" name="tempo" 
+                id="tempo" #tempo="ngModel" [(ngModel)]="inserirSubstituicaoVisitante.tempo">
+            </div> 
+            
+            <div class="col-sm-2">  
+                <label for="entra">Entrou</label>             
+                <input type="number" number class="form-control" name="entra" 
+                id="entra" #entra="ngModel" [(ngModel)]="inserirSubstituicaoVisitante.entra">
+            </div>  
+
+            <div class="col-sm-2">  
+                <label for="sai">Saiu</label>             
+                <input type="number" number class="form-control" name="sai" 
+                id="sai" #sai="ngModel" [(ngModel)]="inserirSubstituicaoVisitante.sai">
+            </div> 
+        </div>
+
+        <button class="btn btn-success"  type="button" (click)="onClickInserirSubstituicaoVisitante()">Incluir</button>
     </div>
 
 
