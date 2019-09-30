@@ -14,6 +14,7 @@ import { Relacao } from '../sumula/relacao';
 import { HeaderComponent } from '../header/header.component';
 import { LoginService } from '../login/login.service';
 import { Substituicao } from '../sumula/substituicao';
+import { Comissao } from '../sumula/comissao';
 
 
 @Component({
@@ -37,6 +38,7 @@ export class SumulaCadastroComponent implements OnInit {
 
   inserirSubstituicaoMandante: Substituicao = new Substituicao();
   inserirSubstituicaoVisitante: Substituicao = new Substituicao();
+
 
   constructor(private router: Router, private clubeService: ClubeService,
     private arbitroService: ArbitroService, private atletaService: AtletaService,
@@ -387,11 +389,14 @@ INICIA SÚMULA
     this.relacoesMandante = []; //Listas de atletas
     this.relacoesVisitante = [];
 
-    this.inicializaInserirSubstituicaoMandante();
+    this.inicializaInserirSubstituicaoMandante(); //Inserção de Substituições
     this.inicializaInserirSubstituicaoVisitante();
 
-    this.sumula.substituicoesMandante = [];
+    this.sumula.substituicoesMandante = []; //Listas de Substituições
     this.sumula.substituicoesVisitante = [];
+
+    this.sumula.comissaoMandante = new Comissao(); //Comissões Técnicas
+    this.sumula.comissaoVisitante = new Comissao();
   }
 /*==============================================================================
 INICIALIZA NOVO ATLETA MANDANTE

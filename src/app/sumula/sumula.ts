@@ -1,5 +1,6 @@
 import { Escalacao } from './escalacao';
 import { Substituicao } from './substituicao';
+import { Comissao } from './comissao';
 
 export class Sumula
 {
@@ -38,4 +39,8 @@ export class Sumula
 
     substituicoesMandante: Substituicao[];
     substituicoesVisitante: Substituicao[];
+
+    comissaoMandante: Comissao;
+    comissaoVisitante: Comissao;
+
 }

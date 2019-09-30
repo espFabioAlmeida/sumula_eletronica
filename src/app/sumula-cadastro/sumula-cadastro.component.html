@@ -457,6 +457,82 @@
         <button class="btn btn-success"  type="button" (click)="onClickInserirSubstituicaoVisitante()">Incluir</button>
     </div>
 
+    <div class="campo_cadastro">
+        <p class="texto_titulo_cadastro">
+            Comissão Técnica da Equipe Mandante
+        </p>
+
+        <div class="form-group">
+            <div class="col-sm-12">
+                <label for="tecnico">Técnico</label>
+                <input type="text" class="form-control" name="tecnico" placeholder="Nome - RG"
+                id="tecnico" #tecnico="ngModel" [(ngModel)]="sumula.comissaoMandante.tecnico">
+            </div>
+
+            <div class="col-sm-12">
+                <label for="auxTecnico">Áuxiliar Técnico</label>
+                <input type="text" class="form-control" name="auxTecnico" placeholder="Nome - RG"
+                id="auxTecnico" #auxTecnico="ngModel" [(ngModel)]="sumula.comissaoMandante.auxTecnico">
+            </div>
+
+            <div class="col-sm-12">
+                <label for="prepGoleiro">Preparador de Goleiro</label>
+                <input type="text" class="form-control" name="prepGoleiro" placeholder="Nome - RG"
+                id="prepGoleiro" #prepGoleiro="ngModel" [(ngModel)]="sumula.comissaoMandante.prepGoleiro">
+            </div>
+
+            <div class="col-sm-12">
+                <label for="medico">Médico</label>
+                <input type="text" class="form-control" name="medico" placeholder="Nome - CRM"
+                id="medico" #medico="ngModel" [(ngModel)]="sumula.comissaoMandante.medico">
+            </div>
+
+            <div class="col-sm-12">
+                <label for="massagista">Massagista</label>
+                <input type="text" class="form-control" name="massagista" placeholder="Nome - RG"
+                id="massagista" #massagista="ngModel" [(ngModel)]="sumula.comissaoMandante.massagista">
+            </div>
+        </div>
+    </div>
+
+    <div class="campo_cadastro">
+        <p class="texto_titulo_cadastro">
+            Comissão Técnica da Equipe Visitante
+        </p>
+
+        <div class="form-group">
+            <div class="col-sm-12">
+                <label for="tecnico">Técnico</label>
+                <input type="text" class="form-control" name="tecnico" placeholder="Nome - RG"
+                id="tecnico" #tecnico="ngModel" [(ngModel)]="sumula.comissaoVisitante.tecnico">
+            </div>
+
+            <div class="col-sm-12">
+                <label for="auxTecnico">Áuxiliar Técnico</label>
+                <input type="text" class="form-control" name="auxTecnico" placeholder="Nome - RG"
+                id="auxTecnico" #auxTecnico="ngModel" [(ngModel)]="sumula.comissaoVisitante.auxTecnico">
+            </div>
+
+            <div class="col-sm-12">
+                <label for="prepGoleiro">Preparador de Goleiro</label>
+                <input type="text" class="form-control" name="prepGoleiro" placeholder="Nome - RG"
+                id="prepGoleiro" #prepGoleiro="ngModel" [(ngModel)]="sumula.comissaoVisitante.prepGoleiro">
+            </div>
+
+            <div class="col-sm-12">
+                <label for="medico">Médico</label>
+                <input type="text" class="form-control" name="medico" placeholder="Nome - CRM"
+                id="medico" #medico="ngModel" [(ngModel)]="sumula.comissaoVisitante.medico">
+            </div>
+
+            <div class="col-sm-12">
+                <label for="massagista">Massagista</label>
+                <input type="text" class="form-control" name="massagista" placeholder="Nome - RG"
+                id="massagista" #massagista="ngModel" [(ngModel)]="sumula.comissaoVisitante.massagista">
+            </div>
+        </div>
+    </div>
+
 
     <div class="campo_cadastro">
         <p class="texto_titulo_cadastro">
