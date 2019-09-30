@@ -151,6 +151,155 @@
     </table>
 </div>
 
+<div class="campo_cadastro">
+    <p class="texto_titulo_cadastro">
+        Substituições Equipe Mandante
+    </p> 
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Período</th>
+                <th scope="col">Tempo</th>
+                <th scope="col">Entrou</th>
+                <th scope="col">Saiu</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let subs of sumula.substituicoesMandante">                           
+                <td>{{subs.periodo}}</td>
+                <td>{{subs.tempo}}</td>
+                <td>{{subs.entra}}</td>
+                <td>{{subs.sai}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="campo_cadastro">
+    <p class="texto_titulo_cadastro">
+        Substituições Equipe Visitante
+    </p> 
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Período</th>
+                <th scope="col">Tempo</th>
+                <th scope="col">Entrou</th>
+                <th scope="col">Saiu</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let subs of sumula.substituicoesVisitante">                           
+                <td>{{subs.periodo}}</td>
+                <td>{{subs.tempo}}</td>
+                <td>{{subs.entra}}</td>
+                <td>{{subs.sai}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="campo_cadastro">
+    <p class="texto_titulo_cadastro">
+        Comissão Técnica Equipe Mandante
+    </p>
+    <div class="form-group">
+        <div class="form-group row">
+            <div class="col-sm-12">
+                <label class="control-label">Técnico</label>
+                <p>{{sumula.comissaoMandante.tecnico}}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="form-group row">
+            <div class="col-sm-12">
+                <label class="control-label">Áuxiliar Técnico</label>
+                <p>{{sumula.comissaoMandante.auxTecnico}}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="form-group row">
+            <div class="col-sm-12">
+                <label class="control-label">Preparador de Goleiro</label>
+                <p>{{sumula.comissaoMandante.prepGoleiro}}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="form-group row">
+            <div class="col-sm-12">
+                <label class="control-label">Médico</label>
+                <p>{{sumula.comissaoMandante.medico}}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="form-group row">
+            <div class="col-sm-12">
+                <label class="control-label">Massagista</label>
+                <p>{{sumula.comissaoMandante.massagista}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="campo_cadastro">
+    <p class="texto_titulo_cadastro">
+        Comissão Técnica Equipe Visitante
+    </p>
+    <div class="form-group">
+        <div class="form-group row">
+            <div class="col-sm-12">
+                <label class="control-label">Técnico</label>
+                <p>{{sumula.comissaoVisitante.tecnico}}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="form-group row">
+            <div class="col-sm-12">
+                <label class="control-label">Áuxiliar Técnico</label>
+                <p>{{sumula.comissaoVisitante.auxTecnico}}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="form-group row">
+            <div class="col-sm-12">
+                <label class="control-label">Preparador de Goleiro</label>
+                <p>{{sumula.comissaoVisitante.prepGoleiro}}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="form-group row">
+            <div class="col-sm-12">
+                <label class="control-label">Médico</label>
+                <p>{{sumula.comissaoVisitante.medico}}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="form-group row">
+            <div class="col-sm-12">
+                <label class="control-label">Massagista</label>
+                <p>{{sumula.comissaoVisitante.massagista}}</p>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="campo_cadastro">
     <p class="texto_titulo_cadastro">
