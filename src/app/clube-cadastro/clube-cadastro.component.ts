@@ -5,6 +5,7 @@ import { ClubeService } from '../clube/clube.service';
 import { Clube } from '../clube/clube';
 import { CepService } from '../clube/cep.service';
 import { Cep } from '../clube/cep';
+import { concat } from 'rxjs';
 
 @Component({
   selector: 'app-clube-cadastro',
@@ -31,6 +32,7 @@ export class ClubeCadastroComponent implements OnInit
   {
     if(formulario.valid)
     {
+      this.clube.cidade = this.endereco.localidade + "/" + this.endereco.uf;
       console.log("Recebido no Submit");
       console.log(this.clube);
       this.clubeService.cadastraClube(this.clube);
@@ -64,8 +66,9 @@ export class ClubeCadastroComponent implements OnInit
       if(this.clube.cep.length == 8) //Verifica se tem 8 letras
       {
         this.cepService.cunsultaCep(this.clube.cep).subscribe(dados => this.endereco = dados); 
-        console.log(this.endereco);
         return;
+
+        
       }
     }
   }
