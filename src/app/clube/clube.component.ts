@@ -18,19 +18,7 @@ export class ClubeComponent implements OnInit
 
   ngOnInit() 
   {
-    this.clubes = this.clubeService.getClubes();
-
-    //this.cepService.buscaCep();
-
-    
-    
-    /*
-    this.clubes.forEach(clube => 
-    {
-      console.log("Busca Cep:");  
-    });
-    */
-  
+    this.clubes = this.clubeService.getClubes(); 
   }
 
 }

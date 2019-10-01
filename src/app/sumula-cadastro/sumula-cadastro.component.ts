@@ -112,10 +112,12 @@ TROCA O CLUBE MANDANTE
     if(this.sumula.idMandante != "null")
     {
       this.sumula.estadio = this.clubes.find(clube => clube.id == idMandante.value).estadio; 
+      this.sumula.cidade = this.clubes.find(clube => clube.id == idMandante.value).cidade;
     }
     else 
     {
       this.sumula.estadio = "";
+      this.sumula.cidade = "";
     }
     //Falta Buscar cidade (após a implementação do CEP service)
 
