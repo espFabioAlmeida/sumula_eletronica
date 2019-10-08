@@ -10,7 +10,8 @@
             </div>
     
             <div class="form-group col-md-12">
-                <input type="text" class="form-control" required formControlName="nome" id="nome" placeholder="Nome">
+                <input type="text" class="form-control" required formControlName="nome" id="nome"
+                 placeholder="Nome" onkeypress="return event.charCode >= 65">                
                 <label for="nome" class="text-danger" *ngIf="verificaCampo('nome')">*Campo Inválido</label>
             </div>
         </div>

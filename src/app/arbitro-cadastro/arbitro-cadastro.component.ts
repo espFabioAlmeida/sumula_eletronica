@@ -26,7 +26,7 @@ export class ArbitroCadastroComponent implements OnInit {
     this.formulario = this.formBuilder.group({
       nome: [this.arbitro.nome, [Validators.required,
         Validators.minLength(3),
-        Validators.maxLength(40)]],
+        Validators.maxLength(40)],],
 
       senha: [this.arbitro.senha,
         [Validators.required,
