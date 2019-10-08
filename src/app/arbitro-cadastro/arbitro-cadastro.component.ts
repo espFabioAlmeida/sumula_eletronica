@@ -62,26 +62,7 @@ export class ArbitroCadastroComponent implements OnInit {
       console.log("recebido no Submit");
       console.log(this.formulario.value);
 
-      //Validação de dados
-     /* if(this.arbitro.cpf.length != 11 || this.arbitro.senha.length < 4
-        || this.arbitro.senha.length > 10)
-      {
-        alert("Há campos com erros.");
-        
-        return;
-      }*/
-
-      this.arbitro.altura = this.formulario.value.altura;
-      this.arbitro.categoria = this.formulario.value.categoria;
-      this.arbitro.cpf = this.formulario.value.cpf;
-      this.arbitro.dataNascimento = this.formulario.value.dataNascimento;
-      this.arbitro.funcao = this.formulario.value.funcao;
-      this.arbitro.idCategoria = this.formulario.value.idCategoria;
-      this.arbitro.nome = this.formulario.value.nome;
-      this.arbitro.peso = this.formulario.value.peso;
-      this.arbitro.senha = this.formulario.value.senha;
-      this.arbitro.sexo = this.formulario.value.sexo;
-      console.log(this.arbitro);
+      this.setArbitro();
 
       this.arbitroService.cadastraArbitro(this.arbitro);
       this.arbitro = new Arbitro();
@@ -116,6 +97,21 @@ export class ArbitroCadastroComponent implements OnInit {
       this.arbitro.sexo="Masculino";
       this.arbitro.funcao="Arbitro";
     }  
+  }
+
+  setArbitro()
+  {
+    this.arbitro.altura = this.formulario.value.altura;
+    this.arbitro.categoria = this.formulario.value.categoria;
+    this.arbitro.cpf = this.formulario.value.cpf;
+    this.arbitro.dataNascimento = this.formulario.value.dataNascimento;
+    this.arbitro.funcao = this.formulario.value.funcao;
+    this.arbitro.idCategoria = this.formulario.value.idCategoria;
+    this.arbitro.nome = this.formulario.value.nome;
+    this.arbitro.peso = this.formulario.value.peso;
+    this.arbitro.senha = this.formulario.value.senha;
+    this.arbitro.sexo = this.formulario.value.sexo;
+    console.log(this.arbitro);
   }
 
   verificaCampo(campo)
