@@ -1,5 +1,5 @@
 <section class="campo_cadastro">
-    <form #formulario="ngForm" (ngSubmit) = "onSubmit(formulario)" >
+    <form (ngSubmit) = "onSubmit(this.formulario)" [formGroup]="formulario">
         <p class="texto_titulo_cadastro">
             Cadastro de Atleta
         </p>    
@@ -10,8 +10,8 @@
             </div>
     
             <div class="form-group col-md-12">
-                <input type="text" class="form-control" name="nome" id="nome" placeholder="Nome" 
-                required #nome="ngModel" [(ngModel)]="atleta.nome">
+                <input type="text" class="form-control" required formControlName="nome" id="nome" placeholder="Nome">
+                <label for="nome" class="text-danger" *ngIf="verificaCampo('nome')">*Campo Inválido</label>
             </div>
         </div>
 
@@ -21,18 +21,19 @@
             </div>
     
             <div class="form-group col-md-6">
-                <input type="text" class="form-control" name="cpf" id="cpf" placeholder="CPF" 
-                required #cpf="ngModel" [(ngModel)]="atleta.cpf"
+                <input type="text" class="form-control" required formControlName="cpf" id="cpf" placeholder="CPF" 
                 onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                <label for="nome" class="text-danger" *ngIf="verificaCampo('cpf')">*Campo Inválido</label>
             </div>
 
             <div class="form-group col-md-6">
-                <label for="dataNascimento" class="control-label">Data de Nascimento</label>
+                <label for="dataNascimento" required class="control-label">Data de Nascimento</label>
             </div>
     
             <div class="form-group col-md-6">
-                <input type="date" date class="form-control" name="dataNascimento" 
-                id="dataNascimento" required #dataNascimento="ngModel" [(ngModel)]="atleta.dataNascimento">
+                <input type="date" date class="form-control" required formControlName="dataNascimento" 
+                id="dataNascimento">
+                <label for="nome" class="text-danger" *ngIf="verificaCampo('dataNascimento')">*Campo Inválido</label>
             </div>
 
             <div class="form-group col-md-6">
@@ -40,16 +41,15 @@
             </div>
     
             <div class="form-group col-md-6">
-                <input type="number" number class="form-control" name="bid" 
-                id="bid" #bid="ngModel" [(ngModel)]="atleta.bid">
+                <input type="number" number class="form-control" formControlName="bid" 
+                id="bid">
             </div>
         </div>
 
         <div class="form-group col-md-6">
             <div class="form-group col-md-6">
                 <label for="idClube">Clube</label>
-                <select id="idClube" class="form-control" id="idClube" name="idClube"
-                #idClube="ngModel" [(ngModel)]="atleta.idClube">
+                <select id="idClube" class="form-control" id="idClube" formControlName="idClube">
                     <option [value]=null>Sem Clube</option>
                     <option *ngFor="let clube of clubes" [value]="clube.id">{{clube.nome}}</option>
                 </select>
