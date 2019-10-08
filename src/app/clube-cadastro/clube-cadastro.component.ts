@@ -23,8 +23,6 @@ export class ClubeCadastroComponent implements OnInit
   ngOnInit() 
   {
     this.getClube();
-    this.verificaCep();
-
     //Teste de cep service
     //this.cepService.cunsultaCep("89053-145").subscribe(dados => console.log(dados));   
 
@@ -46,6 +44,8 @@ export class ClubeCadastroComponent implements OnInit
           Validators.maxLength(8)]],
       }
     )
+
+    this.verificaCep();
   }
 
   onSubmit()
@@ -91,12 +91,12 @@ export class ClubeCadastroComponent implements OnInit
   verificaCep()
   {
     this.endereco = new Cep();
-    if(this.clube.cep != null) //Verifica se tem algo escrito
+    if(this.formulario.value.cep != null) //Verifica se tem algo escrito
     {
-      this.clube.cep = this.clube.cep.replace(/\D/g, ''); //Remove qualquer caracter que não seja dígito
-      if(this.clube.cep.length == 8) //Verifica se tem 8 letras
+      this.formulario.value.cep = this.formulario.value.cep.replace(/\D/g, ''); //Remove qualquer caracter que não seja dígito
+      if(this.formulario.value.cep.length == 8) //Verifica se tem 8 letras
       {
-        this.cepService.cunsultaCep(this.clube.cep).subscribe(dados => this.endereco = dados); 
+        this.cepService.cunsultaCep(this.formulario.value.cep).subscribe(dados => this.endereco = dados); 
         return;
       }
     }
@@ -105,6 +105,11 @@ export class ClubeCadastroComponent implements OnInit
   verificaCampo(campo)
   {
     return !this.formulario.get(campo).valid && this.formulario.get(campo).touched;
+  }
+
+  cepEncontrado()
+  {
+    return !this.endereco.logradouro && this.formulario.get('cep').dirty;
   }
 
 }

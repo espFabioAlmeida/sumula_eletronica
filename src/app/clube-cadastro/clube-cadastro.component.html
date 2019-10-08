@@ -48,11 +48,12 @@
                 placeholder="CEP" (blur)="verificaCep()" onkeypress="return event.charCode >= 48 && event.charCode <= 57"
                 required>
                 <label for="nome" class="text-danger" *ngIf="verificaCampo('cep')">*Campo Inválido</label>
+                <label class="text-danger" *ngIf="cepEncontrado()">*CEP não encontrado</label>
             </div>           
         </div>
 
         <div class="form-group">
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-6">               
                 <label class="control-label">Logradouro: {{endereco.logradouro}}</label>
             </div>
         </div>
