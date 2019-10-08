@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { NgForm, FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AtletaService } from '../atleta/atleta.service';
 import { Atleta } from '../atleta/atleta';
 import { ClubeService } from '../clube/clube.service';

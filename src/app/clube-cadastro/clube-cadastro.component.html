@@ -1,5 +1,5 @@
 <section class="campo_cadastro">
-    <form #formulario="ngForm" (ngSubmit) = "onSubmit(formulario)" >
+    <form (ngSubmit) = "onSubmit(this.formulario)" [formGroup] = "formulario">
         <p class="texto_titulo_cadastro">
             Cadastro de Clube
         </p>    
@@ -10,8 +10,9 @@
             </div>
     
             <div class="form-group col-md-12">
-                <input type="text" class="form-control" name="nome" id="nome" placeholder="Nome" 
-                required #nome="ngModel" [(ngModel)]="clube.nome">
+                <input type="text" class="form-control" formControlName="nome" id="nome" placeholder="Nome" 
+                required>
+                <label for="nome" class="text-danger" *ngIf="verificaCampo('nome')">*Campo Inválido</label>
             </div>
         </div>
 
@@ -21,8 +22,9 @@
             </div>
     
             <div class="form-group col-md-6">
-                <input type="date" date class="form-control" name="dataFundacao" 
-                id="dataFundacao" required #dataFundacao="ngModel" [(ngModel)]="clube.dataFundacao">
+                <input type="date" date class="form-control" formControlName="dataFundacao" 
+                id="dataFundacao" required>
+                <label for="nome" class="text-danger" *ngIf="verificaCampo('dataFundacao')">*Campo Inválido</label>
             </div>
         </div>
 
@@ -32,9 +34,9 @@
             </div>
     
             <div class="form-group col-md-6">
-                <input type="text" class="form-control" name="estadio" id="estadio" 
-                placeholder="Estádio" 
-                required #estadio="ngModel" [(ngModel)]="clube.estadio">
+                <input type="text" class="form-control" formControlName="estadio" id="estadio" 
+                placeholder="Estádio" required>
+                <label for="nome" class="text-danger" *ngIf="verificaCampo('estadio')">*Campo Inválido</label>
             </div>
 
             <div class="form-group col-md-6">
@@ -42,9 +44,10 @@
             </div>
     
             <div class="form-group col-md-6">
-                <input type="text" class="form-control" name="cep" id="cep" 
+                <input type="text" class="form-control" formControlName="cep" id="cep" 
                 placeholder="CEP" (blur)="verificaCep()" onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-                required #cep="ngModel" [(ngModel)]="clube.cep">
+                required>
+                <label for="nome" class="text-danger" *ngIf="verificaCampo('cep')">*Campo Inválido</label>
             </div>           
         </div>
 
