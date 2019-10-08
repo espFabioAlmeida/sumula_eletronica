@@ -5,14 +5,14 @@
             Súmula eletrônica para jogos amadores
         </p>  
     </div>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-success" *ngIf="arbitroLogado.nome"> 
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success"> 
         <div class="header_nav">              
             <div class="navbar-nav">                       
-                <a class="nav-item nav-link" routerLink="/arbitro">Cadastro Árbitros</a>
-                <a class="nav-item nav-link" routerLink="/clube">Cadastro Clubes</a>
-                <a class="nav-item nav-link" routerLink="/atleta">Cadastro Atletas</a>
-                <a class="nav-item nav-link" routerLink="/sumula">Cadastro Súmula Eletrônica</a>              
-                <button class="btn btn-danger" type="button"(click)="onClickSair()">  
+                <a class="nav-item nav-link" routerLink="/arbitro" *ngIf="arbitroLogado.nome == 'ADMIN'">Cadastro Árbitros</a>
+                <a class="nav-item nav-link" routerLink="/clube" *ngIf="arbitroLogado.nome == 'ADMIN'">Cadastro Clubes</a>
+                <a class="nav-item nav-link" routerLink="/atleta" *ngIf="arbitroLogado.nome == 'ADMIN'">Cadastro Atletas</a>
+                <a class="nav-item nav-link" routerLink="/sumula" *ngIf="arbitroLogado.nome">Cadastro Súmula Eletrônica</a>              
+                <button class="btn btn-danger" type="button"(click)="onClickSair()" *ngIf="arbitroLogado.nome">  
                     Sair de {{arbitroLogado.nome}} 
                 </button>              
             </div>      

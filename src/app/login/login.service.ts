@@ -37,4 +37,17 @@ export class LoginService {
   {
     return this.arbitroEstaLogado;
   }
+
+  isAdminLogado()
+  {
+    if(this.arbitroEstaLogado)
+    {
+      if(this.arbitroLogado.nome == "ADMIN")
+      {
+        return true;
+      }
+    }
+    
+    return false;
+  }
 }

@@ -67,8 +67,6 @@ export class ClubeCadastroComponent implements OnInit
       {
         this.cepService.cunsultaCep(this.clube.cep).subscribe(dados => this.endereco = dados); 
         return;
-
-        
       }
     }
   }
