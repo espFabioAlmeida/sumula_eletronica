@@ -50,10 +50,8 @@ export class ArbitroCadastroComponent implements OnInit {
       sexo: [this.arbitro.sexo],
       idCategoria: [this.arbitro.idCategoria],
       funcao: [this.arbitro.funcao]
-    })
-  
-  }
-  
+    })  
+  } 
 
   onSubmit()
   {
@@ -66,13 +64,11 @@ export class ArbitroCadastroComponent implements OnInit {
 
       this.arbitroService.cadastraArbitro(this.arbitro);
       this.arbitro = new Arbitro();
-      this.arbitro.categoria="LVND";
+      this.arbitro.idCategoria="1";
       this.arbitro.sexo="Masculino";
       this.arbitro.funcao="Arbitro";
 
       this.router.navigate(['/arbitro']);
-
-      return;
     }
   }
 
