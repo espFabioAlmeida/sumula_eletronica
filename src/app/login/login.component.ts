@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ArbitroService } from '../arbitro/arbitro.service';
 import { Arbitro } from '../arbitro/arbitro';
 import { Login } from './login';
-import { HeaderComponent } from '../header/header.component';
 import { LoginService } from './login.service';
 
 @Component({
@@ -19,22 +18,37 @@ export class LoginComponent implements OnInit
   login: Login = new Login();
   usuarioEncontrado: Boolean = false;
 
+  formulario: FormGroup
 
   constructor(private router: Router, private arbitroService: ArbitroService, 
-    private loginService: LoginService) 
+    private loginService: LoginService, private formBuilder: FormBuilder) 
   { 
   }
 
   ngOnInit() 
   {
     this.getAritros();
+    this.formulario = this.formBuilder.group(
+      {
+        usuario: [null, Validators.required],
+
+        senha: [null,
+          [Validators.required,
+          Validators.minLength(4),
+          Validators.maxLength(10)]],
+      }
+    )
   }
 
-  onSubmit(formulario: NgForm)
+  onSubmit()
   {
-    if(formulario.valid)
+    if(this.formulario.valid)
     {    
       console.log("Dados de Login: ")
+
+      this.login.usuario = this.formulario.value.usuario;
+      this.login.senha = this.formulario.value.senha;
+      
       console.log(this.login);
       console.log(this.login.usuario);
       console.log(this.login.senha);
@@ -85,5 +99,10 @@ export class LoginComponent implements OnInit
     this.arbitros = this.arbitroService.getArbitrosLinha();
     console.log("Arbitros recebidos do service")
     console.log(this.arbitros);
+  }
+
+  verificaCampo(campo)
+  {
+    return !this.formulario.get(campo).valid && this.formulario.get(campo).touched;
   }
 }

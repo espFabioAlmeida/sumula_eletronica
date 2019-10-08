@@ -1,21 +1,22 @@
 <section class="login">
-    <form #formulario="ngForm" (ngSubmit) = "onSubmit(formulario)" >
+    <form (ngSubmit) = "onSubmit(this.formulario)" [formGroup] = "formulario">
 
         <img class="img_login" src="../assets/img/login_icon.png" alt="login" title="login"> 
 
         <div class="form-group">
             <div class="form-group col-md-12">
                 <label for="usuario" class="control-label">Usuário:</label>
-                <input type="text" class="form-control" name="usuario" id="usuario" placeholder="CPF" 
-                required #usuario="ngModel" [(ngModel)]="login.usuario">
+                <input type="text" class="form-control" formControlName="usuario" id="usuario" placeholder="CPF" 
+                required>
             </div>
         </div>
 
         <div class="form-group">
             <div class="form-group col-md-12">
                 <label for="senha" class="control-label">Senha:</label>
-                <input type="password" password class="form-control" name="senha" id="senha" placeholder="Senha" 
-                required #senha="ngModel" [(ngModel)]="login.senha">
+                <input type="password" password class="form-control" formControlName="senha" id="senha" placeholder="Senha" 
+                required>
+                <label class="text-danger" *ngIf="verificaCampo('senha')">*Campo Inválido</label>
             </div>
         </div>
         
