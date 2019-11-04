@@ -10,6 +10,7 @@ import { ArbitroCategoria } from '../arbitro/arbitroCategoria';
   templateUrl: './arbitro-cadastro.component.html',
   styleUrls: ['./arbitro-cadastro.component.css']
 })
+
 export class ArbitroCadastroComponent implements OnInit {
   arbitro: Arbitro = new Arbitro();
   categorias: ArbitroCategoria[] = [];
@@ -50,6 +51,7 @@ export class ArbitroCadastroComponent implements OnInit {
     {
       console.log("Nao eh nulo");
       this.criarFormulario(); //Cria o formulário para depois sobrescrever
+
       this.arbitroService.getArbitros().subscribe(dados => 
         {
           const arbitros: Arbitro[] = dados;
@@ -62,7 +64,7 @@ export class ArbitroCadastroComponent implements OnInit {
 
           this.arbitro.idCategoria = this.arbitroService.getIdCatergoriaByName(this.arbitro.categoria);         
 
-          console.log("Arbitrs escolhido")
+          console.log("Arbitro escolhido")
           console.log(this.arbitro);
           
           if(this.arbitro != null) 
@@ -99,18 +101,17 @@ export class ArbitroCadastroComponent implements OnInit {
     console.log(this.arbitro);
   }
 
-  verificaCampo(campo)
-  {
-    return !this.formulario.get(campo).valid && this.formulario.get(campo).touched;
-  }
-
   reiniciaArbitro()
   {
     this.arbitro = new Arbitro();
     this.arbitro.idCategoria="1";
     this.arbitro.sexo="Masculino";
     this.arbitro.funcao="Arbitro";
-    //this.setCampos();
+  }
+
+  verificaCampo(campo)
+  {
+    return !this.formulario.get(campo).valid && this.formulario.get(campo).touched;
   }
 
   criarFormulario()
