@@ -63,10 +63,7 @@ export class ArbitroCadastroComponent implements OnInit {
       this.setArbitro();
 
       this.arbitroService.cadastraArbitro(this.arbitro);
-      this.arbitro = new Arbitro();
-      this.arbitro.idCategoria="1";
-      this.arbitro.sexo="Masculino";
-      this.arbitro.funcao="Arbitro";
+      this.reiniciaArbitro();
 
       this.router.navigate(['/arbitro']);
     }
@@ -83,15 +80,29 @@ export class ArbitroCadastroComponent implements OnInit {
     if(id != null)
     {
       console.log("Nao eh nulo");
-      this.arbitro = this.arbitroService.getArbitroById(id);
-    }
+      this.arbitroService.getArbitros().subscribe(dados => 
+        {
+          const arbitros: Arbitro[] = dados;
+  
+          console.log("Arbitros recebidos do service")
+          console.log(arbitros);
 
+          this.arbitro = new Arbitro();
+          this.arbitro = arbitros.find(arbitro => arbitro.id == id);
+
+          console.log("Arbitrs escolhido")
+          console.log(this.arbitro);
+          
+          if(this.arbitro != null) return;
+          this.reiniciaArbitro();
+
+        }
+        );
+    }
     else 
     {
       console.log("Eh nulo");
-      this.arbitro.idCategoria="1";
-      this.arbitro.sexo="Masculino";
-      this.arbitro.funcao="Arbitro";
+      this.reiniciaArbitro();
     }  
   }
 
@@ -113,6 +124,14 @@ export class ArbitroCadastroComponent implements OnInit {
   verificaCampo(campo)
   {
     return !this.formulario.get(campo).valid && this.formulario.get(campo).touched;
+  }
+
+  reiniciaArbitro()
+  {
+    this.arbitro = new Arbitro();
+    this.arbitro.idCategoria="1";
+    this.arbitro.sexo="Masculino";
+    this.arbitro.funcao="Arbitro";
   }
 
 }
