@@ -15,7 +15,18 @@ export class ArbitroComponent implements OnInit {
 
   ngOnInit() 
   {
-    this.arbitros = this.arbitroService.getArbitros();
+    this.getArbitros();
+  }
+
+  getArbitros()
+  {
+    this.arbitroService.getArbitros().subscribe(dados => 
+    {
+      this.arbitros = dados;
+      console.log("Arbitros recebidos do service")
+      console.log(this.arbitros);
+    }
+    );
   }
 
 }

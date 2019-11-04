@@ -16,53 +16,13 @@ export class ArbitroService
 
   constructor(private http: HttpClient) 
   { 
-    //Categorias cadastradas (remover depois que tiver o serviço)
-    const liga: ArbitroCategoria = new ArbitroCategoria();
-    const fcf: ArbitroCategoria = new ArbitroCategoria();
-    const cbf: ArbitroCategoria = new ArbitroCategoria();
-    const fifa: ArbitroCategoria = new ArbitroCategoria();
-
-    liga.id = "1";
-    liga.nome = "LVND";
-    fcf.id = "2";
-    fcf.nome = "FCF";
-    cbf.id = "3";
-    cbf.nome = "CBF";
-    fifa.id = "4";
-    fifa.nome = "FIFA";
-
-    this.categorias.push(liga);
-    this.categorias.push(fcf);
-    this.categorias.push(cbf);
-    this.categorias.push(fifa);
-
-    //Cria arbitro admin -  (remover depois que tiver o serviço)
-    const arbitroAdmin: Arbitro = new Arbitro();
-    arbitroAdmin.nome = "ADMIN";
-    arbitroAdmin.cpf = "ADMIN";
-    arbitroAdmin.id = "ADMIN";
-    arbitroAdmin.senha = "1234";
-    arbitroAdmin.funcao = "Arbitro";
-
-    //this.arbitros.push(arbitroAdmin);
-    
-    this.buscaArbitros().subscribe(dados => 
-      {
-        this.arbitros = dados;
-        console.log("Arbitros recebidos do back");
-        console.log(this.arbitros);
-      }
-      ); 
-  }
-
-  buscaArbitros()
-  {
-    return this.http.get<Arbitro[]>(`/api/arbitro/list`);
+    this.criaCategorias();   
   }
 
   cadastraArbitro(arbitro: Arbitro)
   {
     
+    /*
     if(arbitro.id == null)
     {
       arbitro.id = Math.random().toString(36).substring(2,15) +
@@ -78,16 +38,17 @@ export class ArbitroService
       this.arbitros.push(arbitro);
       console.log(this.arbitros);
       return;
+      
     }
 
     this.index = this.arbitros.indexOf(arbitro);
-    this.arbitros[this.index] = arbitro;
+    this.arbitros[this.index] = arbitro;*/
     
   }
 
   getArbitros()
   {
-    return this.arbitros;
+    return this.http.get<Arbitro[]>(`/api/arbitro/list`);
   }
 
   getCategorias()
@@ -126,5 +87,27 @@ export class ArbitroService
   getArbitroById(id: String)
   {
     return this.arbitros.find(arbitro => arbitro.id == id);
+  }
+
+  criaCategorias()
+  {
+    const liga: ArbitroCategoria = new ArbitroCategoria();
+    const fcf: ArbitroCategoria = new ArbitroCategoria();
+    const cbf: ArbitroCategoria = new ArbitroCategoria();
+    const fifa: ArbitroCategoria = new ArbitroCategoria();
+
+    liga.id = "1";
+    liga.nome = "LVND";
+    fcf.id = "2";
+    fcf.nome = "FCF";
+    cbf.id = "3";
+    cbf.nome = "CBF";
+    fifa.id = "4";
+    fifa.nome = "FIFA";
+
+    this.categorias.push(liga);
+    this.categorias.push(fcf);
+    this.categorias.push(cbf);
+    this.categorias.push(fifa);
   }
 }

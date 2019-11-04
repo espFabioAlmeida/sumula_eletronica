@@ -96,9 +96,27 @@ export class LoginComponent implements OnInit
 
   getAritros()
   {
-    this.arbitros = this.arbitroService.getArbitrosLinha();
-    console.log("Arbitros recebidos do service")
-    console.log(this.arbitros);
+    this.arbitroService.getArbitros().subscribe(dados => 
+      {
+        this.arbitros = dados;
+        this.filtraArbitrosLinha();
+        console.log("Arbitros recebidos do service")
+        console.log(this.arbitros);
+      }
+      );
+  }
+
+  filtraArbitrosLinha()
+  {
+    const arbitrosLinha: Arbitro[] = this.arbitros;
+    this.arbitros = [];
+
+    arbitrosLinha.forEach(arbitro => {
+      if(arbitro.funcao == "Arbitro")
+      {
+        this.arbitros.push(arbitro);
+      }
+    });
   }
 
   verificaCampo(campo)
