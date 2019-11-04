@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Arbitro } from './arbitro';
 import { ArbitroCategoria } from './arbitroCategoria';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class ArbitroService
   categorias: ArbitroCategoria[] = [];
   index: any;
 
-  constructor() 
+  constructor(private http: HttpClient) 
   { 
     //Categorias cadastradas (remover depois que tiver o serviço)
     const liga: ArbitroCategoria = new ArbitroCategoria();
@@ -43,8 +44,20 @@ export class ArbitroService
     arbitroAdmin.senha = "1234";
     arbitroAdmin.funcao = "Arbitro";
 
-    this.arbitros.push(arbitroAdmin);
+    //this.arbitros.push(arbitroAdmin);
     
+    this.buscaArbitros().subscribe(dados => 
+      {
+        this.arbitros = dados;
+        console.log("Arbitros recebidos do back");
+        console.log(this.arbitros);
+      }
+      ); 
+  }
+
+  buscaArbitros()
+  {
+    return this.http.get<Arbitro[]>(`/api/arbitro/list`);
   }
 
   cadastraArbitro(arbitro: Arbitro)
