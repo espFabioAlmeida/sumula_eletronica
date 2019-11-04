@@ -56,6 +56,11 @@ export class ArbitroService
     return this.categorias;
   }
 
+  getIdCatergoriaByName(nome: String)
+  {
+    return this.categorias.find(categoria => categoria.nome == nome).id;
+  }
+
   getArbitrosLinha()
   {
     this.arbitrosLinha = [];

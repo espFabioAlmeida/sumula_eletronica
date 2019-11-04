@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵConsole } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ArbitroService } from '../arbitro/arbitro.service';
@@ -20,37 +20,8 @@ export class ArbitroCadastroComponent implements OnInit {
 
   ngOnInit() 
   {
+    this.categorias = this.arbitroService.getCategorias();
     this.getArbitro();
-
-    //Controle de form 
-    this.formulario = this.formBuilder.group({
-      nome: [this.arbitro.nome, [Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(40)],],
-
-      senha: [this.arbitro.senha,
-        [Validators.required,
-        Validators.minLength(4),
-        Validators.maxLength(10)]],
-
-      cpf: [this.arbitro.cpf,
-      [Validators.required,
-      Validators.minLength(11),
-      Validators.maxLength(11)]],
-
-      dataNascimento: [this.arbitro.dataNascimento,
-        Validators.required],
-
-      altura: [this.arbitro.altura,
-        Validators.required],
-
-      peso: [this.arbitro.peso,
-      Validators.required],
-
-      sexo: [this.arbitro.sexo],
-      idCategoria: [this.arbitro.idCategoria],
-      funcao: [this.arbitro.funcao]
-    })  
   } 
 
   onSubmit()
@@ -73,13 +44,12 @@ export class ArbitroCadastroComponent implements OnInit {
   {
     const id = this.route.snapshot.paramMap.get('id');
     console.log("Id recebido: ");
-    console.log(id);
-
-    this.categorias = this.arbitroService.getCategorias();
+    console.log(id);   
 
     if(id != null)
     {
       console.log("Nao eh nulo");
+      this.criarFormulario(); //Cria o formulário para depois sobrescrever
       this.arbitroService.getArbitros().subscribe(dados => 
         {
           const arbitros: Arbitro[] = dados;
@@ -90,12 +60,19 @@ export class ArbitroCadastroComponent implements OnInit {
           this.arbitro = new Arbitro();
           this.arbitro = arbitros.find(arbitro => arbitro.id == id);
 
+          this.arbitro.idCategoria = this.arbitroService.getIdCatergoriaByName(this.arbitro.categoria);         
+
           console.log("Arbitrs escolhido")
           console.log(this.arbitro);
           
-          if(this.arbitro != null) return;
-          this.reiniciaArbitro();
+          if(this.arbitro != null) 
+          {
+            this.criarFormulario();
+            return;
+          }
 
+          this.reiniciaArbitro();
+          this.criarFormulario();
         }
         );
     }
@@ -103,6 +80,7 @@ export class ArbitroCadastroComponent implements OnInit {
     {
       console.log("Eh nulo");
       this.reiniciaArbitro();
+      this.criarFormulario();
     }  
   }
 
@@ -132,6 +110,39 @@ export class ArbitroCadastroComponent implements OnInit {
     this.arbitro.idCategoria="1";
     this.arbitro.sexo="Masculino";
     this.arbitro.funcao="Arbitro";
+    //this.setCampos();
+  }
+
+  criarFormulario()
+  {
+    this.formulario = this.formBuilder.group({
+      nome: [this.arbitro.nome, [Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(40)],],
+
+      senha: [this.arbitro.senha,
+        [Validators.required,
+        Validators.minLength(4),
+        Validators.maxLength(10)]],
+
+      cpf: [this.arbitro.cpf,
+      [Validators.required,
+      Validators.minLength(11),
+      Validators.maxLength(11)]],
+
+      dataNascimento: [this.arbitro.dataNascimento,
+        Validators.required],
+
+      altura: [this.arbitro.altura,
+        Validators.required],
+
+      peso: [this.arbitro.peso,
+      Validators.required],
+
+      sexo: [this.arbitro.sexo],
+      idCategoria: [this.arbitro.idCategoria],
+      funcao: [this.arbitro.funcao]
+    })
   }
 
 }
