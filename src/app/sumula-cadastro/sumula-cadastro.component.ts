@@ -459,7 +459,7 @@ BUSCA OS CLUBES
 ==============================================================================*/
   getClubes()
   {
-    this.clubes = this.clubeService.getClubes(); //Busca todos os clubes
+    //this.clubes = this.clubeService.getClubes(); //Busca todos os clubes
   }
 /*==============================================================================
 BUSCA OS ASSISTENTES

@@ -18,7 +18,17 @@ export class ClubeComponent implements OnInit
 
   ngOnInit() 
   {
-    this.clubes = this.clubeService.getClubes(); 
+    this.getClubes();
+  }
+
+  getClubes()
+  {
+    this.clubeService.getClubes().subscribe(dados =>
+      {
+        this.clubes = dados;
+        console.log("Clubes recebidos do service")
+        console.log(this.clubes);
+      })
   }
 
 }

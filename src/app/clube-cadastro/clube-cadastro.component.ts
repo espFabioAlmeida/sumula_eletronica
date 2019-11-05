@@ -25,27 +25,6 @@ export class ClubeCadastroComponent implements OnInit
     this.getClube();
     //Teste de cep service
     //this.cepService.cunsultaCep("89053-145").subscribe(dados => console.log(dados));   
-
-    this.formulario = this.formBuilder.group(
-      {
-        nome: [this.clube.nome, [Validators.required,
-          Validators.minLength(2),
-          Validators.maxLength(40)]],
-
-        dataFundacao: [this.clube.dataFundacao,
-          Validators.required],
-        
-        estadio: [this.clube.estadio, [Validators.required,
-          Validators.minLength(2),
-          Validators.maxLength(40)]],
-        
-        cep: [this.clube.cep, [Validators.required,
-          Validators.minLength(8),
-          Validators.maxLength(8)]],
-      }
-    )
-
-    this.verificaCep();
   }
 
   onSubmit()
@@ -75,17 +54,38 @@ export class ClubeCadastroComponent implements OnInit
 
   getClube()
   {
-    const id = this.route.snapshot.paramMap.get('id');
+    const id = this.route.snapshot.paramMap.get('id');   
     console.log("Id recebido:");
     console.log(id);
 
     if(id != null)
     {
+      this.criarFormulario();
       console.log("Nao eh nulo");
-      this.clube = this.clubeService.getClubeById(id);
-      return;
+      this.clubeService.getClubeById(id).subscribe(dados =>
+        {
+          this.clube = dados;
+
+          console.log("Clube Escolhido")
+          console.log(this.clube);
+
+          if(this.clube != null)
+          {
+            this.criarFormulario();
+            this.verificaCep();
+            return;           
+          }
+
+          this.clube = new Clube();
+          this.criarFormulario();
+        })
     }
-    console.log("Eh nulo");
+    else
+    {
+      console.log("Eh nulo");
+      this.clube = new Clube();
+      this.criarFormulario();
+    }
   }
 
   verificaCep()
@@ -110,6 +110,28 @@ export class ClubeCadastroComponent implements OnInit
   cepEncontrado()
   {
     return !this.endereco.logradouro && this.formulario.get('cep').dirty;
+  }
+
+  criarFormulario()
+  {
+    this.formulario = this.formBuilder.group(
+      {
+        nome: [this.clube.nome, [Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(40)]],
+
+        dataFundacao: [this.clube.dataFundacao,
+          Validators.required],
+        
+        estadio: [this.clube.estadio, [Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(40)]],
+        
+        cep: [this.clube.cep, [Validators.required,
+          Validators.minLength(8),
+          Validators.maxLength(8)]],
+      }
+    )
   }
 
 }

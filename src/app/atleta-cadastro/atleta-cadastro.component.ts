@@ -97,7 +97,7 @@ export class AtletaCadastroComponent implements OnInit {
 
   getClubes()
   {
-    this.clubes = this.clubeService.getClubes();
+    //this.clubes = this.clubeService.getClubes();
   }
 
   verificaCampo(campo)
