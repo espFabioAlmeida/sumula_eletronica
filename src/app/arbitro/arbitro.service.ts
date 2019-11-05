@@ -51,6 +51,11 @@ export class ArbitroService
     return this.http.get<Arbitro[]>(`/api/arbitro/list`);
   }
 
+  getArbitrosById(id: String)
+  {
+    return this.http.get<Arbitro>(`/api/arbitro/${id}`);
+  }
+
   getCategorias()
   {
     return this.categorias;

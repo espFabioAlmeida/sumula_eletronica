@@ -52,15 +52,9 @@ export class ArbitroCadastroComponent implements OnInit {
       console.log("Nao eh nulo");
       this.criarFormulario(); //Cria o formulário para depois sobrescrever
 
-      this.arbitroService.getArbitros().subscribe(dados => 
+      this.arbitroService.getArbitrosById(id).subscribe(dados => 
         {
-          const arbitros: Arbitro[] = dados;
-  
-          console.log("Arbitros recebidos do service")
-          console.log(arbitros);
-
-          this.arbitro = new Arbitro();
-          this.arbitro = arbitros.find(arbitro => arbitro.id == id);
+          this.arbitro = dados;
 
           this.arbitro.idCategoria = this.arbitroService.getIdCatergoriaByName(this.arbitro.categoria);         
 
