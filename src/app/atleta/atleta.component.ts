@@ -19,7 +19,12 @@ export class AtletaComponent implements OnInit {
 
   getAtletas()
   {
-    this.atletas = this.atletaService.getAtletas();
+    this.atletaService.getAtletas().subscribe(dados =>
+      {
+        this.atletas = dados;
+        console.log("Atletas recebidos do service")
+        console.log(this.atletas);
+      })
   }
 
 }

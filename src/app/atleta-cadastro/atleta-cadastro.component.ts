@@ -21,26 +21,8 @@ export class AtletaCadastroComponent implements OnInit {
 
   ngOnInit() 
   {
-    this.getAtleta();
-    this.getClubes();
-
-    this.formulario = this.formBuilder.group(
-    {
-      nome: [this.atleta.nome, [Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(40)]],
-
-      cpf: [this.atleta.cpf,
-        [Validators.required,
-        Validators.minLength(11),
-        Validators.maxLength(11)]],
-  
-      dataNascimento: [this.atleta.dataNascimento,
-        Validators.required],
-      
-      bid: [this.atleta.bid],
-      idClube: [this.atleta.idClube]
-    })
+    this.criarFormulario();
+    this.getClubes();    
   }
 
   onSubmit()
@@ -57,9 +39,8 @@ export class AtletaCadastroComponent implements OnInit {
       }  
 
       this.atletaService.cadastraAtleta(this.atleta);
-      this.atleta = new Atleta();
-      this.atleta.clube = "Sem Clube";
-      this.atleta.idClube = "null";
+      
+      this.reiniciaAtleta();
 
       this.router.navigate(['/atleta']);
     }
@@ -76,7 +57,6 @@ export class AtletaCadastroComponent implements OnInit {
     console.log(this.atleta);
   }
 
-
   getAtleta()
   {
     const id = this.route.snapshot.paramMap.get('id');
@@ -86,23 +66,73 @@ export class AtletaCadastroComponent implements OnInit {
     if(id != null)
     {
       console.log("Nao eh nulo");
-      this.atleta = this.atletaService.getAtletaById(id);
-      return;
+      
+      this.atletaService.getAtletaById(id).subscribe(dados =>
+        {
+          this.atleta = dados;
+
+          console.log("Atleta Escolhido")
+          console.log(this.atleta);
+
+          if(this.atleta != null)
+          {
+            this.criarFormulario();
+            return;           
+          }
+
+          this.reiniciaAtleta();
+          this.criarFormulario();
+        })
     }
 
     console.log("Eh nulo");
-    this.atleta.clube = "Sem Clube";
-    this.atleta.idClube = "null";
+    this.reiniciaAtleta();
+    this.criarFormulario();
   }
 
   getClubes()
   {
-    //this.clubes = this.clubeService.getClubes();
+    this.clubeService.getClubes().subscribe(dados =>
+      {
+        this.clubes = dados;
+        console.log("Clubes recebidos do service")
+        console.log(this.clubes);
+        this.getAtleta();
+      })
   }
 
   verificaCampo(campo)
   {
     return !this.formulario.get(campo).valid && this.formulario.get(campo).touched;
+  }
+
+  reiniciaAtleta()
+  {
+    this.atleta = new Atleta();
+    this.atleta = new Atleta();
+    this.atleta.clube = "Sem Clube";
+    this.atleta.idClube = "null";
+  }
+
+  criarFormulario()
+  {
+    this.formulario = this.formBuilder.group(
+      {
+        nome: [this.atleta.nome, [Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(40)]],
+  
+        cpf: [this.atleta.cpf,
+          [Validators.required,
+          Validators.minLength(11),
+          Validators.maxLength(11)]],
+    
+        dataNascimento: [this.atleta.dataNascimento,
+          Validators.required],
+        
+        bid: [this.atleta.bid],
+        idClube: [this.atleta.idClube]
+      })
   }
 
 }
