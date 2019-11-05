@@ -11,7 +11,7 @@
     
             <div class="form-group col-md-12">
                 <input type="text" class="form-control" formControlName="nome" id="nome" 
-                placeholder="Nome" required onkeypress="return event.charCode >= 65"> 
+                placeholder="Nome" required onkeypress="return event.charCode >= 65 || event.charCode == 32"> 
                 <label for="nome" class="text-danger" *ngIf="verificaCampo('nome')">*Campo Inválido</label>
             </div>
           
