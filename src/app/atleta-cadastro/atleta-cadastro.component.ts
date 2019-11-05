@@ -37,12 +37,13 @@ export class AtletaCadastroComponent implements OnInit {
       {
         this.atleta.clube = this.clubes.find(clube => clube.id == this.atleta.idClube).nome;
       }  
-
-      this.atletaService.cadastraAtleta(this.atleta);
       
-      this.reiniciaAtleta();
-
-      this.router.navigate(['/atleta']);
+      this.atletaService.cadastraAtleta(this.atleta).subscribe(dados =>
+      {
+        alert("Atleta Cadastrado com Sucesso");
+        this.reiniciaAtleta();
+        this.router.navigate(['/atleta']);
+      })        
     }
   }
 

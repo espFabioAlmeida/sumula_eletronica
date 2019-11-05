@@ -11,21 +11,23 @@ export class AtletaService
   index: any;
   constructor(private http: HttpClient) { }
 
-  cadastraAtleta(atleta:Atleta)
+  cadastraAtleta(atleta: Atleta)
   {
-    /*if(atleta.id == null)
+    console.log("Recebido no Atleta Service: ");
+    console.log(atleta);
+
+    if(atleta.id == null) 
     {
-      atleta.id = Math.random().toString(36).substring(2,15) +
-      Math.random().toString(36).substring(2,15);
-      console.log("Recebido no Atleta Service: ");
-      console.log(atleta);
-      this.atletas.push(atleta);
-      console.log(this.atletas);
-      return;
+      console.log("Metodo POST");
+      return this.http.post<String>(`/api/atleta/post`, atleta);
     }
-    this.index = this.atletas.indexOf(atleta);
-    this.atletas[this.index] = atleta;
-    */
+
+    console.log("Metodo PUT")
+    return this.http.put<String>(`/api/atleta/put/${atleta.id}`, atleta);
+
+    //this.index = this.atletas.indexOf(atleta);
+    //this.atletas[this.index] = atleta;
+    
   }
 
   getAtletas()
