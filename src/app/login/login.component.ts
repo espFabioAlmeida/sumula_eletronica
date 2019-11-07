@@ -28,16 +28,7 @@ export class LoginComponent implements OnInit
   ngOnInit() 
   {
     this.getAritros();
-    this.formulario = this.formBuilder.group(
-      {
-        usuario: [null, Validators.required],
-
-        senha: [null,
-          [Validators.required,
-          Validators.minLength(4),
-          Validators.maxLength(10)]],
-      }
-    )
+    this.iniciaFormulario();
   }
 
   onSubmit()
@@ -70,7 +61,7 @@ export class LoginComponent implements OnInit
 
   onClickLimpar()
   {
-    this.login = new Login();
+    this.iniciaFormulario();
   }
 
   validaUsuario()
@@ -122,5 +113,19 @@ export class LoginComponent implements OnInit
   verificaCampo(campo)
   {
     return !this.formulario.get(campo).valid && this.formulario.get(campo).touched;
+  }
+
+  iniciaFormulario()
+  {
+    this.formulario = this.formBuilder.group(
+      {
+        usuario: [null, Validators.required],
+
+        senha: [null,
+          [Validators.required,
+          Validators.minLength(4),
+          Validators.maxLength(10)]],
+      }
+    )
   }
 }
