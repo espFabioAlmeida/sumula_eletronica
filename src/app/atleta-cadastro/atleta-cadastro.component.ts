@@ -33,17 +33,29 @@ export class AtletaCadastroComponent implements OnInit {
       console.log(this.formulario.value);
       this.setAtleta();
 
-      if(this.atleta.idClube != "null")
+      if(this.atleta.idClube != "null" && this.atleta.idClube != "0")
       {
         this.atleta.clube = this.clubes.find(clube => clube.id == this.atleta.idClube).nome;
       }  
       
-      this.atletaService.cadastraAtleta(this.atleta).subscribe(dados =>
+      if(this.atleta.id == null)
       {
-        alert("Atleta Cadastrado com Sucesso");
-        this.reiniciaAtleta();
-        this.router.navigate(['/atleta']);
-      })        
+        this.atletaService.cadastraAtleta(this.atleta).subscribe(dados =>
+        {
+          alert("Atleta Cadastrado com Sucesso");
+          this.reiniciaAtleta();
+          this.router.navigate(['/atleta']);
+        })        
+      }
+      else
+      {
+        this.atletaService.atualizaAtleta(this.atleta).subscribe(dados =>
+        {
+          alert("Atleta Atualizado com Sucesso");
+          this.reiniciaAtleta();
+          this.router.navigate(['/atleta']);
+        }) 
+      }
     }
   }
 
@@ -112,7 +124,7 @@ export class AtletaCadastroComponent implements OnInit {
     this.atleta = new Atleta();
     this.atleta = new Atleta();
     this.atleta.clube = "Sem Clube";
-    this.atleta.idClube = "null";
+    this.atleta.idClube = "0";
   }
 
   criarFormulario()

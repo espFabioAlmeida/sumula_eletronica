@@ -16,18 +16,17 @@ export class AtletaService
     console.log("Recebido no Atleta Service: ");
     console.log(atleta);
 
-    if(atleta.id == null) 
-    {
-      console.log("Metodo POST");
-      return this.http.post<String>(`/api/atleta/post`, atleta);
-    }
+    console.log("Metodo POST");
+    return this.http.post<String>(`/api/atleta/post`, atleta); 
+  }
 
-    console.log("Metodo PUT")
-    return this.http.put<String>(`/api/atleta/put/${atleta.id}`, atleta);
-
-    //this.index = this.atletas.indexOf(atleta);
-    //this.atletas[this.index] = atleta;
+  atualizaAtleta(atleta: Atleta)
+  {
+    console.log("Recebido no Atleta Service: ");
+    console.log(atleta);
     
+    console.log("Metodo PUT")
+    return this.http.put<String>(`/api/atleta/put/${atleta.id}`, atleta);  
   }
 
   getAtletas()
