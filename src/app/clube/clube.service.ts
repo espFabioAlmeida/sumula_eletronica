@@ -13,24 +13,20 @@ export class ClubeService
 
   cadastraClube(clube: Clube)
   {
-    /*
-    if(clube.id == null)
-    {
-      clube.id = Math.random().toString(36).substring(2,15) +
-      Math.random().toString(36).substring(2,15);
-      console.log("Recebido no Service");
-      console.log(clube);
-      this.clubes.push(clube);
-      console.log(this.clubes);
-      return;
-    }
+    console.log("Recebido no Service");
+    console.log(clube);
 
-    this.index = this.clubes.indexOf(clube);
-    this.clubes[this.index] = clube;
+    console.log("Metodo POST");
+    return this.http.post<String>(`/api/clube/post`, clube); 
+  }
 
-    console.log("Clube atualizado");
-    console.log(this.index);
-    */
+  atualizaClube(clube: Clube)
+  {
+    console.log("Recebido no Service");
+    console.log(clube);
+
+    console.log("Metodo PUT");
+    return this.http.put<String>(`/api/clube/put/${clube.id}`, clube); 
   }
 
   getClubes()

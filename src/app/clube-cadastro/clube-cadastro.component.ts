@@ -22,9 +22,7 @@ export class ClubeCadastroComponent implements OnInit
 
   ngOnInit() 
   {
-    this.getClube();
-    //Teste de cep service
-    //this.cepService.cunsultaCep("89053-145").subscribe(dados => console.log(dados));   
+    this.getClube(); 
   }
 
   onSubmit()
@@ -36,10 +34,25 @@ export class ClubeCadastroComponent implements OnInit
       this.setClube();
 
       this.clube.cidade = this.endereco.localidade + "/" + this.endereco.uf;
-      this.clubeService.cadastraClube(this.clube);
-      this.clube = new Clube();
 
-      this.router.navigate(['/clube']);
+      if(this.clube.id == null)
+      {
+        this.clubeService.cadastraClube(this.clube).subscribe(dados =>
+          {
+            alert("Clube Cadastrado com Sucesso");
+            this.clube = new Clube();
+            this.router.navigate(['/clube']);
+          })  
+      }
+      else
+      {
+        this.clubeService.atualizaClube(this.clube).subscribe(dados =>
+          {
+            alert("Clube Atualizado com Sucesso");
+            this.clube = new Clube();
+            this.router.navigate(['/clube']);
+          }) 
+      }
     }
   }
 
