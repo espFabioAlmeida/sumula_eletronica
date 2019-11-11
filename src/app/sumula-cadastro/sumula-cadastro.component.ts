@@ -459,14 +459,26 @@ BUSCA OS CLUBES
 ==============================================================================*/
   getClubes()
   {
-    //this.clubes = this.clubeService.getClubes(); //Busca todos os clubes
+    this.clubeService.getClubes().subscribe(dados =>
+      {
+        this.clubes = dados;
+        console.log("Clubes recebidos do service")
+        console.log(this.clubes);
+      })
   }
 /*==============================================================================
 BUSCA OS ASSISTENTES
 ==============================================================================*/
   getAssistentes()
   {
-    this.arbitros = this.arbitroService.getArbitrosAssistentes(); //Busca somentes os assistentes
+    //this.arbitros = this.arbitroService.getArbitrosAssistentes(); //Busca somentes os assistentes
+    this.arbitroService.getArbitrosAssistentes().subscribe(dados => 
+      {
+        this.arbitros = dados;
+        console.log("Arbitros assistentes recebidos do service")
+        console.log(this.arbitros);
+      });
+
     console.log("Assistentes Recebidos")
     console.log(this.arbitros);
   }
@@ -475,13 +487,24 @@ BUSCA OS ATLETAS PELO CLUBE (FALTA IMPLEMENTAR)
 ==============================================================================*/
   getAtletasByClubes()
   {
-    //this.atletasMandante = this.atletaService.getAtletas(); //Busca todos os atletas
-    //this.atletasVisitante = this.atletaService.getAtletas();
-    //Futuramente deverá filtrar por clube escolhido
-
     //Busca os atletas filtrando por equipe
-    this.atletasMandante = this.atletaService.getAtletasByClube(this.sumula.idMandante);
-    this.atletasVisitante = this.atletaService.getAtletasByClube(this.sumula.idVisitante);  
+
+    console.log("Buscando Ateltas Mandante = " + this.sumula.idMandante
+    + " Visitante = " + this.sumula.idVisitante);
+
+    if(this.sumula.idMandante != "null")
+    {
+      this.atletaService.getAtletasByClube(this.sumula.idMandante).subscribe(dados =>
+        this.atletasMandante = dados);
+    }
+
+    if(this.sumula.idVisitante != "null")
+    {
+      this.atletaService.getAtletasByClube(this.sumula.idVisitante).subscribe(dados =>
+        this.atletasVisitante = dados);
+      }
+    //this.atletasMandante = this.atletaService.getAtletasByClube(this.sumula.idMandante);
+    //this.atletasVisitante = this.atletaService.getAtletasByClube(this.sumula.idVisitante);  
   }
 /*==============================================================================
 INSERE CARTÕES NA EQUIPE MANDANTE
