@@ -21,29 +21,26 @@ export class ArbitroService
 
   cadastraArbitro(arbitro: Arbitro)
   {
+    arbitro.categoria = this.categorias.find(categoria => 
+      categoria.id == arbitro.idCategoria).nome;
+    console.log("Recebido no Arbitro Service: ");
+    console.log(arbitro);
+
+    console.log("Metodo POST");
+    return this.http.post<String>(`/api/arbitro/post`, arbitro);  
+  }
+
+  atualizaArbitro(arbitro: Arbitro)
+  {
+    arbitro.categoria = this.categorias.find(categoria => 
+      categoria.id == arbitro.idCategoria).nome;
+
+    console.log("Recebido no Arbitro Service: ");
+    console.log(arbitro); 
     
-    /*
-    if(arbitro.id == null)
-    {
-      arbitro.id = Math.random().toString(36).substring(2,15) +
-      Math.random().toString(36).substring(2,15);
+    console.log("Metodo PUT");
 
-      //Busca o nome pelo id
-      arbitro.categoria = this.categorias.find(categoria => 
-        categoria.id == arbitro.idCategoria).nome;
-
-      console.log("Recebido no Arbitro Service: ");
-      console.log(arbitro);
-
-      this.arbitros.push(arbitro);
-      console.log(this.arbitros);
-      return;
-      
-    }
-
-    this.index = this.arbitros.indexOf(arbitro);
-    this.arbitros[this.index] = arbitro;*/
-    
+    return this.http.put<String>(`/api/arbitro/put/${arbitro.id}`, arbitro); 
   }
 
   getArbitros()

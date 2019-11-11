@@ -34,10 +34,24 @@ export class ArbitroCadastroComponent implements OnInit {
 
       this.setArbitro();
 
-      this.arbitroService.cadastraArbitro(this.arbitro);
-      this.reiniciaArbitro();
-
-      this.router.navigate(['/arbitro']);
+      if(this.arbitro.id == null)
+      {
+        this.arbitroService.cadastraArbitro(this.arbitro).subscribe(dados =>
+        {
+          alert("Árbitro Cadastrado com Sucesso");
+          this.reiniciaArbitro();
+          this.router.navigate(['/arbitro']);
+        })        
+      }
+      else
+      {
+        this.arbitroService.atualizaArbitro(this.arbitro).subscribe(dados =>
+        {
+          alert("Árbitro Atualizado com Sucesso");
+          this.reiniciaArbitro();
+          this.router.navigate(['/arbitro']);
+        }) 
+      }
     }
   }
 
