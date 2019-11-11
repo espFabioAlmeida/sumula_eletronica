@@ -1,5 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Arbitro } from '../arbitro/arbitro'
+import { HttpClient } from '@angular/common/http';
+import { Login } from './login';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +12,13 @@ export class LoginService {
 
   mostrarMenuEmitter = new EventEmitter<Arbitro>();
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+  verificarLogin(login: Login)
+  {
+    return this.http.post<Arbitro>(`/api/login`, login); 
+  }
+
 
   logarArbitro(usuario: Arbitro)
   {

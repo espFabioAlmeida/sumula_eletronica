@@ -1,5 +1,5 @@
 export class Login
 {
-    usuario: String;
+    cpf: String;
     senha: String;
 }

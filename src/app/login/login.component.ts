@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit
 
   ngOnInit() 
   {
-    this.getAritros();
+    //this.getAritros();
     this.iniciaFormulario();
   }
 
@@ -37,64 +37,33 @@ export class LoginComponent implements OnInit
     {    
       console.log("Dados de Login: ")
 
-      this.login.usuario = this.formulario.value.usuario;
+      this.login.cpf = this.formulario.value.usuario;
       this.login.senha = this.formulario.value.senha;
       
       console.log(this.login);
-      console.log(this.login.usuario);
+      console.log(this.login.cpf);
       console.log(this.login.senha);
 
-      if(this.validaUsuario())
-      {       
+      this.loginService.verificarLogin(this.login).subscribe(dados => {
+        this.arbitroLogado = dados;
         this.loginService.logarArbitro(this.arbitroLogado);
         this.login = new Login();
         this.arbitroLogado = new Arbitro();
         this.router.navigate(['/sumula']);
-        return;
-      }
+      },
+      error => {
+        alert("Dados incorretos");
+        this.login = new Login();
+        this.arbitroLogado = new Arbitro();
+        this.iniciaFormulario();
+      })
 
-      alert("Dados incorretos");
-      this.login = new Login();
-      this.arbitroLogado = new Arbitro();
     }
   }
 
   onClickLimpar()
   {
     this.iniciaFormulario();
-  }
-
-  validaUsuario()
-  {
-    this.usuarioEncontrado = false;    
-    this.arbitros.forEach(arbitro => {
-      if(arbitro.cpf == this.login.usuario)
-      {
-        if(arbitro.senha == this.login.senha)
-        {
-          console.log("Arbitro Logado: ");
-          console.log(arbitro.nome);
-          this.arbitroLogado = arbitro;
-          this.usuarioEncontrado = true;
-        }
-      }
-    });
-
-    if(this.usuarioEncontrado) return true;
-
-    return false;
-  }
-
-  getAritros()
-  {
-    this.arbitroService.getArbitros().subscribe(dados => 
-      {
-        this.arbitros = dados;
-        this.filtraArbitrosLinha();
-        console.log("Arbitros recebidos do service")
-        console.log(this.arbitros);
-      }
-      );
   }
 
   filtraArbitrosLinha()
