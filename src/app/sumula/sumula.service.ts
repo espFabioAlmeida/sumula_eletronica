@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Sumula } from './sumula'
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,7 @@ import { Sumula } from './sumula'
 export class SumulaService 
 {
   sumulas: Sumula[] = [];
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   cadastraSumula(sumula: Sumula)
   {
@@ -26,14 +27,13 @@ export class SumulaService
     console.log("Tentou Editar uma Súmula, essa operação não é válida.")
   }
 
-
   getSumulas()
   {
-    return this.sumulas;
+    return this.http.get<Sumula[]>(`/api/sumula/list`);
   }
 
   getSumulaById(id: String)
   {
-    return this.sumulas.find(sumula => sumula.id == id);
+    return this.http.get<Sumula>(`/api/sumula/${id}`);
   }
 }

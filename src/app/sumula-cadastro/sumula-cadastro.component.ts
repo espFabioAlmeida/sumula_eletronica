@@ -68,20 +68,20 @@ ON SUBIMIT
         return;
       }
       //Guarda nome do clube mandante
-      this.sumula.mandante = this.clubes.find(
-        clube => clube.id == this.sumula.idMandante).nome;    
+     /* this.sumula.mandante = this.clubes.find(
+        clube => clube.id == this.sumula.idMandante).nome;   */ 
 
       //Guarda nome do clube visitante
-      this.sumula.visitante = this.clubes.find(
-        clube => clube.id == this.sumula.idVisitante).nome;  
+      /*this.sumula.visitante = this.clubes.find(
+        clube => clube.id == this.sumula.idVisitante).nome;  */
       
       //Guarda nome do assistente1 por id
-      this.sumula.assistente1 = this.arbitros.find(
-        arbitro => arbitro.id == this.sumula.idAssistente1).nome; 
+     /* this.sumula.assistente1 = this.arbitros.find(
+        arbitro => arbitro.id == this.sumula.idAssistente1).nome; */
       
       //Guarda nome do assistente2 por id
-      this.sumula.assistente2 = this.arbitros.find(
-        arbitro => arbitro.id == this.sumula.idAssistente2).nome; 
+     /* this.sumula.assistente2 = this.arbitros.find(
+        arbitro => arbitro.id == this.sumula.idAssistente2).nome; */
       
       //Monta a escalação completa com todas as relações
       this.escalacaoMandante.relacoes = this.relacoesMandante; 
@@ -109,7 +109,7 @@ TROCA O CLUBE MANDANTE
     console.log("Trocando Local da Partida");
     console.log(idMandante.value);
     //Busca nome do estádio
-    if(this.sumula.idMandante != "null")
+  /*  if(this.sumula.idMandante != "null")
     {
       this.sumula.estadio = this.clubes.find(clube => clube.id == idMandante.value).estadio; 
       this.sumula.cidade = this.clubes.find(clube => clube.id == idMandante.value).cidade;
@@ -118,7 +118,7 @@ TROCA O CLUBE MANDANTE
     {
       this.sumula.estadio = "";
       this.sumula.cidade = "";
-    }
+    }*/
     //Falta Buscar cidade (após a implementação do CEP service)
 
     this.getAtletasByClubes(); //Busca os atletas da equipe mandante
@@ -156,7 +156,7 @@ ON CLICK - INSERIR ATLETA CLUBE MANDANTE
     //E se nenhuma tleta com o mesmo número dele está inserido nessa lista
     if(this.inserirRelacaoMandante.idAtleta != "null"
     && this.inserirRelacaoMandante.numero > 0
-    && this.inserirRelacaoMandante.gols >= 0
+    && this.inserirRelacaoMandante.gol >= 0
     && !obj)
     {
       //Busca o nome pelo seu id
@@ -211,7 +211,7 @@ ON CLICK - INSERIR ATLETA EQUIPE VISITANTE
     //E se nenhuma tleta com o mesmo número dele está inserido nessa lista
     if(this.inserirRelacaoVisitante.idAtleta != "null"
     && this.inserirRelacaoVisitante.numero > 0
-    && this.inserirRelacaoVisitante.gols >= 0
+    && this.inserirRelacaoVisitante.gol >= 0
     && !obj)
     {
       console.log("Atleta Válido");
@@ -349,13 +349,13 @@ ATUALIZA PLACAR FINAL
     this.sumula.placarMandante = 0; //Zera
     //Para cada atleta na relação incrementa a variável final
     this.relacoesMandante.forEach(relacao => { 
-    this.sumula.placarMandante += relacao.gols;
+    this.sumula.placarMandante += relacao.gol;
     });
 
     this.sumula.placarVisitante = 0; //Zera
     //Para cada atleta na relação incrementa a variável final
     this.relacoesVisitante.forEach(relacao => {
-      this.sumula.placarVisitante += relacao.gols;
+      this.sumula.placarVisitante += relacao.gol;
     })
      
   }
@@ -370,20 +370,20 @@ INICIA SÚMULA
     this.sumula.placarMandante = 0; //Placar
     this.sumula.placarVisitante = 0;
 
-    this.sumula.mandante = "Sem Clube"; //Equipes
+   /* this.sumula.mandante = "Sem Clube"; //Equipes
     this.sumula.visitante = "Sem Clube";
     this.sumula.idMandante = "null";
-    this.sumula.idVisitante = "null";
+    this.sumula.idVisitante = "null";*/
 
     this.sumula.relatorioExpulsoes = "Nada a Relatar"; //Relatórios
     this.sumula.relatorioObservacoes = "Nada a Relatar";
 
-    this.sumula.idArbitro = arbitroLogado.id; //Arbitragem
+   /* this.sumula.idArbitro = arbitroLogado.id; //Arbitragem
     this.sumula.arbitro = arbitroLogado.nome;
     this.sumula.assistente1 = "Selecionar"; 
     this.sumula.assistente2 = "Selecionar";   
     this.sumula.idAssistente1 = "null";
-    this.sumula.idAssistente2 = "null";
+    this.sumula.idAssistente2 = "null";*/
 
     this.inicializaInserirRelacaoMandante(); //Inserção de atletas
     this.inicializaInserirRelacaoVisitante();
@@ -410,7 +410,7 @@ INICIALIZA NOVO ATLETA MANDANTE
     this.inserirRelacaoMandante.ca = false;
     this.inserirRelacaoMandante.cvd = false;
     this.inserirRelacaoMandante.doisCa = false;
-    this.inserirRelacaoMandante.gols = 0;
+    this.inserirRelacaoMandante.gol = 0;
     this.inserirRelacaoMandante.numero = 0;
     this.inserirRelacaoMandante.titular = "Titular";
     this.inserirRelacaoMandante.idAtleta = "null";
@@ -425,7 +425,7 @@ INICIALIZA NOVO ATLETA VISITANTE
     this.inserirRelacaoVisitante.ca = false;
     this.inserirRelacaoVisitante.cvd = false;
     this.inserirRelacaoVisitante.doisCa = false;
-    this.inserirRelacaoVisitante.gols = 0;
+    this.inserirRelacaoVisitante.gol = 0;
     this.inserirRelacaoVisitante.numero = 0;
     this.inserirRelacaoVisitante.titular = "Titular";
     this.inserirRelacaoVisitante.idAtleta = "null";
@@ -488,7 +488,7 @@ BUSCA OS ATLETAS PELO CLUBE (FALTA IMPLEMENTAR)
   getAtletasByClubes()
   {
     //Busca os atletas filtrando por equipe
-
+/*
     console.log("Buscando Ateltas Mandante = " + this.sumula.idMandante
     + " Visitante = " + this.sumula.idVisitante);
 
@@ -502,7 +502,7 @@ BUSCA OS ATLETAS PELO CLUBE (FALTA IMPLEMENTAR)
     {
       this.atletaService.getAtletasByClube(this.sumula.idVisitante).subscribe(dados =>
         this.atletasVisitante = dados);
-      }
+      }*/
     //this.atletasMandante = this.atletaService.getAtletasByClube(this.sumula.idMandante);
     //this.atletasVisitante = this.atletaService.getAtletasByClube(this.sumula.idVisitante);  
   }
@@ -594,10 +594,12 @@ VALIDA SÚMULA
 ==============================================================================*/
   validaSumula()
   {
+    /*
     if(this.sumula.idMandante == "null") return false;
     if(this.sumula.idVisitante == "null") return false;
     if(this.sumula.idAssistente1 == "null") return false;
     if(this.sumula.idAssistente2 == "null") return false;
+    */
 
     return true;
   }

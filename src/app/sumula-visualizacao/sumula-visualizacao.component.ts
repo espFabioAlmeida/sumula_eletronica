@@ -24,14 +24,6 @@ export class SumulaVisualizacaoComponent implements OnInit
   {
     //Busca a súmula desejada
     this.getSumula();
-
-    //Busca as escalações
-    this.escalacaoMandate = this.sumula.escalacaoMandante;
-    this.escalacaoVisitante = this.sumula.escalacaoVisitante;
-
-    //Busca todas as relações
-    this.relacoesMandante = this.escalacaoMandate.relacoes;
-    this.relacoesVisitante = this.escalacaoVisitante.relacoes;
   }
 
   getSumula()
@@ -43,7 +35,42 @@ export class SumulaVisualizacaoComponent implements OnInit
     if(id != null)
     {
       console.log("Nao eh nulo");
-      this.sumula = this.sumulaService.getSumulaById(id);
+      //this.sumula = this.sumulaService.getSumulaById(id);
+      this.sumulaService.getSumulaById(id).subscribe(dados =>
+        {
+          this.sumula = dados;
+          this.sumula.substituicoesMandante = [];
+          this.sumula.substituicoesVisitante = [];
+
+          console.log("Sumula Lida")
+          console.log(this.sumula);
+
+          //Separa as substituições
+          this.sumula.substituicoes.forEach(subs => {
+            if(subs.equipeMandante) this.sumula.substituicoesMandante.push(subs);
+            else this.sumula.substituicoesVisitante.push(subs);
+          })
+
+          //Busca as escalações
+          this.escalacaoMandate = this.sumula.escalacaoMandante;
+          this.escalacaoVisitante = this.sumula.escalacaoVisitante;
+
+          //Busca todas as relações
+          this.relacoesMandante = this.escalacaoMandate.relacoes;
+          this.relacoesVisitante = this.escalacaoVisitante.relacoes;
+
+          //Calcula os gols
+          this.sumula.placarMandante = 0;
+          this.sumula.placarVisitante = 0;
+
+          this.relacoesMandante.forEach(relacao =>{
+            this.sumula.placarMandante += relacao.gol;
+          })
+
+          this.relacoesVisitante.forEach(relacao =>{
+            this.sumula.placarVisitante += relacao.gol;
+          })
+        })
       return;
     }
     console.log("Eh nulo");

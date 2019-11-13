@@ -20,7 +20,14 @@ export class SumulaComponent implements OnInit {
 
   getSumulas()
   {
-    this.sumulas = this.sumulaService.getSumulas();
+    this.sumulaService.getSumulas().subscribe(dados =>
+      {
+        this.sumulas = dados;
+
+        console.log("Sumulas")
+        console.log(this.sumulas);
+      })
+    //this.sumulas = this.sumulaService.getSumulas();
   }
 
 }

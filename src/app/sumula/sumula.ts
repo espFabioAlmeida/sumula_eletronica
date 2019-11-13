@@ -1,35 +1,25 @@
 import { Escalacao } from './escalacao';
 import { Substituicao } from './substituicao';
 import { Comissao } from './comissao';
+import { Clube } from '../clube/clube';
+import { Arbitro } from '../arbitro/arbitro';
+import { cronologia } from './cronologia';
 
 export class Sumula
 {
     id: String;
-    mandante: String;
-    visitante: String;
-    idMandante: String;
-    idVisitante: String;
+    clubeMandante: Clube;
+    clubeVisitante: Clube;
     data: Date;
     placarMandante: any;
     placarVisitante: any;
-    estadio: String;
-    cidade: String;
+    local: String;
 
-    entradaMandante: Date;
-    entradaVisitante: Date;
-    retornoMandante: Date;
-    retornoVisitante: Date;
-    inicioPrimeiroTempo: Date;
-    inicioSegundoTempo: Date;
-    fimPrimeiroTempo: Date;
-    fimSegundoTempo: Date;
+    cronologia: cronologia;
 
-    arbitro: String;
-    assistente1: String;
-    assistente2: String;
-    idArbitro: String;
-    idAssistente1: String;
-    idAssistente2: String;
+    arbitro: Arbitro;
+    assistente1: Arbitro;
+    assistente2: Arbitro;
 
     relatorioExpulsoes: String;
     relatorioObservacoes: String;
@@ -37,6 +27,7 @@ export class Sumula
     escalacaoMandante: Escalacao;
     escalacaoVisitante: Escalacao;
 
+    substituicoes: Substituicao[];
     substituicoesMandante: Substituicao[];
     substituicoesVisitante: Substituicao[];
 

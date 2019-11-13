@@ -1,5 +1,6 @@
 export class Substituicao
 {
+    id: Number;
     periodo: String;
     tempo: any;
     entra: any;
