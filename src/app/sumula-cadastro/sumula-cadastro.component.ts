@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵConsole } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm, NgModel } from '@angular/forms';
 import { ClubeService } from '../clube/clube.service';
@@ -81,31 +81,38 @@ ON SUBIMIT
         return;
       }
 
-      //Guarda nome do clube mandante
-      /*this.sumula.mandante = this.clubes.find(
-        clube => clube.id == this.sumula.idMandante).nome; */   
-
-      //Guarda nome do clube visitante
-      /*this.sumula.visitante = this.clubes.find(
-        clube => clube.id == this.sumula.idVisitante).nome;  */
-      
-      //Guarda nome do assistente1 por id
-     /* this.sumula.assistente1 = this.arbitros.find(
-        arbitro => arbitro.id == this.sumula.idAssistente1).nome; */
-      
-      //Guarda nome do assistente2 por id
-     /* this.sumula.assistente2 = this.arbitros.find(
-        arbitro => arbitro.id == this.sumula.idAssistente2).nome; */     
-      
       //Monta a escalação completa com todas as relações
       this.escalacaoMandante.relacoes = this.relacoesMandante; 
       this.escalacaoVisitante.relacoes = this.relacoesVisitante;
       
-      //Guarda tudo na classe final
-     // this.sumula.escalacaoMandante = this.escalacaoMandante; 
-     // this.sumula.escalacaoVisitante = this.escalacaoVisitante;
+      //Agrupa substituições
+      this.substituicoesMandante.forEach(subs =>{
+        subs.equipeMandante = true;
+        this.substituicoes.push(subs);
+      })
 
-      console.log("recebido no Submit");
+      this.substituicoesVisitante.forEach(subs =>{
+        subs.equipeMandante = false;
+        this.substituicoes.push(subs);
+      })
+      console.log("Substituições:")
+      console.log(this.substituicoes);
+
+      console.log("Comissao Mandante")
+      console.log(this.comissaoMandante);
+
+      console.log("Comissao Visitante")
+      console.log(this.comissaoVisitante);
+
+      console.log("Cronologia")
+      console.log(this.cronologia);
+
+      console.log("Escalacao Mandante");
+      console.log(this.escalacaoMandante);
+      console.log("Escalacao Visitante");
+      console.log(this.escalacaoVisitante);
+
+      console.log("Sumula");
       console.log(this.sumula);
 
       //this.sumulaService.cadastraSumula(this.sumula); //Salva a súmula

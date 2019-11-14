@@ -46,6 +46,7 @@
                     <p>{{sumula.local}}</p>
                 </div>
             </div>
+
         </div>
     </div>
 
@@ -110,7 +111,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="campo_cadastro">
         <p class="texto_titulo_cadastro">
             Arbitragem
@@ -325,6 +326,7 @@
 
         <button class="btn btn-success"  type="button" (click)="onClickInserirRelacaoVisitante()">Incluir</button>
     </div>
+
     <div class="campo_cadastro">
         <p class="texto_titulo_cadastro">
             Substituições da Equipe Mandante
@@ -341,7 +343,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let substituicao of sumula.substituicoesMandante">                           
+                <tr *ngFor="let substituicao of substituicoesMandante">                           
                     <td>
                         <button class="btn btn-danger" 
                         (click)="onClickExcluirSubstituicaoMandante(substituicao.entra)">X</button>
@@ -407,7 +409,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let substituicao of sumula.substituicoesVisitante">                           
+                <tr *ngFor="let substituicao of substituicoesVisitante">                           
                     <td>
                         <button class="btn btn-danger" 
                         (click)="onClickExcluirSubstituicaoVisitante(substituicao.entra)">X</button>
@@ -466,31 +468,31 @@
             <div class="col-sm-12">
                 <label for="tecnico">Técnico</label>
                 <input type="text" class="form-control" name="tecnico" placeholder="Nome - RG"
-                id="tecnico" #tecnico="ngModel" [(ngModel)]="sumula.comissaoMandante.tecnico">
+                id="tecnico" #tecnico="ngModel" [(ngModel)]="comissaoMandante.tecnico">
             </div>
 
             <div class="col-sm-12">
                 <label for="auxTecnico">Áuxiliar Técnico</label>
                 <input type="text" class="form-control" name="auxTecnico" placeholder="Nome - RG"
-                id="auxTecnico" #auxTecnico="ngModel" [(ngModel)]="sumula.comissaoMandante.auxTecnico">
+                id="auxTecnico" #auxTecnico="ngModel" [(ngModel)]="comissaoMandante.auxTecnico">
             </div>
 
             <div class="col-sm-12">
                 <label for="prepGoleiro">Preparador de Goleiro</label>
                 <input type="text" class="form-control" name="prepGoleiro" placeholder="Nome - RG"
-                id="prepGoleiro" #prepGoleiro="ngModel" [(ngModel)]="sumula.comissaoMandante.prepGoleiro">
+                id="prepGoleiro" #prepGoleiro="ngModel" [(ngModel)]="comissaoMandante.prepGoleiro">
             </div>
 
             <div class="col-sm-12">
                 <label for="medico">Médico</label>
                 <input type="text" class="form-control" name="medico" placeholder="Nome - CRM"
-                id="medico" #medico="ngModel" [(ngModel)]="sumula.comissaoMandante.medico">
+                id="medico" #medico="ngModel" [(ngModel)]="comissaoMandante.medico">
             </div>
 
             <div class="col-sm-12">
                 <label for="massagista">Massagista</label>
                 <input type="text" class="form-control" name="massagista" placeholder="Nome - RG"
-                id="massagista" #massagista="ngModel" [(ngModel)]="sumula.comissaoMandante.massagista">
+                id="massagista" #massagista="ngModel" [(ngModel)]="comissaoMandante.massagista">
             </div>
         </div>
     </div>
@@ -504,31 +506,31 @@
             <div class="col-sm-12">
                 <label for="tecnico">Técnico</label>
                 <input type="text" class="form-control" name="tecnico" placeholder="Nome - RG"
-                id="tecnico" #tecnico="ngModel" [(ngModel)]="sumula.comissaoVisitante.tecnico">
+                id="tecnico" #tecnico="ngModel" [(ngModel)]="comissaoVisitante.tecnico">
             </div>
 
             <div class="col-sm-12">
                 <label for="auxTecnico">Áuxiliar Técnico</label>
                 <input type="text" class="form-control" name="auxTecnico" placeholder="Nome - RG"
-                id="auxTecnico" #auxTecnico="ngModel" [(ngModel)]="sumula.comissaoVisitante.auxTecnico">
+                id="auxTecnico" #auxTecnico="ngModel" [(ngModel)]="comissaoVisitante.auxTecnico">
             </div>
 
             <div class="col-sm-12">
                 <label for="prepGoleiro">Preparador de Goleiro</label>
                 <input type="text" class="form-control" name="prepGoleiro" placeholder="Nome - RG"
-                id="prepGoleiro" #prepGoleiro="ngModel" [(ngModel)]="sumula.comissaoVisitante.prepGoleiro">
+                id="prepGoleiro" #prepGoleiro="ngModel" [(ngModel)]="comissaoVisitante.prepGoleiro">
             </div>
 
             <div class="col-sm-12">
                 <label for="medico">Médico</label>
                 <input type="text" class="form-control" name="medico" placeholder="Nome - CRM"
-                id="medico" #medico="ngModel" [(ngModel)]="sumula.comissaoVisitante.medico">
+                id="medico" #medico="ngModel" [(ngModel)]="comissaoVisitante.medico">
             </div>
 
             <div class="col-sm-12">
                 <label for="massagista">Massagista</label>
                 <input type="text" class="form-control" name="massagista" placeholder="Nome - RG"
-                id="massagista" #massagista="ngModel" [(ngModel)]="sumula.comissaoVisitante.massagista">
+                id="massagista" #massagista="ngModel" [(ngModel)]="comissaoVisitante.massagista">
             </div>
         </div>
     </div>
