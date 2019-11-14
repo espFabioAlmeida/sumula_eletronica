@@ -1,4 +1,4 @@
-export class cronologia
+export class Cronologia
 {
     id: number;
     entradaMandante: Date;

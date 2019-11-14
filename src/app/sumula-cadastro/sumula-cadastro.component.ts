@@ -8,13 +8,14 @@ import { SumulaService } from '../sumula/sumula.service';
 import { Clube } from '../clube/clube';
 import { Arbitro } from '../arbitro/arbitro';
 import { Atleta } from '../atleta/atleta';
-import { Sumula } from '../sumula/sumula';
 import { Escalacao } from '../sumula/escalacao';
 import { Relacao } from '../sumula/relacao';
 import { HeaderComponent } from '../header/header.component';
 import { LoginService } from '../login/login.service';
 import { Substituicao } from '../sumula/substituicao';
 import { Comissao } from '../sumula/comissao';
+import { CreateSumula } from '../sumula/createSumula';
+import { Cronologia } from '../sumula/cronologia';
 
 
 @Component({
@@ -23,11 +24,13 @@ import { Comissao } from '../sumula/comissao';
   styleUrls: ['./sumula-cadastro.component.css']
 })
 export class SumulaCadastroComponent implements OnInit {
-  sumula: Sumula = new Sumula();
+  sumula: CreateSumula = new CreateSumula();
   clubes: Clube[] = [];
   arbitros: Arbitro[] = [];
   atletasMandante: Atleta[] = [];
   atletasVisitante: Atleta[] = [];
+  placarMandante: Number = 0;
+  placarVisitante: Number = 0;
 
   escalacaoMandante: Escalacao = new Escalacao();
   escalacaoVisitante: Escalacao = new Escalacao();
@@ -36,8 +39,18 @@ export class SumulaCadastroComponent implements OnInit {
   inserirRelacaoMandante: Relacao = new Relacao();
   inserirRelacaoVisitante: Relacao = new Relacao();
 
+  substituicoes: Substituicao[] = [];
+  substituicoesMandante: Substituicao[] = [];
+  substituicoesVisitante: Substituicao[] = [];
+
   inserirSubstituicaoMandante: Substituicao = new Substituicao();
   inserirSubstituicaoVisitante: Substituicao = new Substituicao();
+
+  comissaoMandante: Comissao = new Comissao();
+  comissaoVisitante: Comissao = new Comissao();
+
+  cronologia: Cronologia = new Cronologia();
+  arbitro: Arbitro = new Arbitro();
 
 
   constructor(private router: Router, private clubeService: ClubeService,
@@ -50,9 +63,9 @@ NG ON INIT
 ==============================================================================*/
   ngOnInit() 
   {
+    this.inicializaSumula(); //Inicializa variáveis da súmula
     this.getAssistentes(); //Busca opções de assistentes
     this.getClubes(); //Busca opções de clubes
-    //this.getAtletasByClubes(); //Busca atletas por clubes (depois deverá ser removido)
     this.inicializaSumula(); //Inicializa variáveis da súmula
   }
 /*==============================================================================
@@ -67,9 +80,10 @@ ON SUBIMIT
         alert("Há campos com erros");
         return;
       }
+
       //Guarda nome do clube mandante
-     /* this.sumula.mandante = this.clubes.find(
-        clube => clube.id == this.sumula.idMandante).nome;   */ 
+      /*this.sumula.mandante = this.clubes.find(
+        clube => clube.id == this.sumula.idMandante).nome; */   
 
       //Guarda nome do clube visitante
       /*this.sumula.visitante = this.clubes.find(
@@ -81,21 +95,21 @@ ON SUBIMIT
       
       //Guarda nome do assistente2 por id
      /* this.sumula.assistente2 = this.arbitros.find(
-        arbitro => arbitro.id == this.sumula.idAssistente2).nome; */
+        arbitro => arbitro.id == this.sumula.idAssistente2).nome; */     
       
       //Monta a escalação completa com todas as relações
       this.escalacaoMandante.relacoes = this.relacoesMandante; 
       this.escalacaoVisitante.relacoes = this.relacoesVisitante;
       
       //Guarda tudo na classe final
-      this.sumula.escalacaoMandante = this.escalacaoMandante; 
-      this.sumula.escalacaoVisitante = this.escalacaoVisitante;
+     // this.sumula.escalacaoMandante = this.escalacaoMandante; 
+     // this.sumula.escalacaoVisitante = this.escalacaoVisitante;
 
       console.log("recebido no Submit");
       console.log(this.sumula);
 
-      this.sumulaService.cadastraSumula(this.sumula); //Salva a súmula
-      this.sumula = new Sumula(); //Reinicializa 
+      //this.sumulaService.cadastraSumula(this.sumula); //Salva a súmula
+      this.sumula = new CreateSumula(); //Reinicializa 
       this.inicializaSumula(); //Inicia a sumula
 
       this.router.navigate(['/sumula']); //Volta para a página inicial de súmulas
@@ -108,18 +122,16 @@ TROCA O CLUBE MANDANTE
   {
     console.log("Trocando Local da Partida");
     console.log(idMandante.value);
+
     //Busca nome do estádio
-  /*  if(this.sumula.idMandante != "null")
+    if(this.sumula.clubeMandante != "null")
     {
-      this.sumula.estadio = this.clubes.find(clube => clube.id == idMandante.value).estadio; 
-      this.sumula.cidade = this.clubes.find(clube => clube.id == idMandante.value).cidade;
+      this.sumula.local = this.clubes.find(clube => clube.id == idMandante.value).estadio; 
     }
     else 
     {
-      this.sumula.estadio = "";
-      this.sumula.cidade = "";
-    }*/
-    //Falta Buscar cidade (após a implementação do CEP service)
+      this.sumula.local = "-";
+    }
 
     this.getAtletasByClubes(); //Busca os atletas da equipe mandante
     this.inicializaInserirRelacaoMandante(); //Reinicia todos os atletas mandantes
@@ -254,9 +266,9 @@ ON CLICK - INSERIR SUBSTITUIÇÃO MANDANTE
 ==============================================================================*/
   onClickInserirSubstituicaoMandante()
   {
-    const verificaEntrou: Substituicao = this.sumula.substituicoesMandante.find
+    const verificaEntrou: Substituicao = this.substituicoesMandante.find
     (sub => sub.entra == this.inserirSubstituicaoMandante.entra);
-    const verificaSaiu: Substituicao = this.sumula.substituicoesMandante.find
+    const verificaSaiu: Substituicao = this.substituicoesMandante.find
     (sub => sub.sai == this.inserirSubstituicaoMandante.sai);
 
     console.log("Substituicao recebida");
@@ -270,10 +282,10 @@ ON CLICK - INSERIR SUBSTITUIÇÃO MANDANTE
       !verificaEntrou && !verificaSaiu)
     {
       this.inserirSubstituicaoMandante.equipeMandante = true;
-      this.sumula.substituicoesMandante.push(this.inserirSubstituicaoMandante);
+      this.substituicoesMandante.push(this.inserirSubstituicaoMandante);
       
       console.log("Subs Mandante Atualizado");
-      console.log(this.sumula.substituicoesMandante);
+      console.log(this.substituicoesMandante);
 
       this.inicializaInserirSubstituicaoMandante();
       return;
@@ -287,12 +299,12 @@ ON CLICK - EXCLUIR ATLETA DA EQUIPE MANDANTE
   onClickExcluirSubstituicaoMandante(numero: any)
   {
     const excluirSubstituicao: Substituicao = 
-      this.sumula.substituicoesMandante.find(subs => subs.entra == numero);
-    const index: number = this.sumula.substituicoesMandante.indexOf(excluirSubstituicao);
+      this.substituicoesMandante.find(subs => subs.entra == numero);
+    const index: number = this.substituicoesMandante.indexOf(excluirSubstituicao);
 
     if(index >= 0)
     {
-      this.sumula.substituicoesMandante.splice(index, 1);
+      this.substituicoesMandante.splice(index, 1);
     }
   }
 /*==============================================================================
@@ -300,9 +312,9 @@ ON CLICK - INSERIR SUBSTITUIÇÃO VISITANTE
 ==============================================================================*/
   onClickInserirSubstituicaoVisitante()
   {
-    const verificaEntrou: Substituicao = this.sumula.substituicoesVisitante.find
+    const verificaEntrou: Substituicao = this.substituicoesVisitante.find
     (sub => sub.entra == this.inserirSubstituicaoVisitante.entra);
-    const verificaSaiu: Substituicao = this.sumula.substituicoesVisitante.find
+    const verificaSaiu: Substituicao = this.substituicoesVisitante.find
     (sub => sub.sai == this.inserirSubstituicaoVisitante.sai);
 
     console.log("Substituicao recebida");
@@ -316,10 +328,10 @@ ON CLICK - INSERIR SUBSTITUIÇÃO VISITANTE
       !verificaEntrou && !verificaSaiu)
     {
       this.inserirSubstituicaoVisitante.equipeMandante = false;
-      this.sumula.substituicoesVisitante.push(this.inserirSubstituicaoVisitante);
+      this.substituicoesVisitante.push(this.inserirSubstituicaoVisitante);
       
       console.log("Subs Visitante Atualizado");
-      console.log(this.sumula.substituicoesVisitante);
+      console.log(this.substituicoesVisitante);
 
       this.inicializaInserirSubstituicaoVisitante();
       return;
@@ -333,12 +345,12 @@ ON CLICK - EXCLUIR ATLETA DA EQUIPE VISITANTE
   onClickExcluirSubstituicaoVisitante(numero: any)
   {
     const excluirSubstituicao: Substituicao = 
-      this.sumula.substituicoesVisitante.find(subs => subs.entra == numero);
-    const index: number = this.sumula.substituicoesVisitante.indexOf(excluirSubstituicao);
+      this.substituicoesVisitante.find(subs => subs.entra == numero);
+    const index: number = this.substituicoesVisitante.indexOf(excluirSubstituicao);
 
     if(index >= 0)
     {
-      this.sumula.substituicoesVisitante.splice(index, 1);
+      this.substituicoesVisitante.splice(index, 1);
     }
   } 
 /*==============================================================================
@@ -346,16 +358,16 @@ ATUALIZA PLACAR FINAL
 ==============================================================================*/
   atualizaPlacarFinal()
   {
-    this.sumula.placarMandante = 0; //Zera
+    this.placarMandante = 0; //Zera
     //Para cada atleta na relação incrementa a variável final
     this.relacoesMandante.forEach(relacao => { 
-    this.sumula.placarMandante += relacao.gol;
+    this.placarMandante += relacao.gol;
     });
 
-    this.sumula.placarVisitante = 0; //Zera
+    this.placarVisitante = 0; //Zera
     //Para cada atleta na relação incrementa a variável final
     this.relacoesVisitante.forEach(relacao => {
-      this.sumula.placarVisitante += relacao.gol;
+      this.placarVisitante += relacao.gol;
     })
      
   }
@@ -367,13 +379,15 @@ INICIA SÚMULA
     //const arbitroLogado: Arbitro = this.header.getArbitroLogado();
     const arbitroLogado: Arbitro = this.loginService.getArbitroLogado();
 
-    this.sumula.placarMandante = 0; //Placar
-    this.sumula.placarVisitante = 0;
+    this.placarMandante = 0; //Placar
+    this.placarVisitante = 0;
 
    /* this.sumula.mandante = "Sem Clube"; //Equipes
     this.sumula.visitante = "Sem Clube";
     this.sumula.idMandante = "null";
     this.sumula.idVisitante = "null";*/
+    this.sumula.clubeMandante = "null";
+    this.sumula.clubeVisitante = "null";
 
     this.sumula.relatorioExpulsoes = "Nada a Relatar"; //Relatórios
     this.sumula.relatorioObservacoes = "Nada a Relatar";
@@ -384,6 +398,12 @@ INICIA SÚMULA
     this.sumula.assistente2 = "Selecionar";   
     this.sumula.idAssistente1 = "null";
     this.sumula.idAssistente2 = "null";*/
+    this.arbitro = arbitroLogado;
+    this.sumula.arbitro = arbitroLogado.id;
+    this.sumula.assistente1 = "null";
+    this.sumula.assistente2 = "null";
+
+    this.inicializaComissoes();
 
     this.inicializaInserirRelacaoMandante(); //Inserção de atletas
     this.inicializaInserirRelacaoVisitante();
@@ -394,11 +414,11 @@ INICIA SÚMULA
     this.inicializaInserirSubstituicaoMandante(); //Inserção de Substituições
     this.inicializaInserirSubstituicaoVisitante();
 
-    this.sumula.substituicoesMandante = []; //Listas de Substituições
-    this.sumula.substituicoesVisitante = [];
+    this.substituicoesMandante = []; //Listas de Substituições
+    this.substituicoesVisitante = [];
 
-    this.sumula.comissaoMandante = new Comissao(); //Comissões Técnicas
-    this.sumula.comissaoVisitante = new Comissao();
+    this.comissaoMandante = new Comissao(); //Comissões Técnicas
+    this.comissaoVisitante = new Comissao();
   }
 /*==============================================================================
 INICIALIZA NOVO ATLETA MANDANTE
@@ -455,6 +475,25 @@ INICIALIZA NOVA SUBSTITUIÇÃO VISITANTE
     this.inserirSubstituicaoVisitante.tempo = 0;
   }
 /*==============================================================================
+INICIALIZA COMISSOES
+==============================================================================*/
+inicializaComissoes()
+{
+  this.comissaoMandante.auxTecnico = "";
+  this.comissaoMandante.id = 0;
+  this.comissaoMandante.massagista = "";
+  this.comissaoMandante.medico = "";
+  this.comissaoMandante.prepGoleiro = "";
+  this.comissaoMandante.tecnico = "";
+
+  this.comissaoVisitante.auxTecnico = "";
+  this.comissaoVisitante.id = 0;
+  this.comissaoVisitante.massagista = "";
+  this.comissaoVisitante.medico = "";
+  this.comissaoVisitante.prepGoleiro = "";
+  this.comissaoVisitante.tecnico = "";
+}
+/*==============================================================================
 BUSCA OS CLUBES
 ==============================================================================*/
   getClubes()
@@ -471,16 +510,12 @@ BUSCA OS ASSISTENTES
 ==============================================================================*/
   getAssistentes()
   {
-    //this.arbitros = this.arbitroService.getArbitrosAssistentes(); //Busca somentes os assistentes
     this.arbitroService.getArbitrosAssistentes().subscribe(dados => 
       {
         this.arbitros = dados;
         console.log("Arbitros assistentes recebidos do service")
         console.log(this.arbitros);
       });
-
-    console.log("Assistentes Recebidos")
-    console.log(this.arbitros);
   }
 /*==============================================================================
 BUSCA OS ATLETAS PELO CLUBE (FALTA IMPLEMENTAR)
@@ -488,23 +523,21 @@ BUSCA OS ATLETAS PELO CLUBE (FALTA IMPLEMENTAR)
   getAtletasByClubes()
   {
     //Busca os atletas filtrando por equipe
-/*
-    console.log("Buscando Ateltas Mandante = " + this.sumula.idMandante
-    + " Visitante = " + this.sumula.idVisitante);
 
-    if(this.sumula.idMandante != "null")
+    console.log("Buscando Ateltas Mandante = " + this.sumula.clubeMandante
+    + " Visitante = " + this.sumula.clubeVisitante);
+
+    if(this.sumula.clubeMandante != "null")
     {
-      this.atletaService.getAtletasByClube(this.sumula.idMandante).subscribe(dados =>
+      this.atletaService.getAtletasByClube(this.sumula.clubeMandante).subscribe(dados =>
         this.atletasMandante = dados);
     }
 
-    if(this.sumula.idVisitante != "null")
+    if(this.sumula.clubeVisitante != "null")
     {
-      this.atletaService.getAtletasByClube(this.sumula.idVisitante).subscribe(dados =>
+      this.atletaService.getAtletasByClube(this.sumula.clubeVisitante).subscribe(dados =>
         this.atletasVisitante = dados);
-      }*/
-    //this.atletasMandante = this.atletaService.getAtletasByClube(this.sumula.idMandante);
-    //this.atletasVisitante = this.atletaService.getAtletasByClube(this.sumula.idVisitante);  
+      }
   }
 /*==============================================================================
 INSERE CARTÕES NA EQUIPE MANDANTE
@@ -594,13 +627,12 @@ VALIDA SÚMULA
 ==============================================================================*/
   validaSumula()
   {
-    /*
-    if(this.sumula.idMandante == "null") return false;
-    if(this.sumula.idVisitante == "null") return false;
-    if(this.sumula.idAssistente1 == "null") return false;
-    if(this.sumula.idAssistente2 == "null") return false;
-    */
-
+    
+    if(this.sumula.clubeMandante == "null") return false;
+    if(this.sumula.clubeVisitante == "null") return false;
+    if(this.sumula.assistente1 == "null") return false;
+    if(this.sumula.assistente2 == "null") return false;
+    
     return true;
   }
 }

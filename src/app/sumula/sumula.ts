@@ -3,7 +3,7 @@ import { Substituicao } from './substituicao';
 import { Comissao } from './comissao';
 import { Clube } from '../clube/clube';
 import { Arbitro } from '../arbitro/arbitro';
-import { cronologia } from './cronologia';
+import { Cronologia } from './cronologia';
 
 export class Sumula
 {
@@ -15,7 +15,7 @@ export class Sumula
     placarVisitante: any;
     local: String;
 
-    cronologia: cronologia;
+    cronologia: Cronologia;
 
     arbitro: Arbitro;
     assistente1: Arbitro;

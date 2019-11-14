@@ -8,7 +8,7 @@
             <div class="form-group col-md-12">
                 <h3>
                     <label class="control-label">Resultado Final</label>
-                    {{sumula.placarMandante}} x {{sumula.placarVisitante}}
+                    {{placarMandante}} x {{placarVisitante}}
                 </h3>
             </div>
 
@@ -16,7 +16,7 @@
                 <div class="col-sm-5">
                     <label for="idMandante">Clube Mandante</label>
                     <select id="idMandante" class="form-control" id="idMandante" name="idMandante"
-                    #idMandante="ngModel" [(ngModel)]="sumula.idMandante"
+                    #idMandante="ngModel" [(ngModel)]="sumula.clubeMandante"
                     (change)="changeClubeMandante(idMandante)">
                         <option [value]=null>Selecionar</option>
                         <option *ngFor="let clube of clubes" [value]="clube.id">{{clube.nome}}</option>
@@ -26,7 +26,7 @@
                 <div class="col-sm-5">
                     <label for="idVisitante">Clube Visitante</label>
                     <select id="idVisitante" class="form-control" id="idVisitante" name="idVisitante"
-                    #idVisitante="ngModel" [(ngModel)]="sumula.idVisitante"
+                    #idVisitante="ngModel" [(ngModel)]="sumula.clubeVisitante"
                     (change)="changeClubeVisitante(idVisitante)">
                         <option [value]=null>Selecionar</option>
                         <option *ngFor="let clube of clubes" [value]="clube.id">{{clube.nome}}</option>
@@ -43,7 +43,7 @@
 
                 <div class="col-sm-6">
                     <label class="control-label">Local da Partida</label>
-                    <p>{{sumula.estadio}}</p>
+                    <p>{{sumula.local}}</p>
                 </div>
             </div>
         </div>
@@ -59,25 +59,25 @@
                 <div class="col-sm-3">
                     <label for="entradaMandante" class="control-label">Entrada Mandante</label>
                     <input type="time" time class="form-control" name="entradaMandante" 
-                    id="entradaMandante" required #entradaMandante="ngModel" [(ngModel)]="sumula.entradaMandante">
+                    id="entradaMandante" required #entradaMandante="ngModel" [(ngModel)]="cronologia.entradaMandante">
                 </div>
         
                 <div class="col-sm-3">
                     <label for="entradaVisitante" class="control-label">Entrada Visitante</label>
                     <input type="time" time class="form-control" name="entradaVisitante" 
-                    id="entradaVisitante" required #entradaVisitante="ngModel" [(ngModel)]="sumula.entradaVisitante">
+                    id="entradaVisitante" required #entradaVisitante="ngModel" [(ngModel)]="cronologia.entradaVisitante">
                 </div>
         
                 <div class="col-sm-3">
                     <label for="inicioPrimeiroTempo" class="control-label">Início do Jogo</label>
                     <input type="time" time class="form-control" name="inicioPrimeiroTempo" 
-                    id="inicioPrimeiroTempo" required #inicioPrimeiroTempo="ngModel" [(ngModel)]="sumula.inicioPrimeiroTempo">
+                    id="inicioPrimeiroTempo" required #inicioPrimeiroTempo="ngModel" [(ngModel)]="cronologia.inicioPrimeiroTempo">
                 </div>
 
                 <div class="col-sm-3">
                     <label for="fimPrimeiroTempo" class="control-label">Fim do Primeiro Tempo</label>
                     <input type="time" time class="form-control" name="fimPrimeiroTempo" 
-                    id="fimPrimeiroTempo" required #fimPrimeiroTempo="ngModel" [(ngModel)]="sumula.fimPrimeiroTempo">
+                    id="fimPrimeiroTempo" required #fimPrimeiroTempo="ngModel" [(ngModel)]="cronologia.fimPrimeiroTempo">
                 </div>
 
             </div>
@@ -87,25 +87,25 @@
                 <div class="col-sm-3">
                     <label for="retornoMandante" class="control-label">Retorno Mandante</label>
                     <input type="time" time class="form-control" name="retornoMandante" 
-                    id="retornoMandante" required #retornoMandante="ngModel" [(ngModel)]="sumula.retornoMandante">
+                    id="retornoMandante" required #retornoMandante="ngModel" [(ngModel)]="cronologia.retornoMandante">
                 </div>
         
                 <div class="col-sm-3">
                     <label for="retornoVisitante" class="control-label">Retorno Visitante</label>
                     <input type="time" time class="form-control" name="retornoVisitante" 
-                    id="retornoVisitante" required #retornoVisitante="ngModel" [(ngModel)]="sumula.retornoVisitante">
+                    id="retornoVisitante" required #retornoVisitante="ngModel" [(ngModel)]="cronologia.retornoVisitante">
                 </div>
 
                 <div class="col-sm-3">
                     <label for="inicioSegundoTempo" class="control-label">Início do Segundo Tempo</label>
                     <input type="time" time class="form-control" name="inicioSegundoTempo" 
-                    id="inicioSegundoTempo" required #inicioSegundoTempo="ngModel" [(ngModel)]="sumula.inicioSegundoTempo">
+                    id="inicioSegundoTempo" required #inicioSegundoTempo="ngModel" [(ngModel)]="cronologia.inicioSegundoTempo">
                 </div>
         
                 <div class="col-sm-3">
                     <label for="fimSegundoTempo" class="control-label">Fim do Jogo</label>
                     <input type="time" time class="form-control" name="fimSegundoTempo" 
-                    id="fimSegundoTempo" required #fimSegundoTempo="ngModel" [(ngModel)]="sumula.fimSegundoTempo">
+                    id="fimSegundoTempo" required #fimSegundoTempo="ngModel" [(ngModel)]="cronologia.fimSegundoTempo">
                 </div>
             </div>
         </div>
@@ -120,14 +120,14 @@
             <div class="form-group row">
                 <div class="col-sm-12">
                     <label class="control-label">Árbitro</label>
-                    <p>{{sumula.arbitro}}</p>
+                    <p>{{arbitro.nome}}</p>
                 </div>
             </div>
             <div class="form-group row">  
                 <div class="col-sm-6">
                     <label for="idAssistente1">Assistente 1</label>
                     <select id="idAssistente1" class="form-control" name="idAssistente1"
-                    #idAssistente1="ngModel" [(ngModel)]="sumula.idAssistente1">
+                    #idAssistente1="ngModel" [(ngModel)]="sumula.assistente1">
                         <option value=null>Selecionar</option>
                         <option *ngFor="let arbitro of arbitros" [value]="arbitro.id">{{arbitro.nome}}</option>
                     </select>
@@ -136,7 +136,7 @@
                 <div class="col-sm-6">
                     <label for="idAssistente2">Assistente 2</label>
                     <select id="idAssistente2" class="form-control" name="idAssistente2"
-                    #idAssistente2="ngModel" [(ngModel)]="sumula.idAssistente2">
+                    #idAssistente2="ngModel" [(ngModel)]="sumula.assistente2">
                         <option value=null>Selecionar</option>
                         <option *ngFor="let arbitro of arbitros" [value]="arbitro.id">{{arbitro.nome}}</option>
                     </select>
