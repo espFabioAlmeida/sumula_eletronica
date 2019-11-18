@@ -6,7 +6,7 @@ export class Cronologia
     retornoMandante: Date;
     retornoVisitante: Date;
     inicioPartida: Date;
-    inicioSegundoTempo: Date;
     reinicioParida: Date;
     fimSegundoTempo: Date;
+    fimPrimeiroTempo: Date;
 }

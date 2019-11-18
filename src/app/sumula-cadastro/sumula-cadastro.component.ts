@@ -115,13 +115,37 @@ ON SUBIMIT
       console.log("Sumula");
       console.log(this.sumula);
 
+      this.sumulaService.cadastraComissao(this.comissaoMandante).subscribe(dados =>
+      {
+        this.sumulaService.cadastraComissao(this.comissaoVisitante).subscribe(dados =>
+          {
+            this.sumulaService.cadastraCronologia(this.cronologia).subscribe(dados =>
+              {
+                alert("Ate cronologia ok")
+              },
+              dados => this.informaErroCadastro(dados)
+              )
+              
+          }, 
+          dados => this.informaErroCadastro(dados)) 
+      }, 
+      dados => this.informaErroCadastro(dados)) 
+      /*
       //this.sumulaService.cadastraSumula(this.sumula); //Salva a súmula
       this.sumula = new CreateSumula(); //Reinicializa 
       this.inicializaSumula(); //Inicia a sumula
 
       this.router.navigate(['/sumula']); //Volta para a página inicial de súmulas
+      */
     }
   }
+/*==============================================================================
+INFORMA ERRO DE CADASTRO
+==============================================================================*/
+informaErroCadastro(dados: any)
+{
+  alert("Erro ao cadastrar súmula.") 
+}
 /*==============================================================================
 TROCA O CLUBE MANDANTE
 ==============================================================================*/

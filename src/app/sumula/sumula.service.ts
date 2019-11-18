@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Sumula } from './sumula'
 import { HttpClient } from '@angular/common/http';
+import { Comissao } from './comissao';
+import { Cronologia } from './cronologia';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +27,16 @@ export class SumulaService
     }
 
     console.log("Tentou Editar uma Súmula, essa operação não é válida.")
+  }
+
+  cadastraComissao(comissao: Comissao)
+  {
+    return this.http.post<Comissao>(`/api/comissao/post`, comissao);
+  }
+
+  cadastraCronologia(cronologia: Cronologia)
+  {
+    return this.http.post<Comissao>(`/api/cronologia/post`, cronologia);
   }
 
   getSumulas()

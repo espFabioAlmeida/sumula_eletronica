@@ -63,21 +63,6 @@ export class ArbitroService
     return this.categorias.find(categoria => categoria.nome == nome).id;
   }
 
-  /*
-  getArbitrosLinha()
-  {
-    this.arbitrosLinha = [];
-
-    this.arbitros.forEach(arbitro => {
-      if(arbitro.funcao == "Arbitro")
-      {
-        this.arbitrosLinha.push(arbitro);
-      }
-    });
-
-    return this.arbitrosLinha;
-  }*/
-
   getArbitrosAssistentes()
   {
     return this.http.get<Arbitro[]>(`/api/arbitro/list/assistentes`);
