@@ -16,6 +16,8 @@ import { Substituicao } from '../sumula/substituicao';
 import { Comissao } from '../sumula/comissao';
 import { CreateSumula } from '../sumula/createSumula';
 import { Cronologia } from '../sumula/cronologia';
+import { CreateEscalacao} from '../sumula/createEscalacao';
+import { CreateRelacao } from '../sumula/createRelacao';
 
 
 @Component({
@@ -52,6 +54,8 @@ export class SumulaCadastroComponent implements OnInit {
   cronologia: Cronologia = new Cronologia();
   arbitro: Arbitro = new Arbitro();
 
+  createEscalacao: CreateEscalacao = new CreateEscalacao();
+
 
   constructor(private router: Router, private clubeService: ClubeService,
     private arbitroService: ArbitroService, private atletaService: AtletaService,
@@ -81,20 +85,13 @@ ON SUBIMIT
         return;
       }
 
+      this.createEscalacao = new CreateEscalacao();
+      this.createEscalacao.id = 0;
+
       //Monta a escalação completa com todas as relações
       this.escalacaoMandante.relacoes = this.relacoesMandante; 
       this.escalacaoVisitante.relacoes = this.relacoesVisitante;
       
-      //Agrupa substituições
-      this.substituicoesMandante.forEach(subs =>{
-        subs.equipeMandante = true;
-        this.substituicoes.push(subs);
-      })
-
-      this.substituicoesVisitante.forEach(subs =>{
-        subs.equipeMandante = false;
-        this.substituicoes.push(subs);
-      })
       console.log("Substituições:")
       console.log(this.substituicoes);
 
@@ -115,28 +112,9 @@ ON SUBIMIT
       console.log("Sumula");
       console.log(this.sumula);
 
-      this.sumulaService.cadastraComissao(this.comissaoMandante).subscribe(dados =>
-      {
-        this.sumulaService.cadastraComissao(this.comissaoVisitante).subscribe(dados =>
-          {
-            this.sumulaService.cadastraCronologia(this.cronologia).subscribe(dados =>
-              {
-                alert("Ate cronologia ok")
-              },
-              dados => this.informaErroCadastro(dados)
-              )
-              
-          }, 
-          dados => this.informaErroCadastro(dados)) 
-      }, 
-      dados => this.informaErroCadastro(dados)) 
-      /*
-      //this.sumulaService.cadastraSumula(this.sumula); //Salva a súmula
-      this.sumula = new CreateSumula(); //Reinicializa 
-      this.inicializaSumula(); //Inicia a sumula
+      //Salva a sumula
+      this.salvaSumula();
 
-      this.router.navigate(['/sumula']); //Volta para a página inicial de súmulas
-      */
     }
   }
 /*==============================================================================
@@ -145,6 +123,22 @@ INFORMA ERRO DE CADASTRO
 informaErroCadastro(dados: any)
 {
   alert("Erro ao cadastrar súmula.") 
+}
+/*==============================================================================
+CRIA A CLASSE CREATE RELACAO
+==============================================================================*/
+toCreateRelacao(relacao: Relacao, idEscalacao: String): CreateRelacao
+{
+  const createRelacao = new CreateRelacao();
+  createRelacao.id = 0;
+  createRelacao.atleta = relacao.idAtleta;
+  createRelacao.numero = relacao.numero;
+  createRelacao.gol = relacao.gol;
+  createRelacao.titular = relacao.titular;
+  createRelacao.cartoes = relacao.cartoes;
+  createRelacao.escalacao = idEscalacao;
+
+  return createRelacao;
 }
 /*==============================================================================
 TROCA O CLUBE MANDANTE
@@ -666,4 +660,88 @@ VALIDA SÚMULA
     
     return true;
   }
+/*==============================================================================
+SALVA A SUMULA NO BANCO
+==============================================================================*/
+  salvaSumula()
+  {
+    this.sumulaService.cadastraComissao(this.comissaoMandante).subscribe(dados =>
+      {
+        this.sumula.comissaoMandante = "" + dados;
+        this.sumulaService.cadastraComissao(this.comissaoVisitante).subscribe(dados =>
+          {
+            this.sumula.comissaoVisitante = "" + dados;
+            this.sumulaService.cadastraCronologia(this.cronologia).subscribe(dados =>
+              {
+                this.sumula.cronologia = "" + dados;
+                this.sumulaService.cadastraEscalacao(this.createEscalacao).subscribe(dados =>
+                {
+                  this.sumula.escalacaoMandante = "" + dados;
+                  this.sumulaService.cadastraEscalacao(this.createEscalacao).subscribe(dados =>
+                    {
+                      this.sumula.escalacaoVisitante = "" + dados;
+                      this.relacoesMandante.forEach(relacao =>
+                        {
+                          this.sumulaService.cadastraRelacao(this.toCreateRelacao(relacao, this.sumula.escalacaoMandante)).subscribe(dados =>
+                            {
+
+                            },
+                            dados => this.informaErroCadastro(dados))
+                        })
+                      
+                      this.relacoesVisitante.forEach(relacao =>
+                        {
+                          this.sumulaService.cadastraRelacao(this.toCreateRelacao(relacao, this.sumula.escalacaoVisitante)).subscribe(dados =>
+                            {
+
+                            },
+                            dados => this.informaErroCadastro(dados))                            
+                        })
+                    
+                      this.sumulaService.cadastraSumula(this.sumula).subscribe(dados =>
+                        {
+                          this.sumula.id = "" + dados;
+                          this.substituicoesMandante.forEach(sub => 
+                            {
+                              sub.equipeMandante = true;
+                              sub.sumula = this.sumula.id;
+                              this.sumulaService.cadastraSubstituicao(sub).subscribe(dados =>
+                                {
+
+                                },
+                                dados => this.informaErroCadastro(dados))
+                            })
+
+                          this.substituicoesVisitante.forEach(sub => 
+                            {
+                              sub.equipeMandante = false;
+                              sub.sumula = this.sumula.id;
+                              this.sumulaService.cadastraSubstituicao(sub).subscribe(dados =>
+                                {
+
+                                },
+                                dados => this.informaErroCadastro(dados))
+                            })
+                          
+                          this.router.navigate(['/sumula']); //Volta para a página inicial de súmulas
+                        },
+                        dados => this.informaErroCadastro(dados))  
+                    
+                      },
+                    dados => this.informaErroCadastro(dados))
+                },
+                dados => this.informaErroCadastro(dados))
+                
+              },
+              dados => this.informaErroCadastro(dados)
+              )
+              
+          }, 
+          dados => this.informaErroCadastro(dados)) 
+      }, 
+      dados => this.informaErroCadastro(dados)) 
+  }  
 }
+
+
+

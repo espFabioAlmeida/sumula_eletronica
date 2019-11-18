@@ -6,4 +6,5 @@ export class Substituicao
     entra: any;
     sai: any;
     equipeMandante: boolean;
+    sumula: String;
 }
