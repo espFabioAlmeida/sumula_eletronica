@@ -50,7 +50,7 @@ export class LoginService {
   {
     if(this.arbitroEstaLogado)
     {
-      if(this.arbitroLogado.nome == "ADMIN")
+      if(this.arbitroLogado.id == "1")
       {
         return true;
       }
