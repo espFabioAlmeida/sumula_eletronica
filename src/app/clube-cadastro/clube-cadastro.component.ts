@@ -122,7 +122,7 @@ export class ClubeCadastroComponent implements OnInit
 
   cepEncontrado()
   {
-    return !this.endereco.logradouro && this.formulario.get('cep').dirty;
+    return !this.endereco.localidade && this.formulario.get('cep').dirty;
   }
 
   criarFormulario()
