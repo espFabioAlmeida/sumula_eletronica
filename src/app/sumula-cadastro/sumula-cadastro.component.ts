@@ -85,32 +85,13 @@ ON SUBIMIT
         return;
       }
 
+      //Objeto para criar escalação no banco de dados
       this.createEscalacao = new CreateEscalacao();
       this.createEscalacao.id = 0;
 
       //Monta a escalação completa com todas as relações
       this.escalacaoMandante.relacoes = this.relacoesMandante; 
       this.escalacaoVisitante.relacoes = this.relacoesVisitante;
-      
-      console.log("Substituições:")
-      console.log(this.substituicoes);
-
-      console.log("Comissao Mandante")
-      console.log(this.comissaoMandante);
-
-      console.log("Comissao Visitante")
-      console.log(this.comissaoVisitante);
-
-      console.log("Cronologia")
-      console.log(this.cronologia);
-
-      console.log("Escalacao Mandante");
-      console.log(this.escalacaoMandante);
-      console.log("Escalacao Visitante");
-      console.log(this.escalacaoVisitante);
-
-      console.log("Sumula");
-      console.log(this.sumula);
 
       //Salva a sumula
       this.salvaSumula();
@@ -118,7 +99,7 @@ ON SUBIMIT
     }
   }
 /*==============================================================================
-INFORMA ERRO DE CADASTRO
+INFORMA ERRO DE CADASTRO DE SÚMULA
 ==============================================================================*/
 informaErroCadastro(dados: any)
 {
@@ -291,6 +272,7 @@ ON CLICK - INSERIR SUBSTITUIÇÃO MANDANTE
 ==============================================================================*/
   onClickInserirSubstituicaoMandante()
   {
+    //Verifica se já não foi inserido em entrou ou em saiu
     const verificaEntrou: Substituicao = this.substituicoesMandante.find
     (sub => sub.entra == this.inserirSubstituicaoMandante.entra);
     const verificaSaiu: Substituicao = this.substituicoesMandante.find
@@ -299,6 +281,9 @@ ON CLICK - INSERIR SUBSTITUIÇÃO MANDANTE
     console.log("Substituicao recebida");
     console.log(this.inserirSubstituicaoMandante);
 
+    //Verifica se quem entrou, saiu e o tempo são maior ou igual a 1
+    //Verifica se periodo não é nulo
+    //Verifica se entrou e saiu são diferentes e se não se repetiram
     if(this.inserirSubstituicaoMandante.entra >= 1 &&
       this.inserirSubstituicaoMandante.sai >= 1 &&
       this.inserirSubstituicaoMandante.tempo >= 1 &&
@@ -306,13 +291,13 @@ ON CLICK - INSERIR SUBSTITUIÇÃO MANDANTE
       this.inserirSubstituicaoMandante.entra != this.inserirSubstituicaoMandante.sai &&
       !verificaEntrou && !verificaSaiu)
     {
-      this.inserirSubstituicaoMandante.equipeMandante = true;
-      this.substituicoesMandante.push(this.inserirSubstituicaoMandante);
+      this.inserirSubstituicaoMandante.equipeMandante = true; //Equipe mandante
+      this.substituicoesMandante.push(this.inserirSubstituicaoMandante); //Insere
       
       console.log("Subs Mandante Atualizado");
       console.log(this.substituicoesMandante);
 
-      this.inicializaInserirSubstituicaoMandante();
+      this.inicializaInserirSubstituicaoMandante(); //Reinicia a inserção para um novo registro
       return;
     }
     console.log("Erro nas substituição")
@@ -323,13 +308,15 @@ ON CLICK - EXCLUIR ATLETA DA EQUIPE MANDANTE
 ==============================================================================*/
   onClickExcluirSubstituicaoMandante(numero: any)
   {
+    //Busca quem será excluído pelo número de quem entra
     const excluirSubstituicao: Substituicao = 
       this.substituicoesMandante.find(subs => subs.entra == numero);
+    //Busca posição no array
     const index: number = this.substituicoesMandante.indexOf(excluirSubstituicao);
 
-    if(index >= 0)
+    if(index >= 0) //Encontrado
     {
-      this.substituicoesMandante.splice(index, 1);
+      this.substituicoesMandante.splice(index, 1); 
     }
   }
 /*==============================================================================
@@ -337,6 +324,7 @@ ON CLICK - INSERIR SUBSTITUIÇÃO VISITANTE
 ==============================================================================*/
   onClickInserirSubstituicaoVisitante()
   {
+    //Verifica se já não foi cadastrado quem entrou ou saiu
     const verificaEntrou: Substituicao = this.substituicoesVisitante.find
     (sub => sub.entra == this.inserirSubstituicaoVisitante.entra);
     const verificaSaiu: Substituicao = this.substituicoesVisitante.find
@@ -345,6 +333,10 @@ ON CLICK - INSERIR SUBSTITUIÇÃO VISITANTE
     console.log("Substituicao recebida");
     console.log(this.inserirSubstituicaoVisitante);
 
+    //Verifica se quem entrou, saiu e o tempo são maior ou igual a 1
+    //Verifica se periodo não é nulo
+    //Verifica se entrou e saiu são diferentes e se não se repetiram
+
     if(this.inserirSubstituicaoVisitante.entra >= 1 &&
       this.inserirSubstituicaoVisitante.sai >= 1 &&
       this.inserirSubstituicaoVisitante.tempo >= 1 &&
@@ -352,13 +344,13 @@ ON CLICK - INSERIR SUBSTITUIÇÃO VISITANTE
       this.inserirSubstituicaoVisitante.entra != this.inserirSubstituicaoVisitante.sai &&
       !verificaEntrou && !verificaSaiu)
     {
-      this.inserirSubstituicaoVisitante.equipeMandante = false;
-      this.substituicoesVisitante.push(this.inserirSubstituicaoVisitante);
+      this.inserirSubstituicaoVisitante.equipeMandante = false; //Equipe visitante
+      this.substituicoesVisitante.push(this.inserirSubstituicaoVisitante); //Insere
       
       console.log("Subs Visitante Atualizado");
       console.log(this.substituicoesVisitante);
 
-      this.inicializaInserirSubstituicaoVisitante();
+      this.inicializaInserirSubstituicaoVisitante(); //Reinicia a inserção para um novo registro
       return;
     }
     console.log("Erro nas substituição")
@@ -369,11 +361,13 @@ ON CLICK - EXCLUIR ATLETA DA EQUIPE VISITANTE
 ==============================================================================*/
   onClickExcluirSubstituicaoVisitante(numero: any)
   {
+    //Busca substituição pelo número de quem entrou
     const excluirSubstituicao: Substituicao = 
       this.substituicoesVisitante.find(subs => subs.entra == numero);
+    //Busca a posição no array
     const index: number = this.substituicoesVisitante.indexOf(excluirSubstituicao);
 
-    if(index >= 0)
+    if(index >= 0) //Encontrado
     {
       this.substituicoesVisitante.splice(index, 1);
     }
@@ -401,29 +395,18 @@ INICIA SÚMULA
 ==============================================================================*/
   inicializaSumula()
   {
-    //const arbitroLogado: Arbitro = this.header.getArbitroLogado();
     const arbitroLogado: Arbitro = this.loginService.getArbitroLogado();
 
     this.placarMandante = 0; //Placar
     this.placarVisitante = 0;
 
-   /* this.sumula.mandante = "Sem Clube"; //Equipes
-    this.sumula.visitante = "Sem Clube";
-    this.sumula.idMandante = "null";
-    this.sumula.idVisitante = "null";*/
-    this.sumula.clubeMandante = "null";
+    this.sumula.clubeMandante = "null"; //Equipes
     this.sumula.clubeVisitante = "null";
 
     this.sumula.relatorioExpulsoes = "Nada a Relatar"; //Relatórios
     this.sumula.relatorioObservacoes = "Nada a Relatar";
 
-   /* this.sumula.idArbitro = arbitroLogado.id; //Arbitragem
-    this.sumula.arbitro = arbitroLogado.nome;
-    this.sumula.assistente1 = "Selecionar"; 
-    this.sumula.assistente2 = "Selecionar";   
-    this.sumula.idAssistente1 = "null";
-    this.sumula.idAssistente2 = "null";*/
-    this.arbitro = arbitroLogado;
+    this.arbitro = arbitroLogado; //Arbitragem
     this.sumula.arbitro = arbitroLogado.id;
     this.sumula.assistente1 = "null";
     this.sumula.assistente2 = "null";
@@ -441,9 +424,6 @@ INICIA SÚMULA
 
     this.substituicoesMandante = []; //Listas de Substituições
     this.substituicoesVisitante = [];
-
-    this.comissaoMandante = new Comissao(); //Comissões Técnicas
-    this.comissaoVisitante = new Comissao();
   }
 /*==============================================================================
 INICIALIZA NOVO ATLETA MANDANTE
