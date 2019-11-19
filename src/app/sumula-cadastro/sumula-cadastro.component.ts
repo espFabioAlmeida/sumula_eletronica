@@ -722,7 +722,7 @@ SALVA A SUMULA NO BANCO
                                 },
                                 dados => this.informaErroCadastro(dados))
                             })
-                          
+                          alert("Súmula Cadastrada com Sucesso")
                           this.router.navigate(['/sumula']); //Volta para a página inicial de súmulas
                         },
                         dados => this.informaErroCadastro(dados))  
