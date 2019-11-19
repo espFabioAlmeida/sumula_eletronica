@@ -543,7 +543,7 @@ BUSCA OS ASSISTENTES
       });
   }
 /*==============================================================================
-BUSCA OS ATLETAS PELO CLUBE (FALTA IMPLEMENTAR)
+BUSCA OS ATLETAS PELO CLUBE 
 ==============================================================================*/
   getAtletasByClubes()
   {
