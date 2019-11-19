@@ -20,6 +20,9 @@ export class SumulaVisualizacaoComponent implements OnInit
 
   versaoImpressao: Boolean = false;
 
+  dataString: String;
+  horaString: String;
+
   constructor(private route: ActivatedRoute, private router: Router, private sumulaService:SumulaService) { }
 
   ngOnInit() 
@@ -77,11 +80,21 @@ export class SumulaVisualizacaoComponent implements OnInit
           this.relacoesVisitante.forEach(relacao =>{
             this.sumula.placarVisitante += relacao.gol;
           })
+
+          this.mascaraDataHora(this.sumula.data);
         })
       return;
     }
     console.log("Eh nulo");
     alert("ERRO FATAL! Registro não encontrado")
+  }
+
+  mascaraDataHora(data: Date)
+  {
+    const toString: String = data.toString();
+
+    this.dataString = "" + toString.substring(8,10) + "/" + toString.substring(5,7) + "/" + toString.substring(0,4);
+    this.horaString = "" + toString.substring(11,13) + ":" + toString.substring(14,16);
   }
 
 }

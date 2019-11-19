@@ -30,4 +30,12 @@ export class SumulaComponent implements OnInit {
     //this.sumulas = this.sumulaService.getSumulas();
   }
 
+  mascaraDataHora(data: Date)
+  {
+    const toString: String = data.toString();
+
+    return toString.substring(8,10) + "/" + toString.substring(5,7) + "/" + toString.substring(0,4) +
+      " - " + toString.substring(11,13) + ":" + toString.substring(14,16);
+  }
+
 }

@@ -17,7 +17,7 @@
             <tr *ngFor="let sumula of sumulas">
                 <td>
                     <a routerLink="/sumula-visualizacao/{{sumula.id}}">
-                        {{sumula.data}}
+                        {{mascaraDataHora(sumula.data)}}
                     </a>
                 </td>
                 <td>{{sumula.clubeMandante.nome}}</td>
