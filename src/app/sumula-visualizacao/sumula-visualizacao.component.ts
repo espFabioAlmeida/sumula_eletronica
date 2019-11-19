@@ -18,12 +18,19 @@ export class SumulaVisualizacaoComponent implements OnInit
   relacoesMandante: Relacao[] = [];
   relacoesVisitante: Relacao[] = [];
 
+  versaoImpressao: Boolean = false;
+
   constructor(private route: ActivatedRoute, private router: Router, private sumulaService:SumulaService) { }
 
   ngOnInit() 
   {
     //Busca a súmula desejada
     this.getSumula();
+  }
+
+  trocaVersao()
+  {
+    this.versaoImpressao = !this.versaoImpressao;
   }
 
   getSumula()

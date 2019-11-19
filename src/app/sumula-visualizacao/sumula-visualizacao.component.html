@@ -1,5 +1,5 @@
 <section *ngIf="sumula.id">
-    <div class="campo_cadastro">
+    <div [ngClass]="(versaoImpressao)?'campo_cadastro_visualizacao_impressao':'campo_cadastro_visualizacao'">
         <p class="texto_titulo_cadastro">
             Dados da Partida
         </p>    
@@ -24,7 +24,7 @@
         </div>
     </div>
 
-    <div class="campo_cadastro">
+    <div [ngClass]="(versaoImpressao)?'campo_cadastro_visualizacao_impressao':'campo_cadastro_visualizacao'">
         <p class="texto_titulo_cadastro">
             Cronologia
         </p>
@@ -70,7 +70,7 @@
         </div>
     </div>
 
-    <div class="campo_cadastro">
+    <div [ngClass]="(versaoImpressao)?'campo_cadastro_visualizacao_impressao':'campo_cadastro_visualizacao'">
         <p class="texto_titulo_cadastro">
             Arbitragem
         </p>    
@@ -97,7 +97,7 @@
         </div>
     </div>
 
-    <div class="campo_cadastro">
+    <div [ngClass]="(versaoImpressao)?'campo_cadastro_visualizacao_impressao':'campo_cadastro_visualizacao'">
         <p class="texto_titulo_cadastro">
             Escalação Equipe Mandante
         </p> 
@@ -125,7 +125,7 @@
     </div>
 
 
-    <div class="campo_cadastro">
+    <div [ngClass]="(versaoImpressao)?'campo_cadastro_visualizacao_impressao':'campo_cadastro_visualizacao'">
         <p class="texto_titulo_cadastro">
             Escalação Equipe Visitante
         </p> 
@@ -152,7 +152,7 @@
         </table>
     </div>
 
-    <div class="campo_cadastro">
+    <div [ngClass]="(versaoImpressao)?'campo_cadastro_visualizacao_impressao':'campo_cadastro_visualizacao'">
         <p class="texto_titulo_cadastro">
             Substituições Equipe Mandante
         </p> 
@@ -177,7 +177,7 @@
         </table>
     </div>
 
-    <div class="campo_cadastro">
+    <div [ngClass]="(versaoImpressao)?'campo_cadastro_visualizacao_impressao':'campo_cadastro_visualizacao'">
         <p class="texto_titulo_cadastro">
             Substituições Equipe Visitante
         </p> 
@@ -202,7 +202,7 @@
         </table>
     </div>
 
-    <div class="campo_cadastro">
+    <div [ngClass]="(versaoImpressao)?'campo_cadastro_visualizacao_impressao':'campo_cadastro_visualizacao'">
         <p class="texto_titulo_cadastro">
             Comissão Técnica Equipe Mandante
         </p>
@@ -252,7 +252,7 @@
         </div>
     </div>
 
-    <div class="campo_cadastro">
+    <div [ngClass]="(versaoImpressao)?'campo_cadastro_visualizacao_impressao':'campo_cadastro_visualizacao'">
         <p class="texto_titulo_cadastro">
             Comissão Técnica Equipe Visitante
         </p>
@@ -302,7 +302,7 @@
         </div>
     </div>
 
-    <div class="campo_cadastro">
+    <div [ngClass]="(versaoImpressao)?'campo_cadastro_visualizacao_impressao':'campo_cadastro_visualizacao'">
         <p class="texto_titulo_cadastro">
             Relatórios
         </p>    
@@ -314,7 +314,7 @@
             </div>
 
             <div class="form-group col-md-12">
-                <div class="campo_cadastro">
+                <div [ngClass]="(versaoImpressao)?'campo_cadastro_visualizacao_impressao':'campo_cadastro_visualizacao'">
                     {{sumula.relatorioExpulsoes}}
                 </div>
             </div>
@@ -324,17 +324,20 @@
             </div>
 
             <div class="form-group col-md-12">
-                <div class="campo_cadastro">
+                <div [ngClass]="(versaoImpressao)?'campo_cadastro_visualizacao_impressao':'campo_cadastro_visualizacao'">
                     {{sumula.relatorioObservacoes}}
                 </div>
             </div>
         </div>
 
         <p>
-            <button class="btn btn-primary" type="button">Imprimir em PDF</button> 
+            <button class="btn btn-primary" type="button" *ngIf="!versaoImpressao" (click)="trocaVersao()">Versão para Impressão</button> 
         </p>
         <p>
-            <a class="btn btn-danger" routerLink="/sumula">Voltar</a>
+            <button class="btn btn-primary" type="button" *ngIf="versaoImpressao" (click)="trocaVersao()">Versão Normal</button> 
+        </p>
+        <p>
+            <a class="btn btn-danger" *ngIf="!versaoImpressao" routerLink="/sumula">Voltar</a>
         </p>
     </div>         
 </section>

@@ -2,3 +2,18 @@ label
 {
     font-weight: bold;
 }
+
+.campo_cadastro_visualizacao
+{
+    padding: 20px;
+    margin: auto;
+    margin-top: 20px;
+    width: 90%;
+    border: 4px solid green;
+    border-radius: 20px;
+}
+
+.campo_cadastro_visualizacao_impressao
+{
+    margin-top: 20px;
+}
