@@ -108,9 +108,12 @@ informaErroCadastro(dados: any)
 /*==============================================================================
 CRIA A CLASSE CREATE RELACAO
 ==============================================================================*/
-toCreateRelacao(relacao: Relacao, idEscalacao: String): CreateRelacao
+toCreateRelacao(relacoes: Relacao[], idEscalacao: String): CreateRelacao[]
 {
-  const createRelacao = new CreateRelacao();
+  const createRelacoes: CreateRelacao[] = [];
+
+  relacoes.forEach(relacao => {
+    const createRelacao = new CreateRelacao();
   createRelacao.id = 0;
   createRelacao.atleta = relacao.idAtleta;
   createRelacao.numero = relacao.numero;
@@ -119,7 +122,10 @@ toCreateRelacao(relacao: Relacao, idEscalacao: String): CreateRelacao
   createRelacao.cartoes = relacao.cartoes;
   createRelacao.escalacao = idEscalacao;
 
-  return createRelacao;
+  createRelacoes.push(createRelacao);
+  })
+
+  return createRelacoes;
 }
 /*==============================================================================
 TROCA O CLUBE MANDANTE
@@ -660,53 +666,48 @@ SALVA A SUMULA NO BANCO
                   this.sumulaService.cadastraEscalacao(this.createEscalacao).subscribe(dados =>
                     {
                       this.sumula.escalacaoVisitante = "" + dados;
-                      this.relacoesMandante.forEach(relacao =>
-                        {
-                          this.sumulaService.cadastraRelacao(this.toCreateRelacao(relacao, this.sumula.escalacaoMandante)).subscribe(dados =>
-                            {
+                                            
+                      this.sumulaService.cadastraRelacao(this.toCreateRelacao(this.relacoesMandante, this.sumula.escalacaoMandante)).subscribe(dados =>
+                          {
+                            this.sumulaService.cadastraRelacao(this.toCreateRelacao(this.relacoesVisitante, this.sumula.escalacaoVisitante)).subscribe(dados =>
+                              {
+                                this.sumulaService.cadastraSumula(this.sumula).subscribe(dados =>
+                                  {
+                                    this.sumula.id = "" + dados;
 
-                            },
-                            dados => this.informaErroCadastro(dados))
-                        })
-                      
-                      this.relacoesVisitante.forEach(relacao =>
-                        {
-                          this.sumulaService.cadastraRelacao(this.toCreateRelacao(relacao, this.sumula.escalacaoVisitante)).subscribe(dados =>
-                            {
+                                    this.substituicoesMandante.forEach(sub => 
+                                      {
+                                        sub.equipeMandante = true;
+                                        sub.sumula = this.sumula.id;
+                                        this.sumulaService.cadastraSubstituicao(sub).subscribe(dados =>
+                                          {
+          
+                                          },
+                                          dados => this.informaErroCadastro(dados))
+                                      })
+          
+                                    this.substituicoesVisitante.forEach(sub => 
+                                      {
+                                        sub.equipeMandante = false;
+                                        sub.sumula = this.sumula.id;
+                                        this.sumulaService.cadastraSubstituicao(sub).subscribe(dados =>
+                                          {
+          
+                                          },
+                                          dados => this.informaErroCadastro(dados))
+                                      })
+                                    alert("Súmula Cadastrada com Sucesso")
+                                    this.router.navigate(['/sumula']); //Volta para a página inicial de súmulas
+                                  },
+                                  dados => this.informaErroCadastro(dados)) 
 
-                            },
-                            dados => this.informaErroCadastro(dados))                            
-                        })
-                    
-                      this.sumulaService.cadastraSumula(this.sumula).subscribe(dados =>
-                        {
-                          this.sumula.id = "" + dados;
-                          this.substituicoesMandante.forEach(sub => 
-                            {
-                              sub.equipeMandante = true;
-                              sub.sumula = this.sumula.id;
-                              this.sumulaService.cadastraSubstituicao(sub).subscribe(dados =>
-                                {
 
-                                },
-                                dados => this.informaErroCadastro(dados))
-                            })
 
-                          this.substituicoesVisitante.forEach(sub => 
-                            {
-                              sub.equipeMandante = false;
-                              sub.sumula = this.sumula.id;
-                              this.sumulaService.cadastraSubstituicao(sub).subscribe(dados =>
-                                {
 
-                                },
-                                dados => this.informaErroCadastro(dados))
-                            })
-                          alert("Súmula Cadastrada com Sucesso")
-                          this.router.navigate(['/sumula']); //Volta para a página inicial de súmulas
-                        },
-                        dados => this.informaErroCadastro(dados))  
-                    
+                              },
+                              dados => this.informaErroCadastro(dados)) 
+                          },
+                          dados => this.informaErroCadastro(dados))                           
                       },
                     dados => this.informaErroCadastro(dados))
                 },
@@ -714,8 +715,7 @@ SALVA A SUMULA NO BANCO
                 
               },
               dados => this.informaErroCadastro(dados)
-              )
-              
+              )             
           }, 
           dados => this.informaErroCadastro(dados)) 
       }, 

@@ -36,7 +36,7 @@ export class SumulaService
     return this.http.post<Number>(`/api/escalacao/post`, createEscalacao);
   }
 
-  cadastraRelacao(createRelacao: CreateRelacao)
+  cadastraRelacao(createRelacao: CreateRelacao[])
   {
     return this.http.post<Number>(`/api/relacao/post`, createRelacao);
   }
