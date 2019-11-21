@@ -24,9 +24,9 @@ export class HeaderComponent implements OnInit {
 
   onClickSair()
   {
-    this.arbitroLogado = new Arbitro();
-    this.router.navigate(['']);
+    this.arbitroLogado = new Arbitro();  
     this.loginService.deslogarArbitro();
+    this.router.navigate(['/login']);
   }
 
 }

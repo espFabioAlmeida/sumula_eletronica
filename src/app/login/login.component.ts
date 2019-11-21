@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ArbitroService } from '../services/arbitro.service';
 import { Arbitro } from '../models/arbitro';
@@ -17,18 +17,21 @@ export class LoginComponent implements OnInit
   arbitros: Arbitro[] = [];
   login: Login = new Login();
   usuarioEncontrado: Boolean = false;
+  returnUrl: String;
 
   formulario: FormGroup
 
+
   constructor(private router: Router, private arbitroService: ArbitroService, 
+    private route: ActivatedRoute,
     private loginService: LoginService, private formBuilder: FormBuilder) 
   { 
   }
 
   ngOnInit() 
   {
-    //this.getAritros();
     this.iniciaFormulario();
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   onSubmit()
@@ -45,11 +48,14 @@ export class LoginComponent implements OnInit
       console.log(this.login.senha);
 
       this.loginService.verificarLogin(this.login).subscribe(dados => {
+        
         this.arbitroLogado = dados;
         this.loginService.logarArbitro(this.arbitroLogado);
+
         this.login = new Login();
         this.arbitroLogado = new Arbitro();
-        this.router.navigate(['/sumula']);
+
+        this.router.navigate([this.returnUrl]);
       },
       error => {
         alert("Dados incorretos");

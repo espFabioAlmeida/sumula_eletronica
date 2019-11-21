@@ -27,7 +27,7 @@ const routes: Routes = [
 { path: 'sumula-cadastro', component: SumulaCadastroComponent, canActivate: [AuthGuardService]},
 { path: 'sumula-visualizacao/:id', component: SumulaVisualizacaoComponent, canActivate: [AuthGuardService]},
 { path: 'login', component : LoginComponent },
-{ path: '', redirectTo: '/login', pathMatch: 'full'}
+{ path: '', redirectTo: '/sumula', pathMatch: 'full'}
 ];
 
 @NgModule({

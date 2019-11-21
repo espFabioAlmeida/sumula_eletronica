@@ -20,7 +20,13 @@ export class AuthGuardAdminService implements CanActivate {
       return true;
     }
 
-    this.router.navigate(['']);
+    if(this.loginService.isArbitroLogado())
+    {
+      this.router.navigate(['']);
+      return false;
+    }
+
+    this.router.navigate(['/login'], { queryParams: { returnUrl: state.url}});
 
     return false;
   }
