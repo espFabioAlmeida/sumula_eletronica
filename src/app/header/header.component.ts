@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Arbitro } from '../models/arbitro';
 import { Router } from '@angular/router';
-import { LoginService } from '../login/login.service';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-header',

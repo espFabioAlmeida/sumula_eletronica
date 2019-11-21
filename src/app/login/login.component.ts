@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ArbitroService } from '../arbitro/arbitro.service';
+import { ArbitroService } from '../services/arbitro.service';
 import { Arbitro } from '../models/arbitro';
 import { Login } from '../models/login';
-import { LoginService } from './login.service';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-login',

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SumulaService } from './sumula.service';
+import { SumulaService } from '../services/sumula.service';
 import { Sumula } from '../models/sumula'
 
 @Component({

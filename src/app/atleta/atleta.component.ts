@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Atleta } from '../models/atleta';
-import { AtletaService } from './atleta.service';
+import { AtletaService } from '../services/atleta.service';
 
 @Component({
   selector: 'app-atleta',

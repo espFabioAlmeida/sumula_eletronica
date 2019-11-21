@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { SumulaService } from '../sumula/sumula.service';
+import { SumulaService } from '../services/sumula.service';
 import { Sumula } from '../models/sumula';
 import { Escalacao } from '../models/escalacao';
 import { Relacao } from '../models/relacao';

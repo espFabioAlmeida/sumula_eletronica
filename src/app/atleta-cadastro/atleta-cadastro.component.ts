@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AtletaService } from '../atleta/atleta.service';
+import { AtletaService } from '../services/atleta.service';
 import { Atleta } from '../models/atleta';
-import { ClubeService } from '../clube/clube.service';
+import { ClubeService } from '../services/clube.service';
 import { Clube } from '../models/clube';
 
 @Component({

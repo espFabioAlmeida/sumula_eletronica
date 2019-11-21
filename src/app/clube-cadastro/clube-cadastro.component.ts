@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ClubeService } from '../clube/clube.service';
+import { ClubeService } from '../services/clube.service';
 import { Clube } from '../models/clube';
-import { CepService } from '../clube/cep.service';
+import { CepService } from '../services/cep.service';
 import { Cep } from '../models/cep';
 
 @Component({

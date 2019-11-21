@@ -1,7 +1,7 @@
 import { Component, OnInit, ɵConsole } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { ArbitroService } from '../arbitro/arbitro.service';
+import { ArbitroService } from '../services/arbitro.service';
 import { Arbitro } from '../models/arbitro';
 import { ArbitroCategoria } from '../models/arbitroCategoria';
 

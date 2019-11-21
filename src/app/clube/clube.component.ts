@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ClubeService } from './clube.service';
-import { CepService } from './cep.service';
+import { ClubeService } from '../services/clube.service';
+import { CepService } from '../services/cep.service';
 import { Cep } from '../models/cep';
 import { Clube } from '../models/clube';
 
