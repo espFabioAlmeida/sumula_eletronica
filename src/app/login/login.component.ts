@@ -5,6 +5,7 @@ import { ArbitroService } from '../services/arbitro.service';
 import { Arbitro } from '../models/arbitro';
 import { Login } from '../models/login';
 import { LoginService } from '../services/login.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -22,11 +23,13 @@ export class LoginComponent implements OnInit
 
   formulario: FormGroup
 
+  currentUserSubject: BehaviorSubject<Login>;
 
   constructor(private router: Router, private arbitroService: ArbitroService, 
     private route: ActivatedRoute,
     private loginService: LoginService, private formBuilder: FormBuilder) 
   { 
+    this.currentUserSubject = new BehaviorSubject<Login>(JSON.parse(localStorage.getItem('currentUser')));
   }
 
   ngOnInit() 
@@ -40,14 +43,11 @@ export class LoginComponent implements OnInit
     if(this.formulario.valid)
     {    
       console.log("Dados de Login: ")
+      console.log(this.login);
 
       this.login.cpf = this.formulario.value.usuario;
       this.login.senha = this.formulario.value.senha;
       
-      console.log(this.login);
-      console.log(this.login.cpf);
-      console.log(this.login.senha);
-
       this.loginService.verificarLogin(this.login).subscribe(dados => {
         
         this.loginRecebido = dados;
@@ -56,8 +56,8 @@ export class LoginComponent implements OnInit
         console.log(this.loginRecebido);
         console.log(this.loginService.getArbitroLogado());
 
-        this.login = new Login();
-        this.loginRecebido = new Login();
+        localStorage.setItem('currentUser', JSON.stringify(this.loginRecebido));
+        this.currentUserSubject.next(this.loginRecebido);
 
         this.router.navigate([this.returnUrl]);
       },
