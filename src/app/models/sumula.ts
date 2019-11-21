@@ -1,8 +1,8 @@
 import { Escalacao } from './escalacao';
 import { Substituicao } from './substituicao';
 import { Comissao } from './comissao';
-import { Clube } from '../clube/clube';
-import { Arbitro } from '../arbitro/arbitro';
+import { Clube } from './clube';
+import { Arbitro } from './arbitro';
 import { Cronologia } from './cronologia';
 
 export class Sumula

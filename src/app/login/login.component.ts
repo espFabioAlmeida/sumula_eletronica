@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ArbitroService } from '../arbitro/arbitro.service';
-import { Arbitro } from '../arbitro/arbitro';
-import { Login } from './login';
+import { Arbitro } from '../models/arbitro';
+import { Login } from '../models/login';
 import { LoginService } from './login.service';
 
 @Component({

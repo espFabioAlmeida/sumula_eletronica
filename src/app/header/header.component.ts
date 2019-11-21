@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Arbitro } from '../arbitro/arbitro';
+import { Arbitro } from '../models/arbitro';
 import { Router } from '@angular/router';
 import { LoginService } from '../login/login.service';
 

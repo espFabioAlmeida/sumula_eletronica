@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Clube } from './clube';
+import { Clube } from '../models/clube';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({

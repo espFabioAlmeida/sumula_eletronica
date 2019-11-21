@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ArbitroService } from './arbitro.service';
-import { Arbitro } from './arbitro';
+import { Arbitro } from '../models/arbitro';
 
 @Component({
   selector: 'app-arbitro',

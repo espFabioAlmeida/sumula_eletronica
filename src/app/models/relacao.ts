@@ -1,4 +1,4 @@
-import { Atleta } from '../atleta/atleta';
+import { Atleta } from './atleta';
 
 export class Relacao
 {

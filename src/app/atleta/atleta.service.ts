@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Atleta } from './atleta';
+import { Atleta } from '../models/atleta';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({

@@ -5,19 +5,19 @@ import { ClubeService } from '../clube/clube.service';
 import { ArbitroService } from '../arbitro/arbitro.service';
 import { AtletaService } from '../atleta/atleta.service';
 import { SumulaService } from '../sumula/sumula.service';
-import { Clube } from '../clube/clube';
-import { Arbitro } from '../arbitro/arbitro';
-import { Atleta } from '../atleta/atleta';
-import { Escalacao } from '../sumula/escalacao';
-import { Relacao } from '../sumula/relacao';
+import { Clube } from '../models/clube';
+import { Arbitro } from '../models/arbitro';
+import { Atleta } from '../models/atleta';
+import { Escalacao } from '../models/escalacao';
+import { Relacao } from '../models/relacao';
 import { HeaderComponent } from '../header/header.component';
 import { LoginService } from '../login/login.service';
-import { Substituicao } from '../sumula/substituicao';
-import { Comissao } from '../sumula/comissao';
-import { CreateSumula } from '../sumula/createSumula';
-import { Cronologia } from '../sumula/cronologia';
-import { CreateEscalacao} from '../sumula/createEscalacao';
-import { CreateRelacao } from '../sumula/createRelacao';
+import { Substituicao } from '../models/substituicao';
+import { Comissao } from '../models/comissao';
+import { CreateSumula } from '../models/createSumula';
+import { Cronologia } from '../models/cronologia';
+import { CreateEscalacao} from '../models/createEscalacao';
+import { CreateRelacao } from '../models/createRelacao';
 
 
 @Component({

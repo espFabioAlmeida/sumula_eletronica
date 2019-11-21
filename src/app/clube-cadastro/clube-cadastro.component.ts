@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ClubeService } from '../clube/clube.service';
-import { Clube } from '../clube/clube';
+import { Clube } from '../models/clube';
 import { CepService } from '../clube/cep.service';
-import { Cep } from '../clube/cep';
+import { Cep } from '../models/cep';
 
 @Component({
   selector: 'app-clube-cadastro',

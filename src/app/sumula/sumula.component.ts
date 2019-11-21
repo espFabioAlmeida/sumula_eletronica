@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SumulaService } from './sumula.service';
-import { Sumula } from './sumula'
+import { Sumula } from '../models/sumula'
 
 @Component({
   selector: 'app-sumula',

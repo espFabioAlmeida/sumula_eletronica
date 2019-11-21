@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Cep } from './cep';
+import { Cep } from '../models/cep';
 
 @Injectable({
   providedIn: 'root'

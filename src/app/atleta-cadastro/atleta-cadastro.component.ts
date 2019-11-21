@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AtletaService } from '../atleta/atleta.service';
-import { Atleta } from '../atleta/atleta';
+import { Atleta } from '../models/atleta';
 import { ClubeService } from '../clube/clube.service';
-import { Clube } from '../clube/clube';
+import { Clube } from '../models/clube';
 
 @Component({
   selector: 'app-atleta-cadastro',

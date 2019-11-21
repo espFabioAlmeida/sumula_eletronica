@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SumulaService } from '../sumula/sumula.service';
-import { Sumula } from '../sumula/sumula';
-import { Escalacao } from '../sumula/escalacao';
-import { Relacao } from '../sumula/relacao';
+import { Sumula } from '../models/sumula';
+import { Escalacao } from '../models/escalacao';
+import { Relacao } from '../models/relacao';
 
 @Component({
   selector: 'app-sumula-visualizacao',

@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Sumula } from './sumula'
+import { Sumula } from '../models/sumula'
 import { HttpClient } from '@angular/common/http';
-import { Comissao } from './comissao';
-import { Cronologia } from './cronologia';
-import { CreateEscalacao } from './createEscalacao';
-import { CreateRelacao } from './createRelacao';
-import { CreateSumula } from './createSumula';
-import { Substituicao } from './substituicao';
+import { Comissao } from '../models/comissao';
+import { Cronologia } from '../models/cronologia';
+import { CreateEscalacao } from '../models/createEscalacao';
+import { CreateRelacao } from '../models/createRelacao';
+import { CreateSumula } from '../models/createSumula';
+import { Substituicao } from '../models/substituicao';
 
 @Injectable({
   providedIn: 'root'

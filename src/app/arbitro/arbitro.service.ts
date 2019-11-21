@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Arbitro } from './arbitro';
-import { ArbitroCategoria } from './arbitroCategoria';
+import { Arbitro } from '../models/arbitro';
+import { ArbitroCategoria } from '../models/arbitroCategoria';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({

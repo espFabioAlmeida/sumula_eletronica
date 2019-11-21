@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ClubeService } from './clube.service';
 import { CepService } from './cep.service';
-import { Cep } from './cep';
-import { Clube } from './clube';
+import { Cep } from '../models/cep';
+import { Clube } from '../models/clube';
 
 @Component({
   selector: 'app-clube',

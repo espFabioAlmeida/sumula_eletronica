@@ -1,7 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { Arbitro } from '../arbitro/arbitro'
+import { Arbitro } from '../models/arbitro'
 import { HttpClient } from '@angular/common/http';
-import { Login } from './login';
+import { Login } from '../models/login';
 
 @Injectable({
   providedIn: 'root'
@@ -43,7 +43,6 @@ export class LoginService {
 
   isArbitroLogado()
   {
-    return this.arbitroEstaLogado;
   }
 
   isAdminLogado()
