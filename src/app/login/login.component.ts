@@ -66,19 +66,6 @@ export class LoginComponent implements OnInit
     this.iniciaFormulario();
   }
 
-  filtraArbitrosLinha()
-  {
-    const arbitrosLinha: Arbitro[] = this.arbitros;
-    this.arbitros = [];
-
-    arbitrosLinha.forEach(arbitro => {
-      if(arbitro.funcao == "Arbitro")
-      {
-        this.arbitros.push(arbitro);
-      }
-    });
-  }
-
   verificaCampo(campo)
   {
     return !this.formulario.get(campo).valid && this.formulario.get(campo).touched;
