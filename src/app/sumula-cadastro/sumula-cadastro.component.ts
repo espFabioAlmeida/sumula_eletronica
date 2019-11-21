@@ -93,8 +93,8 @@ ON SUBIMIT
       this.escalacaoMandante.relacoes = this.relacoesMandante; 
       this.escalacaoVisitante.relacoes = this.relacoesVisitante;
 
-      //Salva a sumula
-      this.salvaSumula();
+      //Salva a sumula e todos os seus componentes
+      this.cadastraSumula();
 
     }
   }
@@ -647,69 +647,138 @@ VALIDA SÚMULA
     return true;
   }
 /*==============================================================================
-SALVA A SUMULA NO BANCO
+CADASTRA SUMULA
 ==============================================================================*/
-  salvaSumula()
+  cadastraSumula()
+  {  
+    //Ponto de inicio para salvar todos os itens na ordem correta
+    this.salvaComissaoMandante();
+  }
+/*==============================================================================
+SALVA COMISSAO MANDANTE
+==============================================================================*/
+  salvaComissaoMandante()
   {
     this.sumulaService.cadastraComissao(this.comissaoMandante).subscribe(dados =>
       {
-        this.sumula.comissaoMandante = "" + dados;
-        this.sumulaService.cadastraComissao(this.comissaoVisitante).subscribe(dados =>
-          {
-            this.sumula.comissaoVisitante = "" + dados;
-            this.sumulaService.cadastraCronologia(this.cronologia).subscribe(dados =>
-              {
-                this.sumula.cronologia = "" + dados;
-                this.sumulaService.cadastraEscalacao(this.createEscalacao).subscribe(dados =>
-                {
-                  this.sumula.escalacaoMandante = "" + dados;
-                  this.sumulaService.cadastraEscalacao(this.createEscalacao).subscribe(dados =>
-                    {
-                      this.sumula.escalacaoVisitante = "" + dados;
-                                            
-                      this.sumulaService.cadastraRelacao(this.toCreateRelacao(this.relacoesMandante, this.sumula.escalacaoMandante)).subscribe(dados =>
-                          {
-                            this.sumulaService.cadastraRelacao(this.toCreateRelacao(this.relacoesVisitante, this.sumula.escalacaoVisitante)).subscribe(dados =>
-                              {
-                                this.sumulaService.cadastraSumula(this.sumula).subscribe(dados =>
-                                  {
-                                    this.sumula.id = "" + dados;
-
-                                    this.substituicoesMandante.forEach(sub =>{
-                                      sub.equipeMandante = true;
-                                      sub.sumula = this.sumula.id;
-                                    });
-
-                                    this.substituicoesVisitante.forEach(sub =>{
-                                      sub.equipeMandante = false;
-                                      sub.sumula = this.sumula.id;
-                                    });
-
-                                    this.sumulaService.cadastraSubstituicao(this.substituicoesMandante).subscribe(dados => {
-                                      this.sumulaService.cadastraSubstituicao(this.substituicoesVisitante).subscribe(dados => {
-                                        alert("Súmula Cadastrada com Sucesso")
-                                        this.router.navigate(['/sumula']); //Volta para a página inicial de súmulas
-                                      },dados => this.informaErroCadastro(dados));
-                                    },dados => this.informaErroCadastro(dados));
-                                  },
-                                  dados => this.informaErroCadastro(dados)) 
-                              },
-                              dados => this.informaErroCadastro(dados)) 
-                          },
-                          dados => this.informaErroCadastro(dados))                           
-                      },
-                    dados => this.informaErroCadastro(dados))
-                },
-                dados => this.informaErroCadastro(dados))
-                
-              },
-              dados => this.informaErroCadastro(dados)
-              )             
-          }, 
-          dados => this.informaErroCadastro(dados)) 
+        this.sumula.comissaoMandante = "" + dados;    
+        this.salvaComissaoVisitante();
       }, 
       dados => this.informaErroCadastro(dados)) 
-  }  
+  }
+/*==============================================================================
+SALVA COMISSÃO VISITNATE
+==============================================================================*/
+  salvaComissaoVisitante()
+  {
+    this.sumulaService.cadastraComissao(this.comissaoVisitante).subscribe(dados =>
+      {
+        this.sumula.comissaoVisitante = "" + dados;
+        this.salvaCronologia();             
+      }, 
+      dados => this.informaErroCadastro(dados)) 
+  }
+/*==============================================================================
+SALVA CRONOLOIGA
+==============================================================================*/
+  salvaCronologia()
+  { 
+    this.sumulaService.cadastraCronologia(this.cronologia).subscribe(dados =>
+      {
+        this.sumula.cronologia = "" + dados;
+        this.salvaEscalcaoMandante();        
+      },
+      dados => this.informaErroCadastro(dados))     
+  }
+/*==============================================================================
+SALVA ESCALAÇÃO MANDANTE
+==============================================================================*/
+  salvaEscalcaoMandante()
+  { 
+    this.sumulaService.cadastraEscalacao(this.createEscalacao).subscribe(dados =>
+      {
+        this.sumula.escalacaoMandante = "" + dados;
+        this.salvaEscalcaoVisitante();
+      },
+      dados => this.informaErroCadastro(dados))
+  }
+/*==============================================================================
+SALVA ESCALAÇÃO VISITANTE
+==============================================================================*/
+  salvaEscalcaoVisitante()
+  {    
+    this.sumulaService.cadastraEscalacao(this.createEscalacao).subscribe(dados =>
+      {
+        this.sumula.escalacaoVisitante = "" + dados; 
+        this.salvaRelacaoMandante();                                                  
+        },
+      dados => this.informaErroCadastro(dados))
+  }
+/*==============================================================================
+SALVA RELAÇÃO MANDANTE
+==============================================================================*/
+  salvaRelacaoMandante()
+  {
+    this.sumulaService.cadastraRelacao(this.toCreateRelacao(this.relacoesMandante, this.sumula.escalacaoMandante)).subscribe(dados =>
+      {
+        this.salvaRelacaoVisitante();
+      },
+      dados => this.informaErroCadastro(dados)) 
+  }
+/*==============================================================================
+SALVA RELAÇÃO VISITANTE
+==============================================================================*/
+  salvaRelacaoVisitante()
+  {
+    this.sumulaService.cadastraRelacao(this.toCreateRelacao(this.relacoesVisitante, this.sumula.escalacaoVisitante)).subscribe(dados =>
+      {
+        this.salvaSumula();
+      },
+      dados => this.informaErroCadastro(dados)) 
+  }
+  /*==============================================================================
+SALVA SUMULA
+==============================================================================*/
+  salvaSumula()
+  {
+    this.sumulaService.cadastraSumula(this.sumula).subscribe(dados =>
+      {
+        this.sumula.id = "" + dados;
+        this.salvaSubstituicaoMandante();
+      },
+      dados => this.informaErroCadastro(dados)) 
+  }
+/*==============================================================================
+SALVA SUBSTITUIÇÃO MANDANTE
+==============================================================================*/
+  salvaSubstituicaoMandante()
+  {
+    this.substituicoesMandante.forEach(sub =>{
+      sub.equipeMandante = true;
+      sub.sumula = this.sumula.id;
+    });
+
+    this.sumulaService.cadastraSubstituicao(this.substituicoesMandante).subscribe(dados => {
+      this.salvaSubstituicaoVisitante();                                   
+    },
+    dados => this.informaErroCadastro(dados));
+  }
+/*==============================================================================
+SALVA SUBSTITUIÇÃO VISITANTE
+==============================================================================*/
+  salvaSubstituicaoVisitante()
+  {
+    this.substituicoesVisitante.forEach(sub =>{
+      sub.equipeMandante = false;
+      sub.sumula = this.sumula.id;
+    });
+
+    this.sumulaService.cadastraSubstituicao(this.substituicoesVisitante).subscribe(dados => {
+      alert("Súmula Cadastrada com Sucesso")
+      this.router.navigate(['/sumula']); //Volta para a página inicial de súmulas
+    },
+    dados => this.informaErroCadastro(dados));
+  }
 }
 
 
