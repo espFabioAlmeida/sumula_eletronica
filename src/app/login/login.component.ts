@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit
   arbitroLogado: Arbitro = new Arbitro();
   arbitros: Arbitro[] = [];
   login: Login = new Login();
+  loginRecebido: Login = new Login();
   usuarioEncontrado: Boolean = false;
   returnUrl: String;
 
@@ -49,11 +50,14 @@ export class LoginComponent implements OnInit
 
       this.loginService.verificarLogin(this.login).subscribe(dados => {
         
-        this.arbitroLogado = dados;
-        this.loginService.logarArbitro(this.arbitroLogado);
+        this.loginRecebido = dados;
+        this.loginService.logarArbitro(this.loginRecebido.arbitro);
+
+        console.log(this.loginRecebido);
+        console.log(this.loginService.getArbitroLogado());
 
         this.login = new Login();
-        this.arbitroLogado = new Arbitro();
+        this.loginRecebido = new Login();
 
         this.router.navigate([this.returnUrl]);
       },

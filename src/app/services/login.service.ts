@@ -16,7 +16,7 @@ export class LoginService {
 
   verificarLogin(login: Login)
   {
-    return this.http.post<Arbitro>(`/api/login`, login); 
+    return this.http.post<Login>(`/api/login`, login); 
   }
 
 
