@@ -43,6 +43,12 @@ export class LoginService {
 
   isArbitroLogado()
   {
+    if(this.arbitroEstaLogado)
+    {
+      return true;
+    }
+    
+    return false;
   }
 
   isAdminLogado()
