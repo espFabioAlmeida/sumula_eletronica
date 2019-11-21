@@ -675,35 +675,24 @@ SALVA A SUMULA NO BANCO
                                   {
                                     this.sumula.id = "" + dados;
 
-                                    this.substituicoesMandante.forEach(sub => 
-                                      {
-                                        sub.equipeMandante = true;
-                                        sub.sumula = this.sumula.id;
-                                        this.sumulaService.cadastraSubstituicao(sub).subscribe(dados =>
-                                          {
-          
-                                          },
-                                          dados => this.informaErroCadastro(dados))
-                                      })
-          
-                                    this.substituicoesVisitante.forEach(sub => 
-                                      {
-                                        sub.equipeMandante = false;
-                                        sub.sumula = this.sumula.id;
-                                        this.sumulaService.cadastraSubstituicao(sub).subscribe(dados =>
-                                          {
-          
-                                          },
-                                          dados => this.informaErroCadastro(dados))
-                                      })
-                                    alert("Súmula Cadastrada com Sucesso")
-                                    this.router.navigate(['/sumula']); //Volta para a página inicial de súmulas
+                                    this.substituicoesMandante.forEach(sub =>{
+                                      sub.equipeMandante = true;
+                                      sub.sumula = this.sumula.id;
+                                    });
+
+                                    this.substituicoesVisitante.forEach(sub =>{
+                                      sub.equipeMandante = false;
+                                      sub.sumula = this.sumula.id;
+                                    });
+
+                                    this.sumulaService.cadastraSubstituicao(this.substituicoesMandante).subscribe(dados => {
+                                      this.sumulaService.cadastraSubstituicao(this.substituicoesVisitante).subscribe(dados => {
+                                        alert("Súmula Cadastrada com Sucesso")
+                                        this.router.navigate(['/sumula']); //Volta para a página inicial de súmulas
+                                      },dados => this.informaErroCadastro(dados));
+                                    },dados => this.informaErroCadastro(dados));
                                   },
                                   dados => this.informaErroCadastro(dados)) 
-
-
-
-
                               },
                               dados => this.informaErroCadastro(dados)) 
                           },
