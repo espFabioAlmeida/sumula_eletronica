@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpBackend } from '@angular/common/http';
 import { Cep } from '../models/cep';
 
 @Injectable({
@@ -7,7 +7,12 @@ import { Cep } from '../models/cep';
 })
 export class CepService 
 {
-  constructor(private http: HttpClient) { }
+  http: HttpClient;
+
+  constructor(private handler: HttpBackend) 
+  {   
+    this.http = new HttpClient(handler); //Cria o própio http client para contornar o JWT interceptor
+  }
 
   cunsultaCep(cep: String)
   {
