@@ -7,7 +7,7 @@ import { Login } from '../models/login';
   providedIn: 'root'
 })
 export class LoginService {
-  arbitroLogado: Arbitro = new Arbitro();
+  arbitroLogado: Login = new Login();
   arbitroEstaLogado: Boolean = false;
 
   mostrarMenuEmitter = new EventEmitter<Arbitro>();
@@ -19,26 +19,41 @@ export class LoginService {
     return this.http.post<Login>(`/api/login`, login); 
   }
 
+  loginByToken()
+  {
+    return this.http.get<Login>(`/api/login/loginByToken`); 
+  }
 
-  logarArbitro(usuario: Arbitro)
+  cancelarToken()
+  {
+    return this.http.get<boolean>(`/api/login/logoff`); 
+  }
+
+
+  logarArbitro(usuario: Login)
   {
     this.arbitroLogado = usuario;
     this.arbitroEstaLogado = true;
 
-    this.mostrarMenuEmitter.emit(this.arbitroLogado);
+    this.mostrarMenuEmitter.emit(this.arbitroLogado.arbitro);
   }
 
   deslogarArbitro()
   {
-    this.arbitroLogado = new Arbitro();
+    this.arbitroLogado = new Login();
     this.arbitroEstaLogado = false;
 
-    this.mostrarMenuEmitter.emit(this.arbitroLogado);
+    this.mostrarMenuEmitter.emit(this.arbitroLogado.arbitro);
+  }
+
+  getLogin()
+  {
+    return this.arbitroLogado;
   }
 
   getArbitroLogado()
   {
-    return this.arbitroLogado;
+    return this.arbitroLogado.arbitro;
   }
 
   isArbitroLogado()
@@ -55,7 +70,7 @@ export class LoginService {
   {
     if(this.arbitroEstaLogado)
     {
-      if(this.arbitroLogado.id == "1")
+      if(this.arbitroLogado.arbitro.id == "1")
       {
         return true;
       }

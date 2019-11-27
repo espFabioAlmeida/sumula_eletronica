@@ -16,17 +16,22 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() 
   { 
-    this.loginService.mostrarMenuEmitter.subscribe(
-      mostrar => this.arbitroLogado = mostrar
-    );
+    this.loginService.mostrarMenuEmitter.subscribe(mostrar =>{
+      
+      if(mostrar != null) this.arbitroLogado = mostrar;
+      else this.arbitroLogado = new Arbitro();
+    });
   }
 
 
   onClickSair()
-  {
-    this.arbitroLogado = new Arbitro();  
-    this.loginService.deslogarArbitro();
-    this.router.navigate(['/login']);
+  {      
+    this.loginService.cancelarToken().subscribe(dados => {      
+      localStorage.removeItem('currentUser'); 
+      this.loginService.deslogarArbitro();
+      this.arbitroLogado = new Arbitro(); 
+      this.router.navigate(['/login']);
+    });
   }
 
 }

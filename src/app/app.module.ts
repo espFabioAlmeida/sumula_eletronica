@@ -10,12 +10,14 @@ import { ArbitroCadastroComponent } from './arbitro-cadastro/arbitro-cadastro.co
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ClubeCadastroComponent } from './clube-cadastro/clube-cadastro.component';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule, HttpClient, HttpHandler } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HttpHandler, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AtletaCadastroComponent } from './atleta-cadastro/atleta-cadastro.component';
 import { SumulaCadastroComponent } from './sumula-cadastro/sumula-cadastro.component';
 import { SumulaVisualizacaoComponent } from './sumula-visualizacao/sumula-visualizacao.component';
 import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './header/header.component';
+import { JwtInterceptor } from './interceptors/jwt.interceptor';
+import { ErrorInterceptor } from './interceptors/error.interceptor';
 
 
 @NgModule({
@@ -40,7 +42,10 @@ import { HeaderComponent } from './header/header.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

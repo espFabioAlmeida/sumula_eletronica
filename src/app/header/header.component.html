@@ -12,7 +12,7 @@
                 <a class="nav-item nav-link" routerLink="/clube" *ngIf="arbitroLogado.id == '1'">Cadastro Clubes</a>
                 <a class="nav-item nav-link" routerLink="/atleta" *ngIf="arbitroLogado.id == '1'">Cadastro Atletas</a>
                 <a class="nav-item nav-link" routerLink="/sumula" *ngIf="arbitroLogado.id">Cadastro Súmula Eletrônica</a>              
-                <button class="btn btn-danger" type="button"(click)="onClickSair()" *ngIf="arbitroLogado.nome">  
+                <button class="btn btn-danger" type="button"(click)="onClickSair()" *ngIf="arbitroLogado.id >= 1">  
                     Sair de {{arbitroLogado.nome}} 
                 </button>              
             </div>      

@@ -29,7 +29,31 @@ export class LoginComponent implements OnInit
     private route: ActivatedRoute,
     private loginService: LoginService, private formBuilder: FormBuilder) 
   { 
+    //Busca as informações do token no navegador
     this.currentUserSubject = new BehaviorSubject<Login>(JSON.parse(localStorage.getItem('currentUser')));
+
+    if(this.currentUserSubject.value != null) //Existe um token no navegador
+    {
+      this.loginService.logarArbitro(this.currentUserSubject.value); //Seta informações no service
+
+      this.loginService.loginByToken().subscribe(dados =>{ //Solicita ao rest login por token
+
+        this.loginRecebido = dados;
+        this.loginService.logarArbitro(this.loginRecebido);
+
+        console.log(this.loginRecebido);
+        console.log(this.loginService.getArbitroLogado());
+
+        localStorage.setItem('currentUser', JSON.stringify(this.loginRecebido));
+        this.currentUserSubject.next(this.loginRecebido);
+
+        this.router.navigate([this.returnUrl]);
+      }, 
+      error => { //Token recusado
+        console.log("Token recusado");
+        localStorage.removeItem('currentUser'); //remove do navegador, pois não serve mais
+      });
+    }
   }
 
   ngOnInit() 
@@ -51,7 +75,7 @@ export class LoginComponent implements OnInit
       this.loginService.verificarLogin(this.login).subscribe(dados => {
         
         this.loginRecebido = dados;
-        this.loginService.logarArbitro(this.loginRecebido.arbitro);
+        this.loginService.logarArbitro(this.loginRecebido);
 
         console.log(this.loginRecebido);
         console.log(this.loginService.getArbitroLogado());
