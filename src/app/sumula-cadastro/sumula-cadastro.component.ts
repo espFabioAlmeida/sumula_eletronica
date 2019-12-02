@@ -18,6 +18,8 @@ import { CreateSumula } from '../models/createSumula';
 import { Cronologia } from '../models/cronologia';
 import { CreateEscalacao} from '../models/createEscalacao';
 import { CreateRelacao } from '../models/createRelacao';
+import { Cep } from '../models/cep';
+import { CepService } from '../services/cep.service';
 
 
 @Component({
@@ -33,6 +35,7 @@ export class SumulaCadastroComponent implements OnInit {
   atletasVisitante: Atleta[] = [];
   placarMandante: Number = 0;
   placarVisitante: Number = 0;
+  endereco: Cep = new Cep();
 
   escalacaoMandante: Escalacao = new Escalacao();
   escalacaoVisitante: Escalacao = new Escalacao();
@@ -60,7 +63,7 @@ export class SumulaCadastroComponent implements OnInit {
   constructor(private router: Router, private clubeService: ClubeService,
     private arbitroService: ArbitroService, private atletaService: AtletaService,
     private sumulaService: SumulaService, private header: HeaderComponent,
-    private loginService: LoginService) { }
+    private loginService: LoginService, private cepService: CepService) { }
 
 /*==============================================================================
 NG ON INIT
@@ -138,11 +141,14 @@ TROCA O CLUBE MANDANTE
     //Busca nome do estádio
     if(this.sumula.clubeMandante != "null")
     {
-      this.sumula.local = this.clubes.find(clube => clube.id == idMandante.value).estadio; 
+      let clube: Clube;
+      clube = this.clubes.find(clube => clube.id == idMandante.value);
+      this.sumula.local = clube.estadio; 
+      this.buscaCep(clube);
     }
     else 
     {
-      this.sumula.local = "-";
+      this.sumula.local = "";
     }
 
     this.getAtletasByClubes(); //Busca os atletas da equipe mandante
@@ -549,6 +555,15 @@ BUSCA OS ATLETAS PELO CLUBE
       this.atletaService.getAtletasByClube(this.sumula.clubeVisitante).subscribe(dados =>
         this.atletasVisitante = dados);
       }
+  }
+/*==============================================================================
+BUSCA CIDADE DA PARTIDA
+==============================================================================*/
+  buscaCep(clube: Clube)
+  {
+    this.endereco = new Cep();
+      this.cepService.cunsultaCep(clube.cep).subscribe(dados => this.endereco = dados); 
+      return;
   }
 /*==============================================================================
 INSERE CARTÕES NA EQUIPE MANDANTE

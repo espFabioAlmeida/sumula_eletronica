@@ -4,6 +4,8 @@ import { SumulaService } from '../services/sumula.service';
 import { Sumula } from '../models/sumula';
 import { Escalacao } from '../models/escalacao';
 import { Relacao } from '../models/relacao';
+import { Cep } from '../models/cep';
+import { CepService } from '../services/cep.service';
 
 @Component({
   selector: 'app-sumula-visualizacao',
@@ -20,10 +22,13 @@ export class SumulaVisualizacaoComponent implements OnInit
 
   versaoImpressao: Boolean = false;
 
+  endereco: Cep = new Cep();
+
   dataString: String;
   horaString: String;
 
-  constructor(private route: ActivatedRoute, private router: Router, private sumulaService:SumulaService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private sumulaService:SumulaService,
+    private cepService: CepService) { }
 
   ngOnInit() 
   {
@@ -82,11 +87,20 @@ export class SumulaVisualizacaoComponent implements OnInit
           })
 
           this.mascaraDataHora(this.sumula.data);
+
+          this.buscaCep(); //Busca local da partida
         })
       return;
     }
     console.log("Eh nulo");
     alert("ERRO FATAL! Registro não encontrado")
+  }
+
+  buscaCep()
+  {
+    this.endereco = new Cep();
+      this.cepService.cunsultaCep(this.sumula.clubeMandante.cep).subscribe(dados => this.endereco = dados); 
+      return;
   }
 
   mascaraDataHora(data: Date)
