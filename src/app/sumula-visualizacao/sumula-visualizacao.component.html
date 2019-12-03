@@ -102,26 +102,28 @@
             Escalação Equipe Mandante
         </p> 
 
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">Número</th>
-                    <th scope="col">Atleta</th>
-                    <th scope="col">T/R</th>
-                    <th scope="col">Gols</th>
-                    <th scope="col">Cartões</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let relacao of relacoesMandante">                           
-                    <td>{{relacao.numero}}</td>
-                    <td>{{relacao.atleta.nome}}</td>
-                    <td>{{relacao.titular}}</td>
-                    <td>{{relacao.gol}}</td>
-                    <td>{{relacao.cartoes}}
-                </tr>
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Número</th>
+                        <th scope="col">Atleta</th>
+                        <th scope="col">T/R</th>
+                        <th scope="col">Gols</th>
+                        <th scope="col">Cartões</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let relacao of relacoesMandante">                           
+                        <td>{{relacao.numero}}</td>
+                        <td>{{relacao.atleta.nome}}</td>
+                        <td>{{relacao.titular}}</td>
+                        <td>{{relacao.gol}}</td>
+                        <td>{{relacao.cartoes}}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
 
@@ -130,26 +132,28 @@
             Escalação Equipe Visitante
         </p> 
 
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">Número</th>
-                    <th scope="col">Atleta</th>
-                    <th scope="col">T/R</th>
-                    <th scope="col">Gols</th>
-                    <th scope="col">Cartões</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let relacao of relacoesVisitante">                           
-                    <td>{{relacao.numero}}</td>
-                    <td>{{relacao.atleta.nome}}</td>
-                    <td>{{relacao.titular}}</td>
-                    <td>{{relacao.gol}}</td>
-                    <td>{{relacao.cartoes}}
-                </tr>
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Número</th>
+                        <th scope="col">Atleta</th>
+                        <th scope="col">T/R</th>
+                        <th scope="col">Gols</th>
+                        <th scope="col">Cartões</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let relacao of relacoesVisitante">                           
+                        <td>{{relacao.numero}}</td>
+                        <td>{{relacao.atleta.nome}}</td>
+                        <td>{{relacao.titular}}</td>
+                        <td>{{relacao.gol}}</td>
+                        <td>{{relacao.cartoes}}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <div [ngClass]="(versaoImpressao)?'campo_cadastro_visualizacao_impressao':'campo_cadastro_visualizacao'">
@@ -157,24 +161,26 @@
             Substituições Equipe Mandante
         </p> 
 
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">Período</th>
-                    <th scope="col">Tempo</th>
-                    <th scope="col">Entrou</th>
-                    <th scope="col">Saiu</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let subs of sumula.substituicoesMandante">                           
-                    <td>{{subs.periodo}}</td>
-                    <td>{{subs.tempo}}</td>
-                    <td>{{subs.entra}}</td>
-                    <td>{{subs.sai}}</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Período</th>
+                        <th scope="col">Tempo</th>
+                        <th scope="col">Entrou</th>
+                        <th scope="col">Saiu</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let subs of sumula.substituicoesMandante">                           
+                        <td>{{subs.periodo}}</td>
+                        <td>{{subs.tempo}}</td>
+                        <td>{{subs.entra}}</td>
+                        <td>{{subs.sai}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <div [ngClass]="(versaoImpressao)?'campo_cadastro_visualizacao_impressao':'campo_cadastro_visualizacao'">
@@ -182,24 +188,26 @@
             Substituições Equipe Visitante
         </p> 
 
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">Período</th>
-                    <th scope="col">Tempo</th>
-                    <th scope="col">Entrou</th>
-                    <th scope="col">Saiu</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let subs of sumula.substituicoesVisitante">                           
-                    <td>{{subs.periodo}}</td>
-                    <td>{{subs.tempo}}</td>
-                    <td>{{subs.entra}}</td>
-                    <td>{{subs.sai}}</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Período</th>
+                        <th scope="col">Tempo</th>
+                        <th scope="col">Entrou</th>
+                        <th scope="col">Saiu</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let subs of sumula.substituicoesVisitante">                           
+                        <td>{{subs.periodo}}</td>
+                        <td>{{subs.tempo}}</td>
+                        <td>{{subs.entra}}</td>
+                        <td>{{subs.sai}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <div [ngClass]="(versaoImpressao)?'campo_cadastro_visualizacao_impressao':'campo_cadastro_visualizacao'">

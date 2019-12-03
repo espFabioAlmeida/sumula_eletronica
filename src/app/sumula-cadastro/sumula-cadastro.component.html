@@ -151,31 +151,33 @@
             Escalação Equipe Mandante
         </p> 
 
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Número</th>
-                    <th scope="col">Atleta</th>
-                    <th scope="col">T/R</th>
-                    <th scope="col">Gols</th>
-                    <th scope="col">Cartões</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let relacao of relacoesMandante">                           
-                    <td>
-                        <button class="btn btn-danger" 
-                        (click)="onClickExcluirRelacaoMandante(relacao.numero)">X</button>
-                    </td>
-                    <td>{{relacao.numero}}</td>
-                    <td>{{relacao.nome}}</td>
-                    <td>{{relacao.titular}}</td>
-                    <td>{{relacao.gol}}</td>
-                    <td>{{relacao.cartoes}}
-                </tr>
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Número</th>
+                        <th scope="col">Atleta</th>
+                        <th scope="col">T/R</th>
+                        <th scope="col">Gols</th>
+                        <th scope="col">Cartões</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let relacao of relacoesMandante">                           
+                        <td>
+                            <button class="btn btn-danger" 
+                            (click)="onClickExcluirRelacaoMandante(relacao.numero)">X</button>
+                        </td>
+                        <td>{{relacao.numero}}</td>
+                        <td>{{relacao.nome}}</td>
+                        <td>{{relacao.titular}}</td>
+                        <td>{{relacao.gol}}</td>
+                        <td>{{relacao.cartoes}}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
         <p class="texto_titulo_cadastro">
             Incluir Atleta na Equipe Mandante
@@ -241,32 +243,33 @@
         <p class="texto_titulo_cadastro">
             Escalação Equipe Visitante
         </p> 
-
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Número</th>
-                    <th scope="col">Atleta</th>
-                    <th scope="col">T/R</th>
-                    <th scope="col">Gols</th>
-                    <th scope="col">Cartões</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let relacao of relacoesVisitante">                           
-                    <td>
-                        <button class="btn btn-danger" 
-                        (click)="onClickExcluirRelacaoVisitante(relacao.numero)">X</button>
-                    </td>
-                    <td>{{relacao.numero}}</td>
-                    <td>{{relacao.nome}}</td>
-                    <td>{{relacao.titular}}</td>
-                    <td>{{relacao.gol}}</td>
-                    <td>{{relacao.cartoes}}
-                </tr>
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Número</th>
+                        <th scope="col">Atleta</th>
+                        <th scope="col">T/R</th>
+                        <th scope="col">Gols</th>
+                        <th scope="col">Cartões</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let relacao of relacoesVisitante">                           
+                        <td>
+                            <button class="btn btn-danger" 
+                            (click)="onClickExcluirRelacaoVisitante(relacao.numero)">X</button>
+                        </td>
+                        <td>{{relacao.numero}}</td>
+                        <td>{{relacao.nome}}</td>
+                        <td>{{relacao.titular}}</td>
+                        <td>{{relacao.gol}}</td>
+                        <td>{{relacao.cartoes}}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
         <p class="texto_titulo_cadastro">
             Incluir Atleta na Equipe Visitante
@@ -331,30 +334,31 @@
         <p class="texto_titulo_cadastro">
             Substituições da Equipe Mandante
         </p> 
-
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Período</th>
-                    <th scope="col">Tempo</th>
-                    <th scope="col">Entrou</th>
-                    <th scope="col">Saiu</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let substituicao of substituicoesMandante">                           
-                    <td>
-                        <button class="btn btn-danger" 
-                        (click)="onClickExcluirSubstituicaoMandante(substituicao.entra)">X</button>
-                    </td>
-                    <td>{{substituicao.periodo}}</td>
-                    <td>{{substituicao.tempo}}</td>
-                    <td>{{substituicao.entra}}</td>
-                    <td>{{substituicao.sai}}</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Período</th>
+                        <th scope="col">Tempo</th>
+                        <th scope="col">Entrou</th>
+                        <th scope="col">Saiu</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let substituicao of substituicoesMandante">                           
+                        <td>
+                            <button class="btn btn-danger" 
+                            (click)="onClickExcluirSubstituicaoMandante(substituicao.entra)">X</button>
+                        </td>
+                        <td>{{substituicao.periodo}}</td>
+                        <td>{{substituicao.tempo}}</td>
+                        <td>{{substituicao.entra}}</td>
+                        <td>{{substituicao.sai}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
         <p class="texto_titulo_cadastro">
             Incluir Substituição na Equipe Mandante
@@ -398,29 +402,31 @@
             Substituições da Equipe Visitante
         </p> 
 
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Período</th>
-                    <th scope="col">Tempo</th>
-                    <th scope="col">Entrou</th>
-                    <th scope="col">Saiu</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let substituicao of substituicoesVisitante">                           
-                    <td>
-                        <button class="btn btn-danger" 
-                        (click)="onClickExcluirSubstituicaoVisitante(substituicao.entra)">X</button>
-                    </td>
-                    <td>{{substituicao.periodo}}</td>
-                    <td>{{substituicao.tempo}}</td>
-                    <td>{{substituicao.entra}}</td>
-                    <td>{{substituicao.sai}}</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Período</th>
+                        <th scope="col">Tempo</th>
+                        <th scope="col">Entrou</th>
+                        <th scope="col">Saiu</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let substituicao of substituicoesVisitante">                           
+                        <td>
+                            <button class="btn btn-danger" 
+                            (click)="onClickExcluirSubstituicaoVisitante(substituicao.entra)">X</button>
+                        </td>
+                        <td>{{substituicao.periodo}}</td>
+                        <td>{{substituicao.tempo}}</td>
+                        <td>{{substituicao.entra}}</td>
+                        <td>{{substituicao.sai}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
         <p class="texto_titulo_cadastro">
             Incluir Substituição na Equipe Visitante
